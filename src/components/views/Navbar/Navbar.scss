@@ -1,0 +1,17 @@
+@import '~antd/dist/antd.css';
+
+.menu {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  &__left-menu {
+    &-logo img {
+      width: 100px;
+    }
+  }
+
+  &__right-menu > ul {
+    display: flex;
+  }
+}

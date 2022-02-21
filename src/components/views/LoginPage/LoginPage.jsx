@@ -69,8 +69,8 @@ function LoginPage(props) {
 				handleBlur,
 				handleSubmit,
 			}) => (
-				<div className='login-container'>
-					<Title level={2}>Log In</Title>
+				<div className='login--container'>
+					<h1 className='login--container__title'>Log In</h1>
 					<form onSubmit={handleSubmit}>
 						<Form.Item name='email' rules={[{ required: true }]}>
 							<Input

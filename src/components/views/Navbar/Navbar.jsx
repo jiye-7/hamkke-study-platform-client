@@ -1,5 +1,4 @@
 import React from 'react';
-import { Menu } from 'antd';
 import LeftMenu from './Sections/LeftMenu';
 import RightMenu from './Sections/RightMenu';
 

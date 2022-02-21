@@ -1,0 +1,12 @@
+.register--container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 auto;
+	width: 500px;
+	height: 100vh;
+
+	&--form {
+		background-color: red;
+	}
+}

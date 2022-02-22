@@ -1,55 +1,54 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import { Button } from 'antd';
-import { registerUserAPI } from '../../../_module/userApi';
+import { registerUserAPI } from '../../../_module/user_api';
 
 const RegisterPage = () => {
-	// email validate
-	const validateEmail = (value) => {
-		let error;
+	const dispatch = useDispatch();
 
-		if (!value) {
-			error = `Email is Required..`;
-		} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-			error = `Invalid email address..`;
-		}
-		return error;
-	};
+	const validate = {
+		validateEmail: (value) => {
+			let error;
+			const emailValidation = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
-	// password validate
-	const validatePassword = (value) => {
-		let error;
+			if (!value) {
+				error = `Email is Required..`;
+			} else if (!emailValidation.test(value)) {
+				error = `Invalid email address..`;
+			}
+			return error;
+		},
+		validatePassword: (value) => {
+			let error;
 
-		if (!value) {
-			error = 'Password is Required...';
-		} else if (value.length <= 4) {
-			error = 'Password must be at least 5 characters';
-		}
-		return error;
-	};
+			if (!value) {
+				error = 'Password is Required...';
+			} else if (value.length <= 4) {
+				error = 'Password must be at least 5 characters';
+			}
+			return error;
+		},
+		validatePasswordConfirm: (password, pwConfirm) => {
+			let error;
 
-	// passwordConfirm validate
-	const validatePasswordConfirm = (password, pwConfirm) => {
-		let error;
+			if (!pwConfirm) {
+				error = 'Password Confirm is Required...';
+			} else if (password !== pwConfirm) {
+				error = 'Password is not matched';
+			}
+			return error;
+		},
+		validateNickname: (value) => {
+			let error;
 
-		if (!pwConfirm) {
-			error = 'Password Confirm is Required...';
-		} else if (password !== pwConfirm) {
-			error = 'Password is not matched';
-		}
-		return error;
-	};
-
-	// nickname validate
-	const validateNickname = (value) => {
-		let error;
-
-		if (!value) {
-			error = 'Nickname is Required...';
-		} else if (value.length <= 4) {
-			error = 'Nickname must be at least 5 characters';
-		}
-		return error;
+			if (!value) {
+				error = 'Nickname is Required...';
+			} else if (value.length <= 4) {
+				error = 'Nickname must be at least 5 characters';
+			}
+			return error;
+		},
 	};
 
 	return (
@@ -71,44 +70,44 @@ const RegisterPage = () => {
 					setSubmitting(true);
 
 					const { email, password, nickname } = values;
-					let result = registerUserAPI({ email, password, nickname });
+					dispatch(registerUserAPI({ email, password, nickname }));
 					setSubmitting(false);
 				}}
 			>
 				{({ values, errors, touched, handleReset }) => (
-					<Form>
-						<div>
+					<Form className='register--container--form'>
+						<div className='register--container--form_email'>
 							<label htmlFor='Emil'>Email</label>
 							<Field
 								id='Emil'
 								name='email'
 								type='email'
-								validate={validateEmail}
+								validate={validate.validateEmail}
 								autoComplete='on'
 							/>
 							{errors.email && touched.email && <div>{errors.email}</div>}
 						</div>
-						<div>
+						<div className='register--container--form_password'>
 							<label htmlFor='Password'>Password</label>
 							<Field
 								id='Password'
 								name='password'
 								type='password'
-								validate={validatePassword}
+								validate={validate.validatePassword}
 								autoComplete='off'
 							/>
 							{errors.password && touched.password && (
 								<div>{errors.password}</div>
 							)}
 						</div>
-						<div>
+						<div className='register--container--form_pwconfirm'>
 							<label htmlFor='PasswordConfirm'>PwConfirm</label>
 							<Field
 								id='PasswordConfirm'
 								name='pwConfirm'
 								type='password'
 								validate={(pwConfirm) =>
-									validatePasswordConfirm(values.password, pwConfirm)
+									validate.validatePasswordConfirm(values.password, pwConfirm)
 								}
 								autoComplete='off'
 							/>
@@ -116,13 +115,13 @@ const RegisterPage = () => {
 								<div>{errors.pwConfirm}</div>
 							)}
 						</div>
-						<div>
+						<div className='register--container--form_nickname'>
 							<label htmlFor='Nickname'>Nickname</label>
 							<Field
 								id='Nickname'
 								name='nickname'
 								type='text'
-								validate={validateNickname}
+								validate={validate.validateNickname}
 								autoComplete='on'
 							/>
 							{errors.nickname && touched.nickname && (

@@ -1,4 +1,10 @@
-import { LOGIN_USER, REGISTER_USER, LOGIN_FAIL, LOGOUT_USER } from './types';
+import {
+	LOGIN_USER,
+	REGISTER_USER,
+	LOGIN_FAIL,
+	LOGOUT_USER,
+	REGISTER_FAIL,
+} from './types';
 import { loginUserAPI, registerUserAPI } from '../_module/user_api';
 
 export const loginUser = (dataToSubmit) => {
@@ -16,15 +22,19 @@ export const loginUser = (dataToSubmit) => {
 };
 
 export const registerUser = (dataToSubmit) => {
-	const request = registerUserAPI(dataToSubmit);
-
-	return {
-		type: REGISTER_USER,
-		payload: request,
-	};
+	return registerUserAPI(dataToSubmit)
+		.then((data) => ({
+			type: REGISTER_USER,
+			payload: data,
+		}))
+		.catch((err) => ({
+			type: REGISTER_FAIL,
+			payload: err,
+		}));
 };
 
-export const logoutUser = () => {
+export const logoutUser = (removeCookie) => {
+	removeCookie('TID');
 	return {
 		type: LOGOUT_USER,
 		payload: {},

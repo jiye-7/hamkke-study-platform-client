@@ -6,15 +6,17 @@ import {
 } from '../_actions/types';
 
 const userReducer = (state = {}, action) => {
-	switch (action.type) {
+	const { type, payload } = action;
+
+	switch (type) {
 		case LOGIN_USER:
-			return { ...state, loginSuccess: action.payload };
+			return { ...state, loginSuccess: payload };
 		case LOGIN_FAIL:
-			return { ...state, loginSuccess: action.payload };
+			return { ...state, loginSuccess: payload };
 		case REGISTER_USER:
-			return { ...state, registerUser: action.payload };
+			return { ...state, registerUser: payload };
 		case LOGOUT_USER:
-			return { ...state, loginSuccess: action.payload, logoutSuccess: true };
+			return { ...state, loginSuccess: payload, logoutSuccess: true };
 		default:
 			return state;
 	}

@@ -51,7 +51,6 @@ function LoginPage(props) {
 			// validationSchema를 사용하면 포믹이 필드를 알 수 있으므로 제공된다면 포믹에 의해 사용될 수 있다.
 			validationSchema={LoginSchema}
 			onSubmit={async (values, { setSubmitting }) => {
-				// console.log(values);
 				setSubmitting(true);
 				let dataToSubmit = {
 					email: values.email,

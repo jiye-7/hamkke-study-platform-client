@@ -19,15 +19,40 @@ function RightMenu() {
 	const [currentPageKey, setCurrentPageKey] = useState('');
 	const { loginSuccess } = useSelector((state) => state.user);
 	const [, , removeCookie] = useCookies(['TID']); // const [cookie, setCookie, removeCookie] = useCookies(['TID']);
-	console.log(loginSuccess);
+
 	const handleClick = (e) => {
 		setCurrentPageKey(e.key);
 	};
 
 	const handleLogout = () => {
-		removeCookie('TID');
-		dispatch(logoutUser());
+		dispatch(logoutUser(removeCookie));
 		navigate('/');
+	};
+
+	const renderRightMenu = () => {
+		return isEmpty(loginSuccess) ? (
+			<>
+				<Menu.Item key='login' icon={<LoginOutlined />}>
+					<Link to='/login'>로그인</Link>
+				</Menu.Item>
+				<Menu.Item icon={<IdcardOutlined />}>
+					<Link to='/userInfo'>마이 페이지</Link>
+				</Menu.Item>
+			</>
+		) : (
+			<>
+				<Menu.Item icon={<IdcardOutlined />}>
+					<Link to='/userInfo'>마이 페이지</Link>
+				</Menu.Item>
+				<Menu.Item
+					key='logout'
+					icon={<LogoutOutlined />}
+					onClick={handleLogout}
+				>
+					로그아웃
+				</Menu.Item>
+			</>
+		);
 	};
 
 	return (
@@ -36,29 +61,7 @@ function RightMenu() {
 				<Menu.Item key='newpost' icon={<EditOutlined />}>
 					<Link to='/write'>새 글 쓰기</Link>
 				</Menu.Item>
-				{isEmpty(loginSuccess) ? (
-					<>
-						<Menu.Item key='login' icon={<LoginOutlined />}>
-							<Link to='/login'>로그인</Link>
-						</Menu.Item>
-						<Menu.Item icon={<IdcardOutlined />}>
-							<Link to='/userInfo'>마이 페이지</Link>
-						</Menu.Item>
-					</>
-				) : (
-					<>
-						<Menu.Item icon={<IdcardOutlined />}>
-							<Link to='/userInfo'>마이 페이지</Link>
-						</Menu.Item>
-						<Menu.Item
-							key='logout'
-							icon={<LogoutOutlined />}
-							onClick={handleLogout}
-						>
-							로그아웃
-						</Menu.Item>
-					</>
-				)}
+				{renderRightMenu()}
 			</Menu>
 		</div>
 	);

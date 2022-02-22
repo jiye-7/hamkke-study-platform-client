@@ -1,9 +1,14 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import { Button } from 'antd';
-import { registerUserAPI } from '../../../_module/userApi';
+import { registerUser } from '../../../_actions/user_action';
 
 const RegisterPage = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const validate = {
 		validateEmail: (value) => {
 			let error;
@@ -63,12 +68,19 @@ const RegisterPage = () => {
 				}} */
 				validateOnChange={false}
 				validateOnBlur={true}
-				onSubmit={(values, { setSubmitting }) => {
+				onSubmit={async (values, { setSubmitting }) => {
 					setSubmitting(true);
 
 					const { email, password, nickname } = values;
-					let result = registerUserAPI({ email, password, nickname });
+					const { type } = await dispatch(
+						registerUser({ email, password, nickname }),
+					);
+
 					setSubmitting(false);
+
+					if (type === 'register_user') {
+						navigate('/login');
+					}
 				}}
 			>
 				{({ values, errors, touched, handleReset }) => (

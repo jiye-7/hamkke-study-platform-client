@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Form, Input, Button, Checkbox, Typography } from 'antd';
-import { MailOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
-import { loginUserAPI } from '../../../_module/userApi';
+import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import { loginUser } from '../../../_actions/user_action';
 import styled from 'styled-components';
 
 const { Title } = Typography;
@@ -26,7 +27,9 @@ const LoginSchema = Yup.object().shape({
 });
 
 function LoginPage(props) {
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	// const rememberMeChecked = localStorage.getItem('rememberMe') ? true : false;
 	// const [rememberMe, setRememberMe] = rememberMeChecked;
 	const [rememberMe, setRememberMe] = useState(false);
@@ -48,16 +51,18 @@ function LoginPage(props) {
 			// validationSchema를 사용하면 포믹이 필드를 알 수 있으므로 제공된다면 포믹에 의해 사용될 수 있다.
 			validationSchema={LoginSchema}
 			onSubmit={async (values, { setSubmitting }) => {
-				console.log(values);
 				setSubmitting(true);
 				let dataToSubmit = {
 					email: values.email,
 					password: values.password,
 				};
 				// redux 만들기
-				const result = await loginUserAPI(dataToSubmit);
+				const { type } = await dispatch(loginUser(dataToSubmit));
 
-				// setSubmitting(false);
+				if (type === 'login_user') {
+					setSubmitting(false);
+					return navigate('/');
+				}
 			}}
 		>
 			{({

@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Form, Input, Button, Checkbox, Typography } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
-import { loginUser } from '../../../_actions/user_action';
+import { loginUser } from '../../../_actions/userAction';
 import styled from 'styled-components';
 
 const { Title } = Typography;

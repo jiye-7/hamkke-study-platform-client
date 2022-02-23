@@ -5,7 +5,7 @@ import {
 	LOGOUT_USER,
 	REGISTER_FAIL,
 } from './types';
-import { loginUserAPI, registerUserAPI } from '../_module/user_api';
+import { loginUserAPI, registerUserAPI } from '../_module/userApi';
 
 export const loginUser = (dataToSubmit) => {
 	return loginUserAPI(dataToSubmit)

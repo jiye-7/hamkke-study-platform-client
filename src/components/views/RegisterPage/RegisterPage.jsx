@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import { Button } from 'antd';
-import { registerUser } from '../../../_actions/user_action';
+import { registerUser } from '../../../_actions/userAction';
 
 const RegisterPage = () => {
 	const dispatch = useDispatch();
@@ -55,7 +55,7 @@ const RegisterPage = () => {
 
 	return (
 		<div className='register--container'>
-			<h1>Sign Up</h1>
+			<h1 className='register--container_title'>Sign Up</h1>
 			<Formik
 				initialValues={{
 					email: '',
@@ -84,8 +84,8 @@ const RegisterPage = () => {
 				}}
 			>
 				{({ values, errors, touched, handleReset }) => (
-					<Form className='register--container--form'>
-						<div className='register--container--form_email'>
+					<Form className='register--container-form'>
+						<div className='register--container-form_email'>
 							<label htmlFor='Emil'>Email</label>
 							<Field
 								id='Emil'
@@ -94,9 +94,11 @@ const RegisterPage = () => {
 								validate={validate.validateEmail}
 								autoComplete='on'
 							/>
-							{errors.email && touched.email && <div>{errors.email}</div>}
+							{errors.email && touched.email && (
+								<div className='input-validate'>{errors.email}</div>
+							)}
 						</div>
-						<div className='register--container--form_password'>
+						<div className='register--container-form_password'>
 							<label htmlFor='Password'>Password</label>
 							<Field
 								id='Password'
@@ -106,10 +108,10 @@ const RegisterPage = () => {
 								autoComplete='off'
 							/>
 							{errors.password && touched.password && (
-								<div>{errors.password}</div>
+								<div className='input-validate'>{errors.password}</div>
 							)}
 						</div>
-						<div className='register--container--form_pwconfirm'>
+						<div className='register--container-form_pwConfirm'>
 							<label htmlFor='PasswordConfirm'>PwConfirm</label>
 							<Field
 								id='PasswordConfirm'
@@ -121,10 +123,10 @@ const RegisterPage = () => {
 								autoComplete='off'
 							/>
 							{errors.pwConfirm && touched.pwConfirm && (
-								<div>{errors.pwConfirm}</div>
+								<div className='input-validate'>{errors.pwConfirm}</div>
 							)}
 						</div>
-						<div className='register--container--form_nickname'>
+						<div className='register--container-form_nickname'>
 							<label htmlFor='Nickname'>Nickname</label>
 							<Field
 								id='Nickname'
@@ -134,10 +136,10 @@ const RegisterPage = () => {
 								autoComplete='on'
 							/>
 							{errors.nickname && touched.nickname && (
-								<div>{errors.nickname}</div>
+								<div className='input-validate'>{errors.nickname}</div>
 							)}
 						</div>
-						<div>
+						<div className='register--container-form_button'>
 							<Button onClick={handleReset}>Reset</Button>
 							<Button type='primary' htmlType='submit'>
 								Submit

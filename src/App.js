@@ -5,7 +5,7 @@ import LoginPage from './components/views/LoginPage/LoginPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
 import Navbar from './components/views/Navbar/Navbar';
 import WritePage from './components/views/WritePage/WritePage';
-import UserPage from './components/views/UserPage/UserPage';
+import UserInfoPage from './components/views/UserInfoPage/UserInfoPage';
 
 function App() {
 	return (
@@ -17,7 +17,7 @@ function App() {
 					<Route path='/login' element={<LoginPage />} />
 					<Route path='/register' element={<RegisterPage />} />
 					<Route path='/write' element={<WritePage />} />
-					<Route path='/userInfo' element={<UserPage />} />
+					<Route path='/userInfo' element={<UserInfoPage />} />
 				</Routes>
 			</div>
 		</Router>

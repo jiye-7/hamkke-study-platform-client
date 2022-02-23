@@ -41,8 +41,6 @@ const UserInfoPage = () => {
 					/>
 				</Form.Item>
 			</Form>
-			Warning: [antd: Form.Item] `children` is array of render props cannot have
-			`name`.
 		</div>
 	);
 };

@@ -77,10 +77,11 @@ function LoginPage(props) {
 				<div className='login--container'>
 					<h1 className='login--container__title'>Log In</h1>
 					<form onSubmit={handleSubmit}>
-						<Form.Item name='email' rules={[{ required: true }]}>
+						<Form.Item rules={[{ required: true }]}>
 							<Input
 								type='email'
 								id='email'
+								name='email'
 								value={values.email}
 								prefix={<MailOutlined style={{ color: 'rgba(0, 0, 0, .25' }} />}
 								placeholder='Please input your email!'
@@ -97,8 +98,9 @@ function LoginPage(props) {
 								<div className='input-feedback'>{errors.email}</div>
 							)}
 						</Form.Item>
-						<Form.Item name='password' required>
+						<Form.Item required>
 							<Input
+								name='password'
 								type='password'
 								id='password'
 								value={values.password}

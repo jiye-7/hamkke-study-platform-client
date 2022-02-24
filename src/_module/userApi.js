@@ -18,3 +18,9 @@ export const registerUserAPI = (dataToSubmit) => {
 		)
 		.then((response) => response.data);
 };
+
+export const updateUserAPI = (dataToSubmit) => {
+	return axios
+		.put(`${process.env.REACT_APP_SERVER_API + USER_SERVER}`, dataToSubmit)
+		.then((response) => response.data);
+};

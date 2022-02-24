@@ -3,6 +3,7 @@ import {
 	REGISTER_USER,
 	LOGIN_FAIL,
 	LOGOUT_USER,
+	UPDATE_USER,
 } from '../_actions/types';
 
 const userReducer = (state = {}, action) => {
@@ -17,6 +18,19 @@ const userReducer = (state = {}, action) => {
 			return { ...state, registerUser: payload };
 		case LOGOUT_USER:
 			return { ...state, loginSuccess: payload, logoutSuccess: true };
+		case UPDATE_USER:
+			const { type, data } = payload;
+			const updateData = {};
+
+			if (type === 'nickname') {
+				updateData.nickname = data;
+			} else if (type === 'stacks') {
+				updateData.stacks = data;
+			}
+			return {
+				...state,
+				loginSuccess: { ...state.loginSuccess, ...updateData },
+			};
 		default:
 			return state;
 	}

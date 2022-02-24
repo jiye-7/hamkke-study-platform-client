@@ -3,11 +3,9 @@
 .userInfo--container {
 	display: flex;
 	flex-direction: column;
-	// justify-content: center;
-	// align-items: center;
-	margin: 0 auto;
-	margin-top: 120px; // 이 방법 말고?
-	width: 550px;
+	justify-content: center;
+	align-items: center;
+	transform: translateY(-10%);
 	height: 100vh;
 
 	h1 {
@@ -16,32 +14,44 @@
 	}
 
 	&-form {
+		width: 550px;
 		padding: 1rem 1.5rem;
 
-		label {
-			font-size: 0.85rem;
-			font-weight: bold;
-			display: inline-block;
-			width: 20%;
-		}
+		&_filed {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
 
-		input,
-		button {
-			width: 48%;
-			height: 35px;
-			padding: 0 0.7rem;
-			margin-bottom: 0.8rem;
-			border: solid 1px rgb(216, 212, 208);
-			border-radius: 5px;
-		}
+			label {
+				width: 80px;
+				margin-top: 0.5rem;
+				font-size: 0.85rem;
+				font-weight: bold;
+				flex-shrink: 1;
+			}
 
-		button {
-			width: 23%;
-			margin: 0 1rem;
+			input {
+				width: 270px;
+				height: 35px;
+				padding: 0 0.7rem;
+				border: solid 1px rgb(216, 212, 208);
+				border-radius: 5px;
+				flex-shrink: 3;
+			}
+
+			button {
+				width: 120px;
+				height: 35px;
+				padding: 0 0.7rem;
+				border: solid 1px rgb(216, 212, 208);
+				border-radius: 5px;
+				flex-shrink: 1;
+				font-weight: bold;
+			}
 		}
 
 		p {
-			width: 94%;
+			width: 100%;
 			margin-bottom: 2rem;
 			color: rgb(216, 212, 208);
 			border-bottom: 1px solid rgb(216, 212, 208);
@@ -49,20 +59,27 @@
 
 		&_stack {
 			display: flex;
+			justify-content: space-between;
+			label {
+				font-weight: bold;
+			}
 			&-field {
-				width: 74%;
+				width: 81%;
 			}
 		}
 
-		// .css-319lph-ValueContainer {
-		// 	// height: 20px;
-		// 	// margin-top: -1rem;
-		// }
+		section:last-of-type {
+			button {
+				font-weight: bold;
+			}
+			display: flex;
+			justify-content: flex-end;
+		}
 	}
 }
 
 .input-feedback-error,
 .input-feedback-duplicated {
+	margin-top: 0.3rem;
 	color: rgb(201, 140, 151);
-	margin: -10px 0 -10px 100px;
 }

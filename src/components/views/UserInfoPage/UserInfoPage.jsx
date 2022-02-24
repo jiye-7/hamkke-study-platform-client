@@ -23,12 +23,11 @@ const UserInfoUpdateSchema = Yup.object().shape({
 const UserInfoPage = () => {
 	const dispatch = useDispatch();
 	const { loginSuccess: userInfo } = useSelector((state) => state.user);
-	const [updateNickname, setNickName] = useState('');
-	const [updatePassword, setPassword] = useState('');
+	const [stacks, setStacks] = useState([]);
 	const [isNicknameDisable, setIsNicknameDisable] = useState(true);
 	const [isPasswordDisable, setIsPasswordDisable] = useState(true);
-	const [stacks, setStacks] = useState([]);
 	const [nicknameUpdateFail, setNicknameUpdateFail] = useState(false);
+	const [passwordUpdateFail, setPasswordUpdateFail] = useState(false);
 	console.log(userInfo);
 
 	const handleNicknameDisable = (setFieldValue) => {
@@ -37,17 +36,16 @@ const UserInfoPage = () => {
 	};
 
 	const handleNicknameUpdate = async (setFieldValue, nickname) => {
-		if (nickname.length < 4) {
+		if (nickname.length < 5) {
 			return;
 		}
 
 		const { id: userId } = userInfo;
 
-		// server 통신 후 성공 확인 된 후 -> 리덕스도 업데이트 해줘야 됨
 		let response = await dispatch(
 			updateUser({ userId, type: 'nickname', data: nickname }),
 		);
-		console.log(response);
+
 		if (response.type === 'update_user') {
 			setFieldValue('nickname', nickname);
 			setIsNicknameDisable(!isNicknameDisable);
@@ -62,19 +60,40 @@ const UserInfoPage = () => {
 		setIsPasswordDisable(!isPasswordDisable);
 	};
 
-	const handlePasswordUpdate = (setFieldValue, password) => {
-		setPassword(password);
-		setIsPasswordDisable(!isPasswordDisable);
+	const handlePasswordUpdate = async (setFieldValue, password) => {
+		if (password.length < 5) {
+			return;
+		}
 
-		// server 통신 후 성공 확인 된 후
-		// setFieldValue('password', '*****');
+		const { id: userId } = userInfo;
+
+		let response = await dispatch(
+			updateUser({ userId, type: 'password', data: password }),
+		);
+		// console.log(response.payload.response.data)
+		// console.log(response.type);
+		if (response.type === 'update_user') {
+			setIsPasswordDisable(!isPasswordDisable);
+			setPasswordUpdateFail(false);
+		} else {
+			setPasswordUpdateFail(true);
+		}
 	};
 
-	const handleStackValueChange = (values) => {
+	const handleStackValueChange = async (values) => {
 		// const newStacks = [];
 		// values.forEach((value) => newStacks.push(value.label));
 		const newStacks = values.map((value) => value.label);
 		setStacks(newStacks);
+
+		const { id: userId } = userInfo;
+
+		if (newStacks.length > 0) {
+			let response = await dispatch(
+				updateUser({ userId, type: 'stacks', data: newStacks }),
+			);
+			console.log(response);
+		}
 	};
 
 	const handleMembershipWithdrawal = () => {
@@ -121,6 +140,11 @@ const UserInfoPage = () => {
 												{errors.nickname}
 											</div>
 										)}
+										{nicknameUpdateFail && (
+											<div className='input-feedback-duplicated'>
+												이미 사용중인 닉네임입니다.
+											</div>
+										)}
 									</div>
 									{isNicknameDisable ? (
 										<Button
@@ -144,11 +168,7 @@ const UserInfoPage = () => {
 										</Button>
 									)}
 								</div>
-								{nicknameUpdateFail && (
-									<div className='input-feedback-duplicated'>
-										이미 사용중인 닉네임입니다.
-									</div>
-								)}
+
 								<p>Hamkke에서 사용되는 이름입니다.</p>
 							</section>
 							<section>
@@ -167,6 +187,11 @@ const UserInfoPage = () => {
 										{errors.password && touched.password && (
 											<div className='input-feedback-error'>
 												{errors.password}
+											</div>
+										)}
+										{passwordUpdateFail && (
+											<div className='input-feedback-duplicated'>
+												이전 비밀번호와 같습니다.
 											</div>
 										)}
 									</div>
@@ -206,6 +231,7 @@ const UserInfoPage = () => {
 										options={languageOptions}
 										placeholder='관심 태그를 선택해주세요 :)'
 										onChange={(value) => handleStackValueChange(value)}
+										// onBlur={(value) => handleStackValueChange(value)}
 									/>
 								</div>
 								<p>관심있는 기술 태그들을 등록해주세요 :)</p>

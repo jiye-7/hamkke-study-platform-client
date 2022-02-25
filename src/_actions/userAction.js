@@ -6,11 +6,14 @@ import {
 	REGISTER_FAIL,
 	UPDATE_USER,
 	UPDATE_FAIL,
+	DELETE_USER,
+	DELETE_USER_FAIL,
 } from './types';
 import {
 	loginUserAPI,
 	registerUserAPI,
 	updateUserAPI,
+	deleteUserAPI,
 } from '../_module/userApi';
 
 export const loginUser = (dataToSubmit) => {
@@ -55,6 +58,18 @@ export const updateUser = (dataToSubmit) => {
 		}))
 		.catch((err) => ({
 			type: UPDATE_FAIL,
+			payload: err,
+		}));
+};
+
+export const deleteUser = (dataToSubmit) => {
+	return deleteUserAPI(dataToSubmit)
+		.then((data) => ({
+			type: DELETE_USER,
+			payload: {},
+		}))
+		.catch((err) => ({
+			type: DELETE_USER_FAIL,
 			payload: err,
 		}));
 };

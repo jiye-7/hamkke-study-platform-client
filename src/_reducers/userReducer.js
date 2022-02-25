@@ -4,6 +4,7 @@ import {
 	LOGIN_FAIL,
 	LOGOUT_USER,
 	UPDATE_USER,
+	DELETE_USER,
 } from '../_actions/types';
 
 const userReducer = (state = {}, action) => {
@@ -30,6 +31,12 @@ const userReducer = (state = {}, action) => {
 			return {
 				...state,
 				loginSuccess: { ...state.loginSuccess, ...updateData },
+			};
+		case DELETE_USER:
+			return {
+				...state,
+				loginSuccess: { ...payload },
+				registerUser: { ...payload },
 			};
 		default:
 			return state;

@@ -24,3 +24,13 @@ export const updateUserAPI = (dataToSubmit) => {
 		.put(`${process.env.REACT_APP_SERVER_API + USER_SERVER}`, dataToSubmit)
 		.then((response) => response.data);
 };
+
+export const deleteUserAPI = (dataToSubmit) => {
+	return axios
+		.delete(
+			`${
+				process.env.REACT_APP_SERVER_API + USER_SERVER
+			}?userId=${dataToSubmit}`,
+		)
+		.then((response) => response.data);
+};

@@ -5,3 +5,5 @@ export const LOGIN_FAIL = 'login_fail';
 export const REGISTER_FAIL = 'register_fail';
 export const UPDATE_USER = 'update_user';
 export const UPDATE_FAIL = 'update_fail';
+export const DELETE_USER = 'delete_user';
+export const DELETE_USER_FAIL = 'delete_user_fail';

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Field, Form, Formik } from 'formik';
@@ -7,7 +8,7 @@ import * as Yup from 'yup';
 import { Button } from 'antd';
 import languageOptions from '../../utils/data/language';
 import FileUpload from '../../utils/FileUpload/FileUpload';
-import { updateUser } from '../../../_actions/userAction';
+import { updateUser, deleteUser } from '../../../_actions/userAction';
 
 const animatedComponents = makeAnimated();
 
@@ -22,13 +23,15 @@ const UserInfoUpdateSchema = Yup.object().shape({
 
 const UserInfoPage = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const { loginSuccess: userInfo } = useSelector((state) => state.user);
+
 	const [stacks, setStacks] = useState([]);
 	const [isNicknameDisable, setIsNicknameDisable] = useState(true);
 	const [isPasswordDisable, setIsPasswordDisable] = useState(true);
 	const [nicknameUpdateFail, setNicknameUpdateFail] = useState(false);
 	const [passwordUpdateFail, setPasswordUpdateFail] = useState(false);
-	console.log(userInfo);
 
 	const handleNicknameDisable = (setFieldValue) => {
 		setFieldValue('nickname', '');
@@ -89,15 +92,16 @@ const UserInfoPage = () => {
 		const { id: userId } = userInfo;
 
 		if (newStacks.length > 0) {
-			let response = await dispatch(
-				updateUser({ userId, type: 'stacks', data: newStacks }),
-			);
-			console.log(response);
+			await dispatch(updateUser({ userId, type: 'stacks', data: newStacks }));
 		}
 	};
 
-	const handleMembershipWithdrawal = () => {
-		console.log('회원 탈퇴.');
+	const handleMembershipWithdrawal = async () => {
+		const { id: userId } = userInfo;
+		let result = await dispatch(deleteUser(userId));
+		if (result.type === 'delete_user') {
+			navigate('/');
+		}
 	};
 
 	return (
@@ -226,12 +230,10 @@ const UserInfoPage = () => {
 										className='userInfo--container-form_stack-field'
 										closeMenuOnSelect={false}
 										components={animatedComponents}
-										/* defaultInputValue={[]} */
 										isMulti
 										options={languageOptions}
 										placeholder='관심 태그를 선택해주세요 :)'
 										onChange={(value) => handleStackValueChange(value)}
-										// onBlur={(value) => handleStackValueChange(value)}
 									/>
 								</div>
 								<p>관심있는 기술 태그들을 등록해주세요 :)</p>

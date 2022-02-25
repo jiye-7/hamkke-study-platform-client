@@ -8,12 +8,15 @@ import {
 	UPDATE_FAIL,
 	DELETE_USER,
 	DELETE_USER_FAIL,
+	UPDATE_USER_PROFILE,
+	UPDATE_USER_PROFILE_FAIL,
 } from './types';
 import {
 	loginUserAPI,
 	registerUserAPI,
 	updateUserAPI,
 	deleteUserAPI,
+	updateUserProfileAPI,
 } from '../_module/userApi';
 
 export const loginUser = (dataToSubmit) => {
@@ -58,6 +61,18 @@ export const updateUser = (dataToSubmit) => {
 		}))
 		.catch((err) => ({
 			type: UPDATE_FAIL,
+			payload: err,
+		}));
+};
+
+export const updateUserProfile = (userId, config, formData) => {
+	return updateUserProfileAPI(userId, config, formData)
+		.then((data) => ({
+			type: UPDATE_USER_PROFILE,
+			payload: data,
+		}))
+		.catch((err) => ({
+			type: UPDATE_USER_PROFILE_FAIL,
 			payload: err,
 		}));
 };

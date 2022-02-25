@@ -25,6 +25,20 @@ export const updateUserAPI = (dataToSubmit) => {
 		.then((response) => response.data);
 };
 
+export const updateUserProfileAPI = (userId, config, formData) => {
+	return axios
+		.post(
+			`${
+				process.env.REACT_APP_SERVER_API + USER_SERVER
+			}/profile?userId=${userId}`,
+			{
+				...config,
+				data: formData,
+			},
+		)
+		.then((response) => response.data);
+};
+
 export const deleteUserAPI = (dataToSubmit) => {
 	return axios
 		.delete(

@@ -108,7 +108,7 @@ const UserInfoPage = () => {
 		<div className='user-container'>
 			<div className='userInfo--container'>
 				<h1>내 정보 수정</h1>
-				<FileUpload />
+				<FileUpload user={userInfo} />
 				<Formik
 					initialValues={{
 						nickname: userInfo.nickname,

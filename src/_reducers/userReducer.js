@@ -5,6 +5,7 @@ import {
 	LOGOUT_USER,
 	UPDATE_USER,
 	DELETE_USER,
+	UPDATE_USER_PROFILE,
 } from '../_actions/types';
 
 const userReducer = (state = {}, action) => {
@@ -37,6 +38,11 @@ const userReducer = (state = {}, action) => {
 				...state,
 				loginSuccess: { ...payload },
 				registerUser: { ...payload },
+			};
+		case UPDATE_USER_PROFILE:
+			return {
+				...state,
+				loginSuccess: { ...state.loginSuccess, profile: payload },
 			};
 		default:
 			return state;

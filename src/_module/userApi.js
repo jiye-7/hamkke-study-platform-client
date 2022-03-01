@@ -31,10 +31,8 @@ export const updateUserProfileAPI = (userId, config, formData) => {
 			`${
 				process.env.REACT_APP_SERVER_API + USER_SERVER
 			}/profile?userId=${userId}`,
-			{
-				...config,
-				data: formData,
-			},
+			formData,
+			config,
 		)
 		.then((response) => response.data);
 };

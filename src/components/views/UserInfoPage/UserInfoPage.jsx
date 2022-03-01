@@ -25,7 +25,7 @@ const UserInfoPage = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const { loginSuccess: userInfo } = useSelector((state) => state.user);
+	const { userInfo } = useSelector((state) => state.user);
 
 	const [stacks, setStacks] = useState([]);
 	const [isNicknameDisable, setIsNicknameDisable] = useState(true);

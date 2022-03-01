@@ -8,18 +8,28 @@ import {
 	UPDATE_USER_PROFILE,
 } from '../_actions/types';
 
-const userReducer = (state = {}, action) => {
+const defaultState = {
+	userInfo: {
+		id: null,
+		email: '',
+		nickname: '',
+		profile: '',
+		stacks: [],
+	},
+};
+
+const userReducer = (state = defaultState, action) => {
 	const { type, payload } = action;
 
 	switch (type) {
 		case LOGIN_USER:
-			return { ...state, loginSuccess: payload };
+			return { ...state, userInfo: payload };
 		case LOGIN_FAIL:
-			return { ...state, loginSuccess: payload };
+			return { ...state, userInfo: payload };
 		case REGISTER_USER:
 			return { ...state, registerUser: payload };
 		case LOGOUT_USER:
-			return { ...state, loginSuccess: payload, logoutSuccess: true };
+			return { ...state, userInfo: payload, logoutSuccess: true };
 		case UPDATE_USER:
 			const { type, data } = payload;
 			const updateData = {};
@@ -31,18 +41,18 @@ const userReducer = (state = {}, action) => {
 			}
 			return {
 				...state,
-				loginSuccess: { ...state.loginSuccess, ...updateData },
+				userInfo: { ...state.userInfo, ...updateData },
 			};
 		case DELETE_USER:
 			return {
 				...state,
-				loginSuccess: { ...payload },
+				userInfo: { ...payload },
 				registerUser: { ...payload },
 			};
 		case UPDATE_USER_PROFILE:
 			return {
 				...state,
-				loginSuccess: { ...state.loginSuccess, profile: payload },
+				userInfo: { ...state.userInfo, profile: payload.image },
 			};
 		default:
 			return state;

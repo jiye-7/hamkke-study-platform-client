@@ -17,7 +17,7 @@ function RightMenu() {
 	const dispatch = useDispatch();
 
 	const [currentPageKey, setCurrentPageKey] = useState('');
-	const { loginSuccess } = useSelector((state) => state.user);
+	const { userInfo } = useSelector((state) => state.user);
 	const [, , removeCookie] = useCookies(['TID']); // const [cookie, setCookie, removeCookie] = useCookies(['TID']);
 
 	const handleClick = (e) => {
@@ -30,7 +30,7 @@ function RightMenu() {
 	};
 
 	const renderRightMenu = () => {
-		return isEmpty(loginSuccess) ? (
+		return isEmpty(userInfo) ? (
 			<>
 				<Menu.Item key='login' icon={<LoginOutlined />}>
 					<Link to='/login'>로그인</Link>

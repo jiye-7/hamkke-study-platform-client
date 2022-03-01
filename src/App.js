@@ -4,7 +4,7 @@ import LandingPage from './components/views/LandingPage/LandingPage';
 import LoginPage from './components/views/LoginPage/LoginPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
 import Navbar from './components/views/Navbar/Navbar';
-import WritePage from './components/views/WritePage/WritePage';
+import PostWritePage from './components/views/PostWritePage/PostWritePage';
 import UserInfoPage from './components/views/UserInfoPage/UserInfoPage';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
 					<Route path='/' element={<LandingPage />} />
 					<Route path='/login' element={<LoginPage />} />
 					<Route path='/register' element={<RegisterPage />} />
-					<Route path='/write' element={<WritePage />} />
+					<Route path='/write' element={<PostWritePage />} />
 					<Route path='/userInfo' element={<UserInfoPage />} />
 				</Routes>
 			</div>

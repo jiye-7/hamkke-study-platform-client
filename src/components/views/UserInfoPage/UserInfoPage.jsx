@@ -73,7 +73,6 @@ const UserInfoPage = () => {
 		let response = await dispatch(
 			updateUser({ userId, type: 'password', data: password }),
 		);
-
 		if (response.type === 'update_user') {
 			setIsPasswordDisable(!isPasswordDisable);
 			setPasswordUpdateFail(false);

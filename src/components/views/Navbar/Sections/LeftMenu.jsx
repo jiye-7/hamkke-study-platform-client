@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu } from 'antd';
 import HamkkeLogo from '../../../utils/image/hamkkelogo.jpg';
 import '../Navbar.scss';
 

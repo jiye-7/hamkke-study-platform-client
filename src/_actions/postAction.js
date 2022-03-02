@@ -7,5 +7,5 @@ export const createPost = (dataToSubmit) => {
 			type: CREATE_POST,
 			payload: data,
 		}))
-		.catch((err) => console.log(err));
+		.catch((err) => err);
 };

@@ -52,7 +52,6 @@ function PostWritePage() {
 	};
 
 	const handleContentChange = (content, delta, source, editor) => {
-		// console.log(content); // or editor.getHTML()
 		setContents(content);
 	};
 

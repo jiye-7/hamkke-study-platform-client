@@ -23,7 +23,6 @@ function PostWritePage() {
 			[{ color: [] }],
 			['bold', 'italic', 'underline', 'strike', 'blockquote'],
 			[{ list: 'ordered' }, { list: 'bullet' }],
-			// ['link', 'image'],
 		],
 	};
 
@@ -38,8 +37,6 @@ function PostWritePage() {
 		'list',
 		'bullet',
 		'indent',
-		// 'link',
-		// 'image',
 	];
 
 	const handleTitle = (e) => {
@@ -51,7 +48,7 @@ function PostWritePage() {
 		setStacks(selectStacks);
 	};
 
-	const handleContentChange = (content, delta, source, editor) => {
+	const handleContentChange = (content) => {
 		setContents(content);
 	};
 
@@ -97,12 +94,10 @@ function PostWritePage() {
 						className='post-editor-form'
 						modules={modules}
 						formats={formats}
-						onChange={(content, delta, source, editor) =>
-							handleContentChange(content, delta, source, editor)
-						}
+						onChange={(content) => handleContentChange(content)}
 						value={contents}
 						placeholder='프로젝트/스터디 진행 방식 및 신청 방법(오픈카톡, 댓글 등)에 대해 구체적으로 작성해주세요 :)'
-					></ReactQuill>
+					/>
 				</div>
 				<div className='post-btn'>
 					<button className='post-btn-cancel' onClick={() => navigate(-1)}>

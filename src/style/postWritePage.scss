@@ -1,0 +1,85 @@
+.post-container {
+	// transform: translateY(-10%);
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	.post-write-container {
+		width: 60%;
+
+		header {
+			font-size: 3rem;
+			font-style: italic;
+			input {
+				border: none;
+				border-bottom: 1px solid rgb(173, 173, 173);
+				width: 100%;
+				padding: 0 1rem;
+				font-weight: bold;
+			}
+			input:focus {
+				outline: none;
+			}
+		}
+
+		.post-language {
+			display: flex;
+			width: 100%;
+			align-items: center;
+			margin: 2rem 0;
+
+			&-use {
+				width: 13%;
+				font-size: 1.2rem;
+				font-weight: bold;
+			}
+
+			&-select {
+				width: 50%;
+				font-size: 1rem;
+			}
+		}
+
+		.post-editor {
+			&-form {
+				font-style: italic;
+			}
+			.ql-editor {
+				min-height: 480px;
+				font-size: 1rem;
+				font-style: normal;
+				font-weight: 600;
+			}
+		}
+
+		.post-btn {
+			display: flex;
+			justify-content: flex-end;
+			transform: translateY(100%);
+			button {
+				width: 100px;
+				border: none;
+				border-radius: 5px;
+				padding: 0.3rem 0;
+				font-size: 1rem;
+				font-weight: bold;
+				cursor: pointer;
+			}
+			&-cancel {
+				margin-right: 5px;
+			}
+			&-submit {
+				color: #fff;
+				background-color: #000;
+			}
+		}
+	}
+}
+
+@media (min-width: 1350px) {
+	.post-container {
+	}
+}

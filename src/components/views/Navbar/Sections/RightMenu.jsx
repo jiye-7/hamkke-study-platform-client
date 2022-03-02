@@ -30,13 +30,7 @@ function RightMenu() {
 	};
 
 	const renderRightMenu = () => {
-		return isEmpty(userInfo) ? (
-			<>
-				<Menu.Item key='login' icon={<LoginOutlined />}>
-					<Link to='/login'>로그인</Link>
-				</Menu.Item>
-			</>
-		) : (
+		return userInfo.id ? (
 			<>
 				<Menu.Item key='userInfo' icon={<IdcardOutlined />}>
 					<Link to='/userInfo'>마이 페이지</Link>
@@ -47,6 +41,12 @@ function RightMenu() {
 					onClick={handleLogout}
 				>
 					로그아웃
+				</Menu.Item>
+			</>
+		) : (
+			<>
+				<Menu.Item key='login' icon={<LoginOutlined />}>
+					<Link to='/login'>로그인</Link>
 				</Menu.Item>
 			</>
 		);

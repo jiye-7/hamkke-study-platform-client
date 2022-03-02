@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { isEmpty } from 'lodash';
-import { logoutUser } from '../../../../_actions/user_action';
+import { logoutUser } from '../../../../_actions/userAction';
 import { Menu } from 'antd';
 import {
 	EditOutlined,
@@ -17,7 +17,7 @@ function RightMenu() {
 	const dispatch = useDispatch();
 
 	const [currentPageKey, setCurrentPageKey] = useState('');
-	const { loginSuccess } = useSelector((state) => state.user);
+	const { userInfo } = useSelector((state) => state.user);
 	const [, , removeCookie] = useCookies(['TID']); // const [cookie, setCookie, removeCookie] = useCookies(['TID']);
 
 	const handleClick = (e) => {
@@ -30,18 +30,15 @@ function RightMenu() {
 	};
 
 	const renderRightMenu = () => {
-		return isEmpty(loginSuccess) ? (
+		return isEmpty(userInfo) ? (
 			<>
 				<Menu.Item key='login' icon={<LoginOutlined />}>
 					<Link to='/login'>로그인</Link>
 				</Menu.Item>
-				<Menu.Item icon={<IdcardOutlined />}>
-					<Link to='/userInfo'>마이 페이지</Link>
-				</Menu.Item>
 			</>
 		) : (
 			<>
-				<Menu.Item icon={<IdcardOutlined />}>
+				<Menu.Item key='userInfo' icon={<IdcardOutlined />}>
 					<Link to='/userInfo'>마이 페이지</Link>
 				</Menu.Item>
 				<Menu.Item

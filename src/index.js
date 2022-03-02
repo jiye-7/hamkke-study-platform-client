@@ -6,8 +6,7 @@ import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import Reducer from '../src/_reducers';
 import App from './App';
-import './index.css';
-import 'antd/dist/antd.min.css';
+import './index.scss';
 
 import axios from 'axios';
 axios.defaults.withCredentials = true;

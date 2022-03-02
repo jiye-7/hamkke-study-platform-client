@@ -21,11 +21,9 @@ const FileUpload = (props) => {
 			const uploadFile = e.target.files[0];
 			formData.append('image', uploadFile);
 		}
-		console.log(formData);
 
 		// server로 요청 보내기
 		let result = await dispatch(updateUserProfile(userId, config, formData));
-		console.log(result);
 	};
 
 	// 이미지 제거 버튼 클릭 시-> 로고 이미지로 변경

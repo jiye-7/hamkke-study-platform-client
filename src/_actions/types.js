@@ -1,3 +1,4 @@
+// user
 export const LOGIN_USER = 'login_user';
 export const REGISTER_USER = 'register_user';
 export const LOGOUT_USER = 'logout_user';
@@ -9,3 +10,6 @@ export const UPDATE_USER_PROFILE_FAIL = 'update_user_profile_fail';
 export const UPDATE_FAIL = 'update_fail';
 export const DELETE_USER = 'delete_user';
 export const DELETE_USER_FAIL = 'delete_user_fail';
+
+// post
+export const CREATE_POST = 'create_post';

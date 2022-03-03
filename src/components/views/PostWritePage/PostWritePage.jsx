@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
 import ReactQuill from 'react-quill';
 import languageOptions from '../../utils/data/language';
 import { createPost } from '../../../_actions/postAction';
-
-const animatedComponents = makeAnimated();
 
 function PostWritePage() {
 	const navigate = useNavigate();
@@ -44,7 +41,7 @@ function PostWritePage() {
 	};
 
 	const handleStacks = (e) => {
-		let selectStacks = e.map((stack) => stack.label);
+		const selectStacks = e.map((stack) => stack.label);
 		setStacks(selectStacks);
 	};
 
@@ -59,7 +56,6 @@ function PostWritePage() {
 			tags: stacks,
 			contents,
 		};
-		// server 요청 보내기
 		const result = await createPost(data);
 		if (result.type === 'create_post') {
 			navigate('/');
@@ -77,12 +73,11 @@ function PostWritePage() {
 					/>
 				</header>
 				<div className='post-language'>
-					<label className='post-language-use'>사용 언어 :</label>
+					<label>사용 언어 :</label>
 					<Select
 						isMulti
 						options={languageOptions}
 						closeMenuOnSelect={false}
-						components={animatedComponents}
 						className='post-language-select'
 						placeholder='프로젝트/스터디 진행 언어 선택해주세요 :)'
 						onChange={handleStacks}

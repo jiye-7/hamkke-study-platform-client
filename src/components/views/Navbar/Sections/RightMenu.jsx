@@ -12,6 +12,9 @@ import {
 	IdcardOutlined,
 	ReadOutlined,
 } from '@ant-design/icons';
+import defaultProfileImage from '../../../utils/image/hamkkelogo.jpg';
+
+const { SubMenu } = Menu;
 
 function RightMenu() {
 	const navigate = useNavigate();
@@ -32,40 +35,36 @@ function RightMenu() {
 
 	const renderRightMenu = () => {
 		return userInfo.id ? (
-			<>
-				<Menu.Item key='userInfo' icon={<IdcardOutlined />}>
-					<Link to='/userInfo'>마이 페이지</Link>
-				</Menu.Item>
-				<Menu.Item key='myPosts' icon={<ReadOutlined />}>
-					<Link to='/myPosts'>내 작성글</Link>
-				</Menu.Item>
-				<Menu.Item
-					key='logout'
-					icon={<LogoutOutlined />}
-					onClick={handleLogout}
-				>
-					로그아웃
-				</Menu.Item>
-			</>
-		) : (
-			<>
-				<Menu.Item key='login' icon={<LoginOutlined />}>
-					<Link to='/login'>로그인</Link>
-				</Menu.Item>
-			</>
-		);
-	};
-
-	return (
-		<div className='menu__right-menu'>
-			<Menu onClick={handleClick}>
+			<Menu mode='horizontal'>
 				<Menu.Item key='newpost' icon={<EditOutlined />}>
 					<Link to='/write'>새 글 쓰기</Link>
 				</Menu.Item>
-				{renderRightMenu()}
+				<SubMenu key='submenu' title={userInfo.nickname}>
+					<Menu.Item key='userInfo' icon={<IdcardOutlined />}>
+						<Link to='/userInfo'>마이 페이지</Link>
+					</Menu.Item>
+					<Menu.Item
+						key='logout'
+						icon={<LogoutOutlined />}
+						onClick={handleLogout}
+					>
+						로그아웃
+					</Menu.Item>
+				</SubMenu>
 			</Menu>
-		</div>
-	);
+		) : (
+			<Menu>
+				<Menu.Item key='newpost' icon={<EditOutlined />}>
+					<Link to='/write'>새 글 쓰기</Link>
+				</Menu.Item>
+				<Menu.Item key='login' icon={<LoginOutlined />}>
+					<Link to='/login'>로그인</Link>
+				</Menu.Item>
+			</Menu>
+		);
+	};
+
+	return <div className='menu__right-menu'>{renderRightMenu()}</div>;
 }
 
 export default RightMenu;

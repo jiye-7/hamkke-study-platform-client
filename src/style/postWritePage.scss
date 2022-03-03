@@ -31,15 +31,18 @@
 			align-items: center;
 			margin: 2rem 0;
 
-			&-use {
-				width: 13%;
+			label {
+				width: 15%;
 				font-size: 1.2rem;
 				font-weight: bold;
 			}
 
 			&-select {
 				width: 50%;
-				font-size: 1rem;
+				-moz-transition: none;
+				-ms-transition: none;
+				-webkit-transition: none;
+				transition: none;
 			}
 		}
 

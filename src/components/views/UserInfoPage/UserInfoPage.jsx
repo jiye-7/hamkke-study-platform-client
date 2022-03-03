@@ -84,7 +84,7 @@ const UserInfoPage = () => {
 	const handleStackValueChange = async (values) => {
 		// const newStacks = [];
 		// values.forEach((value) => newStacks.push(value.label));
-		const newStacks = values.map((value) => value.label);
+		const newStacks = values.map((value) => value.value);
 		setStacks(newStacks);
 
 		const { id: userId } = userInfo;

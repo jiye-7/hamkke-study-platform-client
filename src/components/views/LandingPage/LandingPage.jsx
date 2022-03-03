@@ -5,7 +5,7 @@ import Post from '../Post/Post';
 
 const LandingPage = () => {
 	const dispatch = useDispatch();
-	const { posts } = useSelector((state) => state.post);
+	const { posts } = useSelector(({ post }) => post);
 
 	useEffect(() => {
 		dispatch(getPosts());
@@ -13,7 +13,7 @@ const LandingPage = () => {
 
 	// 해당 post 1개씩 리턴
 	const renderPost = () => {
-		return posts?.map((post) => <Post key={post.id} post={post} />);
+		return posts.map((post) => <Post key={post.id} post={post} />);
 	};
 
 	return (

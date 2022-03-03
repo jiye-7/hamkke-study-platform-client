@@ -1,6 +1,10 @@
 import { GET_POSTS } from '../_actions/types';
 
-const postReducer = (state = {}, action) => {
+const defaultState = {
+	posts: [],
+};
+
+const postReducer = (state = defaultState, action) => {
 	const { type, payload } = action;
 
 	switch (type) {

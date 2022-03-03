@@ -13,3 +13,4 @@ export const DELETE_USER_FAIL = 'delete_user_fail';
 
 // post
 export const CREATE_POST = 'create_post';
+export const GET_POSTS = 'get_posts';

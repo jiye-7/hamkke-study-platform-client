@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Select from 'react-select';
 import ReactQuill from 'react-quill';
-import languageOptions from '../../utils/data/language';
-import { createPost } from '../../../_actions/postAction';
+import languageOptions from '../../../utils/data/language';
+import { createPost } from '../../../../_actions/postAction';
 
 function PostWritePage() {
 	const navigate = useNavigate();
@@ -41,7 +41,7 @@ function PostWritePage() {
 	};
 
 	const handleStacks = (e) => {
-		const selectStacks = e.map((stack) => stack.label);
+		const selectStacks = e.map((stack) => stack.value);
 		setStacks(selectStacks);
 	};
 

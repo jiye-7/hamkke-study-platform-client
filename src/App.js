@@ -4,7 +4,7 @@ import LandingPage from './components/views/LandingPage/LandingPage';
 import LoginPage from './components/views/LoginPage/LoginPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
 import Navbar from './components/views/Navbar/Navbar';
-import PostWritePage from './components/views/PostWritePage/PostWritePage';
+import PostWritePage from './components/views/Post/PostWritePage/PostWritePage';
 import UserInfoPage from './components/views/UserInfoPage/UserInfoPage';
 
 function App() {

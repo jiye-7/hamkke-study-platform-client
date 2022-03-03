@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HamkkeLogo from '../../../utils/image/hamkkelogo.jpg';
-import '../Navbar.scss';
 
 function LeftMenu() {
 	return (

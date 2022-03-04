@@ -35,15 +35,18 @@ const PostDetailPage = () => {
 	// 마감 처리 (필터에서 모집 중인 글 보기쪽에서 사라짐)
 	const handleDeadlineConfirm = () => {
 		Swal.fire({
-			title: postDeadline ? '다시 개시하시겠습니까?' : '마감하시겠습니까?',
+			title: postDeadline ? '다시 개시하시겠어요?' : '마감 처리 하시겠어요?',
 			text: postDeadline
 				? '다시 글을 개시합니다.'
 				: '마감 후 다시 개시 가능합니다.',
 			icon: 'question',
+			allowOutsideClick: false,
 			showConfirmButton: true,
 			showCancelButton: true,
-			confirmButtonText: '확인',
-			cancelButtonText: '취소',
+			confirmButtonText: postDeadline
+				? '네, 다시 개시할게요.'
+				: '네, 마감합니다.',
+			cancelButtonText: '아니요!',
 			confirmButtonColor: '#3085d6', // #7066e0
 			cancelButtonColor: '#d33', // #6e7881
 		}).then((result) => {
@@ -53,7 +56,11 @@ const PostDetailPage = () => {
 			} else if (result.isConfirmed && postDeadline) {
 				// 확인 버튼 클릭 + 마감 됐을 때 -> 다시 개시 처리!
 				handlePostDeadlineCancel();
-			} else if (result.isDismissed) {
+			} else if (result.isDismissed && postDeadline) {
+				// 취소 버튼 클릭 + 다시 개시하고 싶을 때
+				handlePostDeadlineCheck();
+			} else if (result.isDismissed && !postDeadline) {
+				// 취소 버튼 클릭 + 계속 마감처리로 두고 싶을 때
 				handlePostDeadlineCancel();
 			}
 		});

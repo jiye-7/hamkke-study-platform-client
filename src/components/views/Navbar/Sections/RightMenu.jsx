@@ -34,7 +34,7 @@ function RightMenu() {
 
 	const renderRightMenu = () => {
 		return userInfo.id ? (
-			<Menu mode='horizontal'>
+			<Menu>
 				<Menu.Item key='newpost' icon={<EditOutlined />}>
 					<Link to='/write'>새 글 쓰기</Link>
 				</Menu.Item>

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify';
-import Swal from 'sweetalert2';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { getPost, deletePost } from '../../../../_actions/postAction';
 import Tag from './Tag';
+import handleConfirm from '../../../utils/Alert/Alert';
 import profileImg from '../../../utils/image/quokka.jpg';
 
 const PostDetailPage = () => {
@@ -13,9 +13,7 @@ const PostDetailPage = () => {
 	const { userInfo } = useSelector(({ user }) => user);
 	const { id: postId } = useParams();
 	const [POST, setPost] = useState({});
-
 	const [postDeadline, setPostDeadline] = useState(false);
-	// const [postUpdate, setPostUpdate] = useState(false);
 
 	useEffect(() => {
 		async function post() {
@@ -28,40 +26,6 @@ const PostDetailPage = () => {
 	/** dangerouslySetInnerHTML 설정 */
 	const createMarkup = () => ({ __html: DOMPurify.sanitize(POST.contents) });
 
-	/** 마감 처리 (필터에서 모집 중인 글 보기쪽에서 사라짐) */
-	const handleDeadlineConfirm = () => {
-		Swal.fire({
-			title: postDeadline ? '다시 개시하시겠어요?' : '마감 처리 하시겠어요?',
-			text: postDeadline
-				? '다시 글을 개시합니다.'
-				: '마감 후 다시 개시 가능합니다.',
-			icon: 'question',
-			allowOutsideClick: false,
-			showConfirmButton: true,
-			showCancelButton: true,
-			confirmButtonText: postDeadline
-				? '네, 다시 개시할게요.'
-				: '네, 마감합니다.',
-			cancelButtonText: '아니요!',
-			confirmButtonColor: '#3085d6', // #7066e0
-			cancelButtonColor: '#d33', // #6e7881
-		}).then((result) => {
-			// 확인 버튼 클릭 + 마감 전일 때 -> 마감처리!
-			if (result.isConfirmed && !postDeadline) {
-				handlePostDeadlineCheck();
-			} else if (result.isConfirmed && postDeadline) {
-				// 확인 버튼 클릭 + 마감 됐을 때 -> 다시 개시 처리!
-				handlePostDeadlineCancel();
-			} else if (result.isDismissed && postDeadline) {
-				// 취소 버튼 클릭 + 다시 개시하고 싶을 때
-				handlePostDeadlineCheck();
-			} else if (result.isDismissed && !postDeadline) {
-				// 취소 버튼 클릭 + 계속 마감처리로 두고 싶을 때
-				handlePostDeadlineCancel();
-			}
-		});
-	};
-
 	/** 마감하기 */
 	const handlePostDeadlineCheck = () => {
 		setPostDeadline(true);
@@ -72,33 +36,46 @@ const PostDetailPage = () => {
 		setPostDeadline(false);
 	};
 
+	/** 마감 처리 alert (필터에서 모집 중인 글 보기쪽에서 사라짐) */
+	const handleDeadlineConfirm = () => {
+		postDeadline
+			? handleConfirm({
+					title: '다시 개시하시겠어요?',
+					text: '다시 글을 개시합니다.',
+					icon: 'question',
+					confirmButtonText: '네, 다시 개시할게요.',
+					cancelButtonText: '아니요!',
+					confirmFunction: handlePostDeadlineCancel,
+			  })
+			: handleConfirm({
+					title: '마감 처리 하시겠어요?',
+					text: '마감 후 다시 개시 가능합니다.',
+					icon: 'question',
+					confirmButtonText: '네, 마감합니다.',
+					cancelButtonText: '아니요!',
+					confirmFunction: handlePostDeadlineCheck,
+			  });
+	};
+
 	/** 글 수정하기 -> 바로 수정 창으로 이동 */
 	const handlePostUpdate = () => {
 		console.log('글 수정하러 갑니다.');
 	};
 
-	/** 글 삭제하기 -> '진짜 삭제하시겠습니까?' 확인 누르면 삭제 처리, 랜딩 페이지로 이동. */
+	/** 글 삭제하기 */
 	const handleDeleteConfirm = () => {
-		Swal.fire({
+		handleConfirm({
 			title: '작성하신 글을 삭제 하시겠어요?',
 			text: '삭제하시면 되돌릴 수 없습니다. ',
 			icon: 'warning',
-			allowOutsideClick: false,
-			showConfirmButton: true,
-			showCancelButton: true,
 			confirmButtonText: '네, 삭제할래요',
 			cancelButtonText: '아니요',
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-		})
-			.then((result) => {
-				if (result.value) {
-					return deletePost(POST.id);
-				}
-			})
-			.then((result) => {
-				if (result.type === 'delete_post') navigate('/');
-			});
+			confirmFunction: () => {
+				deletePost(POST.id).then((result) => {
+					if (result.type === 'delete_post') navigate('/');
+				});
+			},
+		});
 	};
 
 	/** 기술 스택 */

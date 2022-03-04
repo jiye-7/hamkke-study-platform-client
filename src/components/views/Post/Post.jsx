@@ -1,16 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getPost } from '../../../_actions/postAction';
 
 const Post = ({ post }) => {
 	const navigate = useNavigate();
 
-	const handleSelectPost = async () => {
+	const handleSelectPost = () => {
 		// 서버에 상세 글 요청 날리기
-		let result = await getPost(post.id);
-		if (result) {
-			navigate(`/post/${post.id}`);
-		}
+		navigate(`/post/${post.id}`);
 	};
 
 	return (

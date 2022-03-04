@@ -5,24 +5,30 @@ const handleConfirm = (props) => {
 	const {
 		title,
 		text,
-		icon,
-		confirmButtonText,
-		cancelButtonText,
-		confirmFunction,
-		cancelFunction,
+		icon = 'question',
+		allowOutsideClick = false,
+		showConfirmButton = true,
+		showCancelButton = true,
+		confirmButtonText = '확인',
+		cancelButtonText = '취소',
+		confirmButtonColor = '#3085d6', // #7066e0
+		cancelButtonColor = '#d33', // #6e7881
+		confirmFunction = () => {},
+		cancelFunction = () => {},
 	} = props;
+
 	Swal.fire({
 		title,
 		text,
 		icon,
-		allowOutsideClick: false,
-		showConfirmButton: true,
-		showCancelButton: true,
+		allowOutsideClick,
+		showConfirmButton,
+		showCancelButton,
 		confirmButtonText,
 		cancelButtonText,
-		confirmButtonColor: '#3085d6', // #7066e0
-		cancelButtonColor: '#d33', // #6e7881
-		// didClose: cancelFunction
+		confirmButtonColor,
+		cancelButtonColor,
+		didClose: cancelFunction,
 	}).then((result) => {
 		if (result.isConfirmed) {
 			confirmFunction();

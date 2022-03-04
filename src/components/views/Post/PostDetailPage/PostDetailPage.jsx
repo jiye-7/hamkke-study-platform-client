@@ -42,7 +42,6 @@ const PostDetailPage = () => {
 			? handleConfirm({
 					title: '다시 개시하시겠어요?',
 					text: '다시 글을 개시합니다.',
-					icon: 'question',
 					confirmButtonText: '네, 다시 개시할게요.',
 					cancelButtonText: '아니요!',
 					confirmFunction: handlePostDeadlineCancel,
@@ -50,7 +49,6 @@ const PostDetailPage = () => {
 			: handleConfirm({
 					title: '마감 처리 하시겠어요?',
 					text: '마감 후 다시 개시 가능합니다.',
-					icon: 'question',
 					confirmButtonText: '네, 마감합니다.',
 					cancelButtonText: '아니요!',
 					confirmFunction: handlePostDeadlineCheck,

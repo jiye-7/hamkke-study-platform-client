@@ -12,3 +12,9 @@ export const getPostsAPI = () => {
 		.get(`${process.env.REACT_APP_SERVER_API + POST_SERVER}/`)
 		.then((response) => response.data);
 };
+
+export const getPostAPI = (postId) => {
+	return axios
+		.get(`${process.env.REACT_APP_SERVER_API + POST_SERVER}/${postId}`)
+		.then((response) => response.data);
+};

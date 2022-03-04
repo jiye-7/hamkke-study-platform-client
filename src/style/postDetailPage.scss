@@ -1,0 +1,27 @@
+.post-detail-container {
+	width: 100%;
+	height: 100vh;
+	// background-color: blanchedalmond;
+	transform: translateY(20%);
+
+	.content-container {
+		width: 70%;
+		background-color: rgb(241, 200, 195);
+
+		.anticon-arrow-left {
+			font-size: 2rem;
+		}
+
+		.post-tags {
+			padding: 0.35rem 0.7rem;
+			margin-left: 5px;
+			border-radius: 20px;
+			background-color: rgb(231, 228, 228);
+		}
+
+		.line {
+			border: none;
+			border-bottom: 1px solid rgb(136, 133, 133);
+		}
+	}
+}

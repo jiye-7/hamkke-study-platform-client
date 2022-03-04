@@ -6,6 +6,7 @@ import RegisterPage from './components/views/RegisterPage/RegisterPage';
 import Navbar from './components/views/Navbar/Navbar';
 import PostWritePage from './components/views/Post/PostWritePage/PostWritePage';
 import UserInfoPage from './components/views/UserInfoPage/UserInfoPage';
+import PostDetailPage from './components/views/Post/PostDetailPage/PostDetailPage';
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 					<Route path='/register' element={<RegisterPage />} />
 					<Route path='/write' element={<PostWritePage />} />
 					<Route path='/userInfo' element={<UserInfoPage />} />
+					<Route path='/post/:id' element={<PostDetailPage />} />
 				</Routes>
 			</div>
 		</Router>

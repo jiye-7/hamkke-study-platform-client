@@ -66,45 +66,46 @@ const PostDetailPage = () => {
 		});
 	};
 
-	// 마감하기
+	/* 마감하기 */
 	const handlePostDeadlineCheck = () => {
 		setPostDeadline(true);
 	};
 
-	// 마감 취소
+	/* 마감 취소  */
 	const handlePostDeadlineCancel = () => {
 		setPostDeadline(false);
 	};
 
-	// 글 수정하기->바로 수정 창으로 이동
+	/* 글 수정하기 -> 바로 수정 창으로 이동 */
 
-	// 글 삭제하기-> '진짜 삭제하시겠습니까?' 확인 누르면 삭제 처리, 랜딩 페이지로 이동.
+	/* 글 삭제하기 -> '진짜 삭제하시겠습니까?' 확인 누르면 삭제 처리, 랜딩 페이지로 이동. */
+	const handleDeleteConfirm = () => {};
 
-	// dangerouslySetInnerHTML 설정
+	/* dangerouslySetInnerHTML 설정 */
 	const createMarkup = () => ({ __html: DOMPurify.sanitize(POST.contents) });
 
-	// 기술 스택
+	/* 기술 스택 */
 	const renderTags = () =>
 		POST.tags?.split(',').map((tag, idx) => <Tag tag={tag} key={idx} />);
 
-	// 글 작성자일 때만 마감, 수정, 삭제 버튼 보이도록 처리
+	/* 글 작성자일 때만 마감, 수정, 삭제 버튼 보이도록 처리 */
 	const handlePostWriter = () => {
 		if (POST.user?.nickname !== userInfo.nickname) {
-			return postDeadline ? (
+			return (
 				<>
-					<button className='alert-btn' onClick={handleDeadlineConfirm}>
-						마감 취소
-					</button>
+					{postDeadline ? (
+						<button className='alert-btn' onClick={handleDeadlineConfirm}>
+							마감 취소
+						</button>
+					) : (
+						<button className='alert-btn' onClick={handleDeadlineConfirm}>
+							마감
+						</button>
+					)}
 					<button className='alert-btn'>수정</button>
-					<button className='alert-btn'>삭제</button>
-				</>
-			) : (
-				<>
-					<button className='alert-btn' onClick={handleDeadlineConfirm}>
-						마감
+					<button className='alert-btn' onClick={handleDeleteConfirm}>
+						삭제
 					</button>
-					<button className='alert-btn'>수정</button>
-					<button className='alert-btn'>삭제</button>
 				</>
 			);
 		}

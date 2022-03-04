@@ -1,8 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Post = ({ post }) => {
+	const navigate = useNavigate();
+
 	const handleSelectPost = () => {
-		console.log('select post::::: ', post);
+		// 서버에 상세 글 요청 날리기
+		navigate(`/post/${post.id}`);
 	};
 
 	return (

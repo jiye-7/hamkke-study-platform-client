@@ -18,3 +18,9 @@ export const getPostAPI = (postId) => {
 		.get(`${process.env.REACT_APP_SERVER_API + POST_SERVER}/${postId}`)
 		.then((response) => response.data);
 };
+
+export const deletePostAPI = (postId) => {
+	return axios
+		.delete(`${process.env.REACT_APP_SERVER_API + POST_SERVER}/${postId}`)
+		.then((response) => response.data);
+};

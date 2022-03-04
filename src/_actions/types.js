@@ -15,3 +15,4 @@ export const DELETE_USER_FAIL = 'delete_user_fail';
 export const CREATE_POST = 'create_post';
 export const GET_POSTS = 'get_posts';
 export const GET_POST = 'get_post';
+export const DELETE_POST = 'delete_post';

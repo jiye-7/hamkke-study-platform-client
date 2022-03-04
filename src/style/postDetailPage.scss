@@ -1,27 +1,96 @@
 .post-detail-container {
+	display: flex;
+	justify-content: center;
 	width: 100%;
 	height: 100vh;
-	// background-color: blanchedalmond;
 	transform: translateY(20%);
 
 	.content-container {
 		width: 70%;
-		background-color: rgb(241, 200, 195);
+		// background-color: rgb(241, 200, 195);
 
 		.anticon-arrow-left {
 			font-size: 2rem;
+			font-weight: bold;
+			color: rgb(167, 165, 165);
 		}
 
-		.post-tags {
-			padding: 0.35rem 0.7rem;
-			margin-left: 5px;
-			border-radius: 20px;
-			background-color: rgb(231, 228, 228);
+		h1 {
+			font-size: 3rem;
+			font-weight: bold;
+			margin-top: 1.5rem;
+		}
+
+		.content-container_post-info {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.user-info {
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+
+				&_profile {
+					width: 50px;
+					height: 50px;
+					border-radius: 50%;
+					margin-right: 0.5rem;
+					box-shadow: 0 0 8px rgb(0 0 0 / 9%);
+				}
+				&_nickname {
+					font-size: 1rem;
+					font-weight: bold;
+				}
+			}
+
+			.writing-date {
+				font-size: 1rem;
+				font-weight: bold;
+				color: rgb(167, 167, 167);
+			}
+		}
+
+		.content-container_post-handling {
+			display: flex;
+			justify-content: flex-end;
+			height: 30px;
+
+			.alert-btn {
+				font-size: 1rem;
+				font-weight: bold;
+				border: none;
+				background-color: #fff;
+				cursor: pointer;
+			}
+		}
+
+		.content-container_post-stack {
+			margin-top: 1.4rem;
+			.use-stack {
+				font-size: 1.2rem;
+				font-weight: bold;
+				.post-tags {
+					font-size: 1rem;
+					font-weight: lighter;
+					padding: 0.35rem 0.7rem;
+					margin-left: 5px;
+					border-radius: 20px;
+					background-color: rgb(231, 228, 228);
+				}
+			}
 		}
 
 		.line {
+			margin: 1rem 0;
+			margin-bottom: 2rem;
 			border: none;
 			border-bottom: 1px solid rgb(136, 133, 133);
+		}
+
+		.post-content {
+			font-size: 1.1rem;
+			font-weight: 500;
 		}
 	}
 }

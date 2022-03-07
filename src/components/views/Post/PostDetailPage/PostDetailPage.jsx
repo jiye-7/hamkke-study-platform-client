@@ -57,7 +57,17 @@ const PostDetailPage = () => {
 
 	/** 글 수정하기 -> 바로 수정 창으로 이동 */
 	const handlePostUpdate = () => {
-		console.log('글 수정하러 갑니다.');
+		// 글 수정에서도 postId를 같이 넘겨주기 x
+		navigate(`/alteration/${postId}`);
+	};
+
+	const handleUpdateConfirm = () => {
+		handleConfirm({
+			title: '글 내용을 수정하시겠어요?',
+			text: '글 내용을 수정하러 갑니다',
+			confirmButtonText: '글 수정',
+			confirmFunction: handlePostUpdate,
+		});
 	};
 
 	/** 글 삭제하기 */
@@ -94,7 +104,7 @@ const PostDetailPage = () => {
 							마감
 						</button>
 					)}
-					<button className='alert-btn' onClick={handlePostUpdate}>
+					<button className='alert-btn' onClick={handleUpdateConfirm}>
 						수정
 					</button>
 					<button className='alert-btn' onClick={handleDeleteConfirm}>

@@ -7,6 +7,7 @@ import Navbar from './components/views/Navbar/Navbar';
 import PostWritePage from './components/views/Post/PostWritePage/PostWritePage';
 import UserInfoPage from './components/views/UserInfoPage/UserInfoPage';
 import PostDetailPage from './components/views/Post/PostDetailPage/PostDetailPage';
+import PostUpdatePage from './components/views/Post/PostUpdatePage/PostUpdatePage';
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 					<Route path='/write' element={<PostWritePage />} />
 					<Route path='/userInfo' element={<UserInfoPage />} />
 					<Route path='/post/:id' element={<PostDetailPage />} />
+					<Route path='/alteration/:id' element={<PostUpdatePage />} />
 				</Routes>
 			</div>
 		</Router>

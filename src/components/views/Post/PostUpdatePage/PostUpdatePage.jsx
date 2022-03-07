@@ -54,7 +54,7 @@ const PostUpdatePage = () => {
 			tags: selectTags.map((tag) => tag.value),
 			contents,
 		};
-		// console.log(requestData);
+
 		let result = await updatePost(requestData);
 		if (result.payload.success) {
 			navigate(`/post/${postId}`);

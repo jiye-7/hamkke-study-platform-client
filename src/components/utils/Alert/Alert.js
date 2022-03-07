@@ -28,7 +28,7 @@ const handleConfirm = (props) => {
 		cancelButtonText,
 		confirmButtonColor,
 		cancelButtonColor,
-		didClose: cancelFunction,
+		// didClose: cancelFunction,
 	}).then((result) => {
 		if (result.isConfirmed) {
 			confirmFunction();

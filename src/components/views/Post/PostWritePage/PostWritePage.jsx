@@ -5,6 +5,7 @@ import Select from 'react-select';
 import ReactQuill from 'react-quill';
 import languageOptions from '../../../utils/data/language';
 import { createPost } from '../../../../_actions/postAction';
+import { editorModules, editorFormats } from '../../../utils/quill/quill';
 
 function PostWritePage() {
 	const navigate = useNavigate();
@@ -13,28 +14,6 @@ function PostWritePage() {
 	const [title, setTitle] = useState('');
 	const [stacks, setStacks] = useState([]);
 	const [contents, setContents] = useState('');
-
-	const modules = {
-		toolbar: [
-			[{ header: [1, 2, 3, false] }],
-			[{ color: [] }],
-			['bold', 'italic', 'underline', 'strike', 'blockquote'],
-			[{ list: 'ordered' }, { list: 'bullet' }],
-		],
-	};
-
-	const formats = [
-		'header',
-		'color',
-		'bold',
-		'italic',
-		'underline',
-		'strike',
-		'blockquote',
-		'list',
-		'bullet',
-		'indent',
-	];
 
 	const handleTitle = (e) => {
 		setTitle(e.currentTarget.value);
@@ -87,8 +66,8 @@ function PostWritePage() {
 					<ReactQuill
 						theme='snow'
 						className='post-editor-form'
-						modules={modules}
-						formats={formats}
+						modules={editorModules}
+						formats={editorFormats}
 						onChange={(content) => handleContentChange(content)}
 						value={contents}
 						placeholder='프로젝트/스터디 진행 방식 및 신청 방법(오픈카톡, 댓글 등)에 대해 구체적으로 작성해주세요 :)'

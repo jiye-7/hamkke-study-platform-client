@@ -27,6 +27,6 @@ export const deletePostAPI = (postId) => {
 
 export const updatePostAPI = (dataToSubmit) => {
 	return axios
-		.put(`${process.env.REACT_APP_SERVER_API + POST_SERVER}`)
+		.put(`${process.env.REACT_APP_SERVER_API + POST_SERVER}`, dataToSubmit)
 		.then((response) => response.data);
 };

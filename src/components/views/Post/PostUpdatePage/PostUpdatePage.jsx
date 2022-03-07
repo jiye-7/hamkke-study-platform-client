@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import ReactQuill from 'react-quill';
-// import { isEmpty } from 'lodash';
-import { getPost } from '../../../../_actions/postAction';
+import { getPost, updatePost } from '../../../../_actions/postAction';
 import languageOptions from '../../../utils/data/language';
+import { editorModules, editorFormats } from '../../../utils/quill/quill';
 
 const PostUpdatePage = () => {
+	const navigate = useNavigate();
+
 	const { id: postId } = useParams();
 	const [title, setTitle] = useState('');
 	const [selectTags, setSelectTags] = useState([]);
@@ -28,36 +30,42 @@ const PostUpdatePage = () => {
 
 	const hashStacks = useMemo(() => {
 		return selectTags.reduce((acc, cur, idx) => {
-			acc[cur.value] = idx;
+			acc[cur.value] = 1;
 			return acc;
 		}, {});
 	}, [selectTags]);
 
-	/* 	useEffect(() => {
-		!isEmpty(POST) &&
-			setSelectTags(
-				POST.tags.split(',').map((tag) => ({ label: tag, value: tag })),
-			);
-	}, [POST]); */
+	const handleTitleUpdate = (e) => {
+		setTitle(e.target.value);
+	};
 
-	/*const hashStacks = useMemo(() => {
-		// selectTags에 존재하는 값들이 있을 때, 1개의 객체로 변환한다.
-		// ex) [{ value: "JS"}, {value: "TS"}] -> { JS : 1, TS : 1}
-		const hashObj = {};
-
-		selectTags.map((tag) => (hashObj[tag.value] = 1));
-		return hashObj;
-	}, [selectTags]); */
-
-	const handleStacks = (option) => {
+	const handleStacksUpdate = (option) => {
 		setSelectTags(option);
+	};
+
+	const handleContentUpdate = (content) => {
+		setContents(content);
+	};
+
+	const handleUpdatePost = async () => {
+		const requestData = {
+			postId,
+			title,
+			tags: selectTags.map((tag) => tag.value),
+			contents,
+		};
+		// console.log(requestData);
+		let result = await updatePost(requestData);
+		if (result.payload.success) {
+			navigate(`/post/${postId}`);
+		}
 	};
 
 	return (
 		<section className='post-update-container'>
 			<div className='update'>
 				<header>
-					<input value={title} />
+					<input placeholder={title} onChange={handleTitleUpdate} />
 				</header>
 				<hr />
 				<div>
@@ -66,14 +74,24 @@ const PostUpdatePage = () => {
 						options={languageOptions}
 						isMulti
 						closeMenuOnSelect={false}
-						onChange={handleStacks}
+						onChange={handleStacksUpdate}
+						placeholder='프로젝트/스터디 진행 언어 선택해주세요 :)'
 						value={languageOptions.filter((option) => {
 							return option.value in hashStacks;
-							// return hashStacks[option.value] !== undefined;
 						})}
 					/>
 				</div>
-				<ReactQuill value={contents} />
+				<ReactQuill
+					theme='snow'
+					modules={editorModules}
+					formats={editorFormats}
+					value={contents}
+					onChange={(content) => handleContentUpdate(content)}
+				/>
+				<div>
+					<button onClick={() => navigate(-1)}>취소</button>
+					<button onClick={handleUpdatePost}>수정</button>
+				</div>
 			</div>
 		</section>
 	);

@@ -8,7 +8,6 @@ import { editorModules, editorFormats } from '../../../utils/quill/quill';
 
 const PostUpdatePage = () => {
 	const navigate = useNavigate();
-
 	const { id: postId } = useParams();
 	const [title, setTitle] = useState('');
 	const [selectTags, setSelectTags] = useState([]);
@@ -29,7 +28,7 @@ const PostUpdatePage = () => {
 	}, []);
 
 	const hashStacks = useMemo(() => {
-		return selectTags.reduce((acc, cur, idx) => {
+		return selectTags.reduce((acc, cur) => {
 			acc[cur.value] = 1;
 			return acc;
 		}, {});

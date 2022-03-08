@@ -20,7 +20,7 @@ function RightMenu() {
 	const dispatch = useDispatch();
 
 	const [currentPageKey, setCurrentPageKey] = useState('');
-	const { userInfo } = useSelector((state) => state.user);
+	const user = useSelector(({ user }) => user.userInfo);
 	const [, , removeCookie] = useCookies(['TID']); // const [cookie, setCookie, removeCookie] = useCookies(['TID']);
 
 	const handleClick = (e) => {
@@ -33,12 +33,12 @@ function RightMenu() {
 	};
 
 	const renderRightMenu = () => {
-		return userInfo.id ? (
+		return user?.id ? (
 			<Menu>
 				<Menu.Item key='newpost' icon={<EditOutlined />}>
 					<Link to='/write'>새 글 쓰기</Link>
 				</Menu.Item>
-				<SubMenu key='submenu' title={userInfo.nickname}>
+				<SubMenu key='submenu' title={user.nickname}>
 					<Menu.Item key='myPosts' icon={<ReadOutlined />}>
 						<Link to='/myPosts'>내 작성글</Link>
 					</Menu.Item>

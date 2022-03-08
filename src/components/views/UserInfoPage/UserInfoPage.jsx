@@ -25,7 +25,7 @@ const UserInfoPage = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const { userInfo } = useSelector((state) => state.user);
+	const user = useSelector(({ user }) => user.userInfo);
 
 	const [stacks, setStacks] = useState([]);
 	const [isNicknameDisable, setIsNicknameDisable] = useState(true);
@@ -43,7 +43,7 @@ const UserInfoPage = () => {
 			return;
 		}
 
-		const { id: userId } = userInfo;
+		const { id: userId } = user;
 
 		let response = await dispatch(
 			updateUser({ userId, type: 'nickname', data: nickname }),
@@ -68,7 +68,7 @@ const UserInfoPage = () => {
 			return;
 		}
 
-		const { id: userId } = userInfo;
+		const { id: userId } = user;
 
 		let response = await dispatch(
 			updateUser({ userId, type: 'password', data: password }),
@@ -87,7 +87,7 @@ const UserInfoPage = () => {
 		const newStacks = values.map((value) => value.value);
 		setStacks(newStacks);
 
-		const { id: userId } = userInfo;
+		const { id: userId } = user;
 
 		if (newStacks.length > 0) {
 			await dispatch(updateUser({ userId, type: 'stacks', data: newStacks }));
@@ -95,7 +95,7 @@ const UserInfoPage = () => {
 	};
 
 	const handleMembershipWithdrawal = async () => {
-		const { id: userId } = userInfo;
+		const { id: userId } = user;
 		let result = await dispatch(deleteUser(userId));
 		if (result.type === 'delete_user') {
 			navigate('/');
@@ -106,10 +106,10 @@ const UserInfoPage = () => {
 		<div className='user-container'>
 			<div className='userInfo--container'>
 				<h1>내 정보 수정</h1>
-				<FileUpload user={userInfo} />
+				<FileUpload user={user} />
 				<Formik
 					initialValues={{
-						nickname: userInfo.nickname,
+						nickname: user.nickname,
 						password: '*****',
 					}}
 					validationSchema={UserInfoUpdateSchema}

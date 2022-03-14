@@ -6,6 +6,7 @@ import {
 	UPDATE_USER,
 	DELETE_USER,
 	UPDATE_USER_PROFILE,
+	AUTH_USER,
 } from '../_actions/types';
 
 const defaultState = {
@@ -22,14 +23,21 @@ const userReducer = (state = defaultState, action) => {
 	const { type, payload } = action;
 
 	switch (type) {
+		case AUTH_USER:
+			return { ...state, userInfo: payload.user };
 		case LOGIN_USER:
-			return { ...state, userInfo: payload };
+			return { ...state, userInfo: payload, loginSuccess: true };
 		case LOGIN_FAIL:
 			return { ...state, userInfo: payload };
 		case REGISTER_USER:
 			return { ...state, registerUser: payload };
 		case LOGOUT_USER:
-			return { ...state, userInfo: payload, logoutSuccess: true };
+			return {
+				...state,
+				userInfo: payload,
+				loginSuccess: false,
+				logoutSuccess: true,
+			};
 		case UPDATE_USER:
 			const { type, data } = payload;
 			const updateData = {};

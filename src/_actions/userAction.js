@@ -10,13 +10,17 @@ import {
 	DELETE_USER_FAIL,
 	UPDATE_USER_PROFILE,
 	UPDATE_USER_PROFILE_FAIL,
+	AUTH_USER,
+	AUTH_FAIL,
 } from './types';
+
 import {
 	loginUserAPI,
 	registerUserAPI,
 	updateUserAPI,
 	deleteUserAPI,
 	updateUserProfileAPI,
+	authUserAPI,
 } from '../_module/userApi';
 
 export const loginUser = (dataToSubmit) => {
@@ -87,4 +91,18 @@ export const deleteUser = (dataToSubmit) => {
 			type: DELETE_USER_FAIL,
 			payload: err,
 		}));
+};
+
+export const auth = () => {
+	return authUserAPI()
+		.then((response) => ({
+			type: AUTH_USER,
+			payload: response,
+		}))
+		.catch((err) => {
+			return {
+				type: AUTH_FAIL,
+				payload: { success: false },
+			};
+		});
 };

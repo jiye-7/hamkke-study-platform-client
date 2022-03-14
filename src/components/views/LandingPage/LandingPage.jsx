@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPosts } from '../../../_actions/postAction';
 import Post from '../Post/Post';
+import StackPage from '../StackPage/StackPage';
 
 const LandingPage = () => {
 	const dispatch = useDispatch();
@@ -18,7 +19,10 @@ const LandingPage = () => {
 
 	return (
 		<div className='main-container'>
-			{/* TODO: language filter section */}
+			{/* language filter section */}
+			<section className='stackFilter-section'>
+				<StackPage />
+			</section>
 			{/* TODO: filter section(recent, like, recruiting) */}
 			{/* posts section */}
 			<section className='post-section'>{renderPost()}</section>

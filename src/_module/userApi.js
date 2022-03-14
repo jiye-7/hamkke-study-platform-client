@@ -46,3 +46,12 @@ export const deleteUserAPI = (dataToSubmit) => {
 		)
 		.then((response) => response.data);
 };
+
+export const authUserAPI = () => {
+	return axios
+		.get(`${process.env.REACT_APP_SERVER_API + USER_SERVER}/auth`)
+		.then((response) => response.data)
+		.catch((err) => {
+			throw Error(err);
+		});
+};

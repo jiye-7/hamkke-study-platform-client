@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Auth from './hoc/auth';
 import LandingPage from './components/views/LandingPage/LandingPage';
 import LoginPage from './components/views/LoginPage/LoginPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
@@ -15,13 +16,13 @@ function App() {
 			<Navbar />
 			<div>
 				<Routes>
-					<Route path='/' element={<LandingPage />} />
-					<Route path='/login' element={<LoginPage />} />
-					<Route path='/register' element={<RegisterPage />} />
-					<Route path='/write' element={<PostWritePage />} />
-					<Route path='/userInfo' element={<UserInfoPage />} />
-					<Route path='/post/:id' element={<PostDetailPage />} />
-					<Route path='/alteration/:id' element={<PostUpdatePage />} />
+					<Route path='/' element={Auth(LandingPage, null)} />
+					<Route path='/login' element={Auth(LoginPage, false)} />
+					<Route path='/register' element={Auth(RegisterPage, false)} />
+					<Route path='/write' element={Auth(PostWritePage, true)} />
+					<Route path='/userInfo' element={Auth(UserInfoPage, true)} />
+					<Route path='/post/:id' element={Auth(PostDetailPage, null)} />
+					<Route path='/alteration/:id' element={Auth(PostUpdatePage, true)} />
 				</Routes>
 			</div>
 		</Router>

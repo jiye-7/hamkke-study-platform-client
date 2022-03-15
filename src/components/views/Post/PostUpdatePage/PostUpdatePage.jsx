@@ -16,6 +16,7 @@ const PostUpdatePage = () => {
 	useEffect(() => {
 		async function post() {
 			const { payload } = await getPost(postId);
+
 			if (payload && payload.post) {
 				setTitle(payload.post.title);
 				setSelectTags(
@@ -47,16 +48,23 @@ const PostUpdatePage = () => {
 	};
 
 	const handleUpdatePost = async () => {
-		const requestData = {
-			postId,
-			title,
-			tags: selectTags.map((tag) => tag.value),
-			contents,
-		};
+		if (
+			title !== '' &&
+			selectTags.length >= 1 &&
+			contents &&
+			contents !== `<p><br></p>`
+		) {
+			const requestData = {
+				postId,
+				title,
+				tags: selectTags.map((tag) => tag.value),
+				contents,
+			};
 
-		let result = await updatePost(requestData);
-		if (result.payload.success) {
-			navigate(`/post/${postId}`);
+			let result = await updatePost(requestData);
+			if (result.payload.success) {
+				navigate(`/post/${postId}`);
+			}
 		}
 	};
 

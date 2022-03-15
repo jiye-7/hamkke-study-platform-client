@@ -29,15 +29,23 @@ function PostWritePage() {
 	};
 
 	const handleCreatePost = async () => {
-		const data = {
-			userId,
-			title,
-			tags: stacks,
-			contents,
-		};
-		const result = await createPost(data);
-		if (result.type === 'create_post') {
-			navigate('/');
+		if (
+			title !== '' &&
+			stacks.length >= 1 &&
+			contents &&
+			contents !== `<p><br></p>`
+		) {
+			const data = {
+				userId,
+				title,
+				tags: stacks,
+				contents,
+			};
+
+			const result = await createPost(data);
+			if (result.type === 'create_post') {
+				navigate('/');
+			}
 		}
 	};
 

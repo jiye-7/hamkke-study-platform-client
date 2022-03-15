@@ -6,6 +6,7 @@ import ReactQuill from 'react-quill';
 import languageOptions from '../../../utils/data/language';
 import { createPost } from '../../../../_actions/postAction';
 import { editorModules, editorFormats } from '../../../utils/quill/quill';
+import handleConfirm from '../../../utils/Alert/Alert';
 
 function PostWritePage() {
 	const navigate = useNavigate();
@@ -29,6 +30,7 @@ function PostWritePage() {
 	};
 
 	const handleCreatePost = async () => {
+		console.log(contents);
 		if (
 			title !== '' &&
 			stacks.length >= 1 &&
@@ -46,6 +48,21 @@ function PostWritePage() {
 			if (result.type === 'create_post') {
 				navigate('/');
 			}
+		} else {
+			handleConfirm({
+				title: '값이 비어있습니다.',
+				text: `${
+					`${title === '' ? '제목이 비었습니다.' : ''}` ||
+					`${stacks.length === 0 ? '사용언어를 선택해주세요.' : ''}` ||
+					`${
+						contents === '' || contents === `<p><br></p>`
+							? '내용을 입력해주세요'
+							: ''
+					}`
+				}`,
+				icon: 'warning',
+				showCancelButton: false,
+			});
 		}
 	};
 

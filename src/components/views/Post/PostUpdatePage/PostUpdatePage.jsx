@@ -5,6 +5,7 @@ import ReactQuill from 'react-quill';
 import { getPost, updatePost } from '../../../../_actions/postAction';
 import languageOptions from '../../../utils/data/language';
 import { editorModules, editorFormats } from '../../../utils/quill/quill';
+import handleConfirm from '../../../utils/Alert/Alert';
 
 const PostUpdatePage = () => {
 	const navigate = useNavigate();
@@ -65,6 +66,19 @@ const PostUpdatePage = () => {
 			if (result.payload.success) {
 				navigate(`/post/${postId}`);
 			}
+		} else {
+			handleConfirm({
+				title: '값이 비어있습니다.',
+				text: `${
+					`${title === '' ? '제목이 비었습니다.' : ''}` ||
+					`${selectTags.length === 0 ? '사용언어를 선택해주세요.' : ''}` ||
+					`${
+						contents && contents === `<p><br></p>` ? '내용을 입력해주세요' : ''
+					}`
+				}`,
+				icon: 'warning',
+				showCancelButton: false,
+			});
 		}
 	};
 

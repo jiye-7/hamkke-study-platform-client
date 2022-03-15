@@ -10,15 +10,16 @@ const LandingPage = () => {
 	const [selectStack, setSelectStack] = useState([]);
 
 	useEffect(() => {
-		dispatch(getPosts());
-	}, []);
+		dispatch(getPosts(selectStack));
+	}, [selectStack]);
 
 	// 해당 post 1개씩 리턴
 	const renderPost = () => {
 		return posts.map((post) => <Post key={post.id} post={post} />);
 	};
 
-	const handleStackCheck = (stack) => {
+	const handleStackCheck = (checkStack) => {
+		const stack = checkStack.toLowerCase();
 		// selectStack에 stack이 있는 지 확인
 		const findIdx = selectStack.indexOf(stack);
 		const stacks = [...selectStack];
@@ -26,7 +27,6 @@ const LandingPage = () => {
 		// findIdx가 -1이면 존재하지 않으니 selectStack에 해당 stack을 추가한다.
 		// findIdx가 0이면 존재하는 경우, selectStack에서 지운다.
 		findIdx === -1 ? stacks.push(stack) : stacks.splice(findIdx, 1);
-
 		setSelectStack(stacks);
 	};
 

@@ -30,7 +30,6 @@ function PostWritePage() {
 	};
 
 	const handleCreatePost = async () => {
-		console.log(contents);
 		if (
 			title !== '' &&
 			stacks.length >= 1 &&

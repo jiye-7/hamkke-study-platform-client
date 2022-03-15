@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useInView } from 'react-intersection-observer';
 import { getPosts } from '../../../_actions/postAction';
 import Post from '../Post/Post';
 import StackPage from '../StackPage/StackPage';
@@ -8,6 +9,11 @@ const LandingPage = () => {
 	const dispatch = useDispatch();
 	const { posts } = useSelector(({ post }) => post);
 	const [selectStack, setSelectStack] = useState([]);
+
+	const { ref, inView, entry } = useInView({
+		/* Optional options */
+		threshold: 0,
+	});
 
 	useEffect(() => {
 		dispatch(getPosts(selectStack));

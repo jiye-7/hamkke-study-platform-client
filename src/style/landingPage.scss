@@ -1,19 +1,16 @@
 .main-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 	width: 100%;
 	height: 100vh;
 
 	/* stackFilter-section*/
 	.stackFilter-section {
-		transform: translateY(-100%);
+		margin-top: 400px;
 	}
 
 	/* post-section */
 	.post-section {
 		display: flex;
+		flex-wrap: wrap;
 		flex-direction: row;
 	}
 
@@ -25,7 +22,7 @@
 		box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
 		border-radius: 1.5rem;
 		cursor: pointer;
-		// transition: transform 0.2s ease-in;
+		transition: transform 0.15s ease-in-out; // 어떤 변하는 값을 추적하여 부드럽게 만드는 옵션
 
 		h1 {
 			font-size: 1.2rem;
@@ -37,5 +34,9 @@
 			width: 100%;
 			text-overflow: ellipsis;
 		}
+	}
+
+	.post-container:hover {
+		transform: scale(1.05); // 변화시키기 위한 값 (translate, scale, rotate)
 	}
 }

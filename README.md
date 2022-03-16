@@ -6,8 +6,6 @@
 
 ### Stack
 
-Front
-
 - React
 - Redux
 - CSS Framework - Antd
@@ -15,4 +13,12 @@ Front
 
 <br/>
 
-#### <a href='https://github.com/jiye-7/hamkke-study-platform-client/wiki'>wiki</a>
+### Installation
+```js
+npm install --save
+```
+
+<br/>
+
+#### <a href='https://github.com/jiye-7/hamkke-study-platform-client/wiki'>Wiki</a>
+#### <a href='https://github.com/jiye-7/hamkke-study-platform-client/projects/1'>Project</a>

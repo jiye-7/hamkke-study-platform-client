@@ -49,8 +49,7 @@ function PostWritePage() {
 			}
 		} else {
 			handleConfirm({
-				title: '값이 비어있습니다.',
-				text: `${
+				title: `${
 					`${title === '' ? '제목이 비었습니다.' : ''}` ||
 					`${stacks.length === 0 ? '사용언어를 선택해주세요.' : ''}` ||
 					`${
@@ -59,6 +58,7 @@ function PostWritePage() {
 							: ''
 					}`
 				}`,
+				text: '',
 				icon: 'warning',
 				showCancelButton: false,
 			});

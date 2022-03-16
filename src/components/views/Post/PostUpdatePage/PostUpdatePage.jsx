@@ -20,9 +20,7 @@ const PostUpdatePage = () => {
 
 			if (payload && payload.post) {
 				setTitle(payload.post.title);
-				setSelectTags(
-					payload.post.tags.split(',').map((tag) => ({ value: tag })),
-				);
+				setSelectTags(payload.post.stacks.map((tag) => ({ value: tag })));
 				setContents(payload.post.contents);
 			}
 		}
@@ -49,6 +47,7 @@ const PostUpdatePage = () => {
 	};
 
 	const handleUpdatePost = async () => {
+		console.log(title);
 		if (
 			title !== '' &&
 			selectTags.length >= 1 &&
@@ -58,7 +57,7 @@ const PostUpdatePage = () => {
 			const requestData = {
 				postId,
 				title,
-				tags: selectTags.map((tag) => tag.value),
+				stacks: selectTags.map((tag) => tag.value),
 				contents,
 			};
 
@@ -68,14 +67,14 @@ const PostUpdatePage = () => {
 			}
 		} else {
 			handleConfirm({
-				title: '값이 비어있습니다.',
-				text: `${
+				title: `${
 					`${title === '' ? '제목이 비었습니다.' : ''}` ||
 					`${selectTags.length === 0 ? '사용언어를 선택해주세요.' : ''}` ||
 					`${
 						contents && contents === `<p><br></p>` ? '내용을 입력해주세요' : ''
 					}`
 				}`,
+				text: '',
 				icon: 'warning',
 				showCancelButton: false,
 			});

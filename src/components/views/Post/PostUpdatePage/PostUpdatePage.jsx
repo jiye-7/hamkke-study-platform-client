@@ -47,7 +47,6 @@ const PostUpdatePage = () => {
 	};
 
 	const handleUpdatePost = async () => {
-		console.log(title);
 		if (
 			title !== '' &&
 			selectTags.length >= 1 &&
@@ -74,7 +73,6 @@ const PostUpdatePage = () => {
 						contents && contents === `<p><br></p>` ? '내용을 입력해주세요' : ''
 					}`
 				}`,
-				text: '',
 				icon: 'warning',
 				showCancelButton: false,
 			});

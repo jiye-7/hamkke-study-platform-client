@@ -58,7 +58,6 @@ function PostWritePage() {
 							: ''
 					}`
 				}`,
-				text: '',
 				icon: 'warning',
 				showCancelButton: false,
 			});

@@ -14,3 +14,5 @@ Front
 - Styled-Component
 
 <br/>
+
+#### <a href='https://github.com/jiye-7/hamkke-study-platform-client/wiki'>wiki</a>

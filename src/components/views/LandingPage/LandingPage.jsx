@@ -1,6 +1,8 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useInView } from 'react-intersection-observer';
+import { POST_SERVER } from '../../../Config';
+// import { useInView } from 'react-intersection-observer';
 import { getPosts } from '../../../_actions/postAction';
 import Post from '../Post/Post';
 import StackPage from '../StackPage/StackPage';
@@ -10,13 +12,14 @@ const LandingPage = () => {
 	const { posts } = useSelector(({ post }) => post);
 	const [selectStack, setSelectStack] = useState([]);
 
-	const { ref, inView, entry } = useInView({
-		/* Optional options */
-		threshold: 0,
-	});
+	// const { ref, inView, entry } = useInView({
+	// 	/* Optional options */
+	// 	threshold: 0,
+	// });
 
 	useEffect(() => {
-		dispatch(getPosts(selectStack));
+		const params = { params: { stacks: selectStack } };
+		dispatch(getPosts(params));
 	}, [selectStack]);
 
 	// 해당 post 1개씩 리턴
@@ -34,6 +37,11 @@ const LandingPage = () => {
 		// findIdx가 0이면 존재하는 경우, selectStack에서 지운다.
 		findIdx === -1 ? stacks.push(stack) : stacks.splice(findIdx, 1);
 		setSelectStack(stacks);
+		// handleStackSearch(selectStack);
+	};
+
+	const handleStackSearch = () => {
+		console.log('filtering...', selectStack);
 	};
 
 	return (

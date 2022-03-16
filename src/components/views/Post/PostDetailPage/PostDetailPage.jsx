@@ -88,7 +88,7 @@ const PostDetailPage = () => {
 
 	/** 기술 스택 */
 	const renderTags = () =>
-		POST.tags?.split(',').map((tag, idx) => <Tag tag={tag} key={idx} />);
+		POST.stacks?.map((tag, idx) => <Tag tag={tag} key={idx} />);
 
 	/** 글 작성자일 때만 마감, 수정, 삭제 버튼 보이도록 처리 */
 	const handlePostWriter = () => {

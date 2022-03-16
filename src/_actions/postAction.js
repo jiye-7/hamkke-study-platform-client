@@ -23,8 +23,8 @@ export const createPost = (dataToSubmit) => {
 };
 
 /** 글 전체 가져오기 */
-export const getPosts = () => {
-	return getPostsAPI()
+export const getPosts = (params) => {
+	return getPostsAPI(params)
 		.then((data) => ({
 			type: GET_POSTS,
 			payload: data,

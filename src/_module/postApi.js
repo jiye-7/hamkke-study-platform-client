@@ -7,9 +7,9 @@ export const createPostAPI = (dataToSubmit) => {
 		.then((response) => response.data);
 };
 
-export const getPostsAPI = () => {
+export const getPostsAPI = (params) => {
 	return axios
-		.get(`${process.env.REACT_APP_SERVER_API + POST_SERVER}/`)
+		.get(`${process.env.REACT_APP_SERVER_API + POST_SERVER}/`, params)
 		.then((response) => response.data);
 };
 

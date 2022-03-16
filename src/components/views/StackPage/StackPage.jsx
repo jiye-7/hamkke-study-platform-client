@@ -4,7 +4,7 @@ import Stack from './Stack';
 import languageOptions from '../../utils/data/language';
 
 const StackPage = (props) => {
-	const stack = () =>
+	const makeStack = () =>
 		languageOptions.map((stack) => (
 			<Stack key={stack.id} stack={stack} stackCheck={props.stackCheck} />
 		));
@@ -15,7 +15,7 @@ const StackPage = (props) => {
 				<HeartOutlined className='balloon_icon' />
 				원하는 언어로 필터링 해보세요 :)
 			</div>
-			{stack()}
+			{makeStack()}
 		</div>
 	);
 };

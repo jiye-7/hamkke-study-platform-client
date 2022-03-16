@@ -5,6 +5,7 @@ import ReactQuill from 'react-quill';
 import { getPost, updatePost } from '../../../../_actions/postAction';
 import languageOptions from '../../../utils/data/language';
 import { editorModules, editorFormats } from '../../../utils/quill/quill';
+import handleConfirm from '../../../utils/Alert/Alert';
 
 const PostUpdatePage = () => {
 	const navigate = useNavigate();
@@ -16,6 +17,7 @@ const PostUpdatePage = () => {
 	useEffect(() => {
 		async function post() {
 			const { payload } = await getPost(postId);
+
 			if (payload && payload.post) {
 				setTitle(payload.post.title);
 				setSelectTags(payload.post.stacks.map((tag) => ({ value: tag })));
@@ -45,16 +47,35 @@ const PostUpdatePage = () => {
 	};
 
 	const handleUpdatePost = async () => {
-		const requestData = {
-			postId,
-			title,
-			stacks: selectTags.map((tag) => tag.value),
-			contents,
-		};
+		if (
+			title !== '' &&
+			selectTags.length >= 1 &&
+			contents &&
+			contents !== `<p><br></p>`
+		) {
+			const requestData = {
+				postId,
+				title,
+				stacks: selectTags.map((tag) => tag.value),
+				contents,
+			};
 
-		let result = await updatePost(requestData);
-		if (result.payload.success) {
-			navigate(`/post/${postId}`);
+			let result = await updatePost(requestData);
+			if (result.payload.success) {
+				navigate(`/post/${postId}`);
+			}
+		} else {
+			handleConfirm({
+				title: `${
+					`${title === '' ? '제목이 비었습니다.' : ''}` ||
+					`${selectTags.length === 0 ? '사용언어를 선택해주세요.' : ''}` ||
+					`${
+						contents && contents === `<p><br></p>` ? '내용을 입력해주세요' : ''
+					}`
+				}`,
+				icon: 'warning',
+				showCancelButton: false,
+			});
 		}
 	};
 

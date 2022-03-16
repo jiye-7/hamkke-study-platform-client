@@ -9,7 +9,11 @@ const postReducer = (state = defaultState, action) => {
 
 	switch (type) {
 		case GET_POSTS:
-			return { ...state, posts: [...state.posts, ...payload.posts] };
+			return {
+				...state,
+				posts: [...state.posts, ...payload.posts],
+				isLastPost: payload.isLastPost,
+			};
 		default:
 			return state;
 	}

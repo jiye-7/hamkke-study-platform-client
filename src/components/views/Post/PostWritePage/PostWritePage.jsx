@@ -32,7 +32,7 @@ function PostWritePage() {
 		const data = {
 			userId,
 			title,
-			tags: stacks,
+			stacks,
 			contents,
 		};
 		const result = await createPost(data);

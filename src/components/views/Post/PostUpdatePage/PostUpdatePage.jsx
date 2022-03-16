@@ -18,9 +18,7 @@ const PostUpdatePage = () => {
 			const { payload } = await getPost(postId);
 			if (payload && payload.post) {
 				setTitle(payload.post.title);
-				setSelectTags(
-					payload.post.tags.split(',').map((tag) => ({ value: tag })),
-				);
+				setSelectTags(payload.post.stacks.map((tag) => ({ value: tag })));
 				setContents(payload.post.contents);
 			}
 		}
@@ -50,7 +48,7 @@ const PostUpdatePage = () => {
 		const requestData = {
 			postId,
 			title,
-			tags: selectTags.map((tag) => tag.value),
+			stacks: selectTags.map((tag) => tag.value),
 			contents,
 		};
 

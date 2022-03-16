@@ -12,7 +12,7 @@ const PostDetailPage = () => {
 	const navigate = useNavigate();
 	const { userInfo } = useSelector(({ user }) => user);
 	const { id: postId } = useParams();
-	const [POST, setPost] = useState({});
+	const [post, setPost] = useState({});
 	const [postDeadline, setPostDeadline] = useState(false);
 
 	useEffect(() => {
@@ -24,7 +24,7 @@ const PostDetailPage = () => {
 	}, []);
 
 	/** dangerouslySetInnerHTML 설정 */
-	const createMarkup = () => ({ __html: DOMPurify.sanitize(POST.contents) });
+	const createMarkup = () => ({ __html: DOMPurify.sanitize(post.contents) });
 
 	/** 마감하기 */
 	const handlePostDeadlineCheck = () => {
@@ -57,7 +57,6 @@ const PostDetailPage = () => {
 
 	/** 글 수정하기 -> 바로 수정 창으로 이동 */
 	const handlePostUpdate = () => {
-		// 글 수정에서도 postId를 같이 넘겨주기 x
 		navigate(`/alteration/${postId}`);
 	};
 
@@ -79,7 +78,7 @@ const PostDetailPage = () => {
 			confirmButtonText: '네, 삭제할래요',
 			cancelButtonText: '아니요',
 			confirmFunction: () => {
-				deletePost(POST.id).then((result) => {
+				deletePost(post.id).then((result) => {
 					if (result.type === 'delete_post') navigate('/');
 				});
 			},
@@ -88,11 +87,11 @@ const PostDetailPage = () => {
 
 	/** 기술 스택 */
 	const renderTags = () =>
-		POST.tags?.split(',').map((tag, idx) => <Tag tag={tag} key={idx} />);
+		post.stacks?.map((tag, idx) => <Tag tag={tag} key={idx} />);
 
 	/** 글 작성자일 때만 마감, 수정, 삭제 버튼 보이도록 처리 */
 	const handlePostWriter = () => {
-		if (POST.user?.nickname === userInfo.nickname) {
+		if (post.user?.nickname === userInfo.nickname) {
 			return (
 				<>
 					{postDeadline ? (
@@ -118,14 +117,14 @@ const PostDetailPage = () => {
 	return (
 		<section className='post-detail-container'>
 			<div className='content-container'>
-				<ArrowLeftOutlined onClick={() => navigate(-1)} />
-				<h1>{POST.title}</h1>
+				<ArrowLeftOutlined onClick={() => navigate('/')} />
+				<h1>{post.title}</h1>
 				<div className='content-container_post-info'>
 					<div className='user-info'>
 						<img src={profileImg} className='user-info_profile' />
-						<p className='user-info_nickname'>{POST.user?.nickname}</p>
+						<p className='user-info_nickname'>{post.user?.nickname}</p>
 					</div>
-					<p className='writing-date'>{POST.createdAt?.split('T')[0]}</p>
+					<p className='writing-date'>{post.createdAt?.split('T')[0]}</p>
 				</div>
 				<div className='content-container_post-handling'>
 					{handlePostWriter()}

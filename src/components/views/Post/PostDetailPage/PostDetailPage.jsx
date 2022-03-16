@@ -117,7 +117,7 @@ const PostDetailPage = () => {
 	return (
 		<section className='post-detail-container'>
 			<div className='content-container'>
-				<ArrowLeftOutlined onClick={() => navigate(-1)} />
+				<ArrowLeftOutlined onClick={() => navigate('/')} />
 				<h1>{post.title}</h1>
 				<div className='content-container_post-info'>
 					<div className='user-info'>

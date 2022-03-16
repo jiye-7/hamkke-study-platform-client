@@ -54,7 +54,7 @@ const PostUpdatePage = () => {
 
 		let result = await updatePost(requestData);
 		if (result.payload.success) {
-			navigate('/'); // navigate(`/post/${postId}`);
+			navigate(`/post/${postId}`);
 		}
 	};
 

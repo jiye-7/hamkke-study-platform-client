@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../_actions/userAction';
-import LoadingPage from '../components/views/LoadingPage/LoadingPage';
+import Loading from '../components/utils/Loading/Loading';
 import handleConfirm from '../components/utils/Alert/Alert';
 
 /**
@@ -51,7 +51,7 @@ export default (SpecificComponent, option, adminRoute = null) => {
 		}, []);
 
 		if (isLoading) {
-			return <LoadingPage />;
+			return <Loading />;
 		}
 		return <SpecificComponent {...props} />;
 	};

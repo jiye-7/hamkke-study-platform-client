@@ -1,0 +1,64 @@
+.stack-search {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	position: relative;
+	padding: 0 4rem;
+
+	.balloon {
+		position: absolute;
+		padding: 0 1rem;
+		width: 300px;
+		height: 40px;
+		left: 5rem;
+		top: -4rem;
+		// transform: translate(8%, -100%);
+		border-radius: 30px;
+		background-color: #ffe579;
+		font-size: 1.1rem;
+		font-weight: bold;
+		text-align: center;
+		line-height: 40px;
+
+		&_icon {
+			font-size: 1.2rem;
+			color: red;
+			transform: translate(-15%, 10%);
+		}
+	}
+
+	.balloon:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 20%;
+		width: 0;
+		height: 0;
+		border: 12px solid transparent;
+		border-top-color: #ffe579;
+		border-bottom: 0;
+		margin-left: -10px;
+		margin-bottom: -10px;
+	}
+
+	.stack-chip {
+		padding: 0.1rem 1.8rem;
+		border: none;
+		border-radius: 20px;
+		font-size: 1.1rem;
+		font-weight: bold;
+		opacity: 0.3;
+		transition: opacity 0.3s ease-in-out, color 0.3s ease-in-out;
+		margin: 0.2rem;
+	}
+
+	.stack-chip:hover {
+		cursor: pointer;
+	}
+
+	.stack-chip.select {
+		color: #fff;
+		opacity: 1;
+	}
+}

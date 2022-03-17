@@ -30,6 +30,7 @@ const LandingPage = () => {
 	}, [selectStack, page, updateState]);
 
 	useEffect(() => {
+		return () => dispatch(clearPosts());
 	}, []);
 
 	const renderPost = () => {

@@ -16,6 +16,7 @@ export const AUTH_FAIL = 'auth_fail';
 // post
 export const CREATE_POST = 'create_post';
 export const GET_POSTS = 'get_posts';
+export const CLEAR_POSTS = 'clear_posts';
 export const GET_POST = 'get_post';
 export const DELETE_POST = 'delete_post';
 export const UPDATE_POST = 'update_post';

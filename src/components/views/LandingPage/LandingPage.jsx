@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import queryString from 'query-string';
 import Post from '../Post/Post';
@@ -20,7 +20,7 @@ const LandingPage = () => {
 		);
 		dispatch(getPosts(query));
 		setIsMoreBtn(false);
-	}, [selectStack]);
+	}, [selectStack, page]);
 
 	const renderPost = () => {
 		return posts.map((post) => <Post key={post.id} post={post} />);

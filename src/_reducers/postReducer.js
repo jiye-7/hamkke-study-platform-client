@@ -1,4 +1,4 @@
-import { GET_POSTS } from '../_actions/types';
+import { GET_POSTS, CLEAR_POSTS } from '../_actions/types';
 
 const defaultState = {
 	posts: [],
@@ -9,7 +9,16 @@ const postReducer = (state = defaultState, action) => {
 
 	switch (type) {
 		case GET_POSTS:
-			return { ...state, posts: payload.posts };
+			return {
+				...state,
+				posts: [...state.posts, ...payload.posts],
+				isLastPost: payload.isLastPost,
+			};
+		case CLEAR_POSTS:
+			return {
+				...state,
+				posts: payload.posts,
+			};
 		default:
 			return state;
 	}

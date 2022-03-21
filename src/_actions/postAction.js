@@ -1,6 +1,7 @@
 import {
 	CREATE_POST,
 	GET_POSTS,
+	CLEAR_POSTS,
 	GET_POST,
 	DELETE_POST,
 	UPDATE_POST,
@@ -13,6 +14,7 @@ import {
 	updatePostAPI,
 } from '../_module/postApi';
 
+/** 글 작성하기 */
 export const createPost = (dataToSubmit) => {
 	return createPostAPI(dataToSubmit)
 		.then((data) => ({
@@ -30,6 +32,14 @@ export const getPosts = (params) => {
 			payload: data,
 		}))
 		.catch((err) => err);
+};
+
+/** 가져온 전체 글 지우기 */
+export const clearPosts = () => {
+	return {
+		type: CLEAR_POSTS,
+		payload: { posts: [] },
+	};
 };
 
 /** 1개 글 가져오기 */

@@ -3,8 +3,8 @@ import React from 'react';
 const Stack = (props) => {
 	const handleSelectStack = (e) => {
 		const isStack = e.target.textContent.split('.')[0];
-		// e.target.classList.toggle('select');
-		if (e.target.className === 'stack-chip') {
+
+		if (e.target.classList.value === 'stack-chip') {
 			e.target.classList.add('select');
 		} else {
 			e.target.classList.remove('select');

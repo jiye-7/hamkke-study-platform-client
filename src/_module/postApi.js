@@ -30,3 +30,11 @@ export const updatePostAPI = (dataToSubmit) => {
 		.put(`${process.env.REACT_APP_SERVER_API + POST_SERVER}`, dataToSubmit)
 		.then((response) => response.data);
 };
+
+export const completionOfRecruitmentAPI = (postId) => {
+	return axios
+		.put(
+			`${process.env.REACT_APP_SERVER_API + POST_SERVER}/completed/${postId}`,
+		)
+		.then((response) => response.data);
+};

@@ -26,7 +26,7 @@ const UserInfoPage = () => {
 	const navigate = useNavigate();
 
 	const user = useSelector(({ user }) => user.userInfo);
-	const [stacks, setStacks] = useState([...user.stacks]);
+	const [stacks, setStacks] = useState(user.stacks || []);
 	const [isNicknameDisable, setIsNicknameDisable] = useState(true);
 	const [isPasswordDisable, setIsPasswordDisable] = useState(true);
 	const [nicknameUpdateFail, setNicknameUpdateFail] = useState(false);
@@ -91,7 +91,6 @@ const UserInfoPage = () => {
 		// const newStacks = [];
 		// values.forEach((value) => newStacks.push(value.label));
 		const newStacks = values.map((value) => value.value);
-		console.log(newStacks);
 		setStacks(newStacks);
 
 		const { id: userId } = user;

@@ -7,7 +7,13 @@
 @import './postDetailPage.scss';
 @import './postUpdatePage.scss';
 @import './stackPage.scss';
+@import './filterPage.scss';
+@import './checkBox.scss';
 
-p {
+body {
 	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Spoqa Han Sans Neo', -apple-system, BlinkMacSystemFont,
+		'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+		'Droid Sans', 'Helvetica Neue', sans-serif;
 }

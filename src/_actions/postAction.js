@@ -5,6 +5,7 @@ import {
 	GET_POST,
 	DELETE_POST,
 	UPDATE_POST,
+	NONEXISTENCE_POST,
 } from './types';
 import {
 	createPostAPI,
@@ -31,7 +32,12 @@ export const getPosts = (params) => {
 			type: GET_POSTS,
 			payload: data,
 		}))
-		.catch((err) => err);
+		.catch((err) => {
+			return {
+				type: NONEXISTENCE_POST,
+				payload: { success: false, message: '게시글이 존재하지 않습니다.' },
+			};
+		});
 };
 
 /** 가져온 전체 글 지우기 */

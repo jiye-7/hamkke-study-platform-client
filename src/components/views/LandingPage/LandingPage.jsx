@@ -54,7 +54,7 @@ const LandingPage = () => {
 	// 최신, 인기 글 보기 추가
 
 	/** 모집 중인 글만 보기 */
-	const handleRecruitmentPosts = (e) => {
+	const handleRecruitmentPosts = () => {
 		setIsRecruitState(!isRecruitState);
 	};
 

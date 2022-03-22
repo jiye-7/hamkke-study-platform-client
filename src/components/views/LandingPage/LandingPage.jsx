@@ -17,7 +17,7 @@ const LandingPage = () => {
 
 	useEffect(() => {
 		const query = queryString.stringify(
-			{ stacks: selectStack, limit: 6, page },
+			{ stacks: selectStack, limit: 6, page, completed: !isRecruitState },
 			{ arrayFormat: 'bracket' },
 		);
 
@@ -29,7 +29,7 @@ const LandingPage = () => {
 		} else {
 			dispatch(getPosts(query));
 		}
-	}, [selectStack, page, updateState]);
+	}, [selectStack, page, updateState, isRecruitState]);
 
 	useEffect(() => {
 		return () => dispatch(clearPosts());
@@ -51,17 +51,11 @@ const LandingPage = () => {
 		setSelectStack(stacks);
 	};
 
-	// 최신, 인기, 모집 중인 글만 보기 추가
+	// 최신, 인기 글 보기 추가
 
 	/** 모집 중인 글만 보기 */
-	const handleRecruitmentPosts = (value) => {
-		console.log('서버로 요청 보내기');
-
-		if (isRecruitState) {
-			console.log('모집 중인 글만 보기 서버로 요청 보내기');
-		} else {
-			console.log('전체 글 보기 (모집 끝난 글도 보기)');
-		}
+	const handleRecruitmentPosts = () => {
+		setIsRecruitState(!isRecruitState);
 	};
 
 	/** 더 보기 로직 */
@@ -79,7 +73,10 @@ const LandingPage = () => {
 			</section>
 			{/* TODO: filter section(recent, like, recruiting) */}
 			<section className='filter-section'>
-				<FilterPage recruitingPost={handleRecruitmentPosts} />
+				<FilterPage
+					recruitingPost={handleRecruitmentPosts}
+					recruitState={isRecruitState}
+				/>
 			</section>
 			<section className='post-section'>{renderPost()}</section>
 			<section className='more-post-section'>

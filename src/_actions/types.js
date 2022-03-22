@@ -21,3 +21,4 @@ export const GET_POST = 'get_post';
 export const DELETE_POST = 'delete_post';
 export const UPDATE_POST = 'update_post';
 export const NONEXISTENCE_POST = 'nonexistence_post';
+export const COMPLETION_OF_RECRUITMENT = 'completion_of_recruitment';

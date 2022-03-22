@@ -6,6 +6,7 @@ import {
 	DELETE_POST,
 	UPDATE_POST,
 	NONEXISTENCE_POST,
+	COMPLETION_OF_RECRUITMENT,
 } from './types';
 import {
 	createPostAPI,
@@ -13,6 +14,7 @@ import {
 	getPostAPI,
 	deletePostAPI,
 	updatePostAPI,
+	completionOfRecruitmentAPI,
 } from '../_module/postApi';
 
 /** 글 작성하기 */
@@ -76,4 +78,9 @@ export const updatePost = (dataToSubmit) => {
 			payload: data,
 		}))
 		.catch((err) => err);
+};
+
+/** 모집 완료 */
+export const completionOfRecruitment = (postId) => {
+	return completionOfRecruitmentAPI(postId).then((data) => data);
 };

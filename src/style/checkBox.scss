@@ -1,0 +1,38 @@
+.right-filter {
+	.checkbox-container {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		cursor: pointer;
+		font-weight: bold;
+
+		input[type='checkbox'] {
+			display: none;
+		}
+
+		input[type='checkbox'] + label {
+			display: inline-block;
+			width: 30px;
+			height: 30px;
+			border: 2px solid #858585;
+			border-radius: 4px;
+			position: relative;
+			cursor: pointer;
+		}
+
+		input[id='checkBox']:checked + label::after {
+			display: flex;
+			align-items: center;
+			content: '✔';
+			font-size: 22px;
+			width: 30px;
+			height: 30px;
+			position: absolute;
+			padding: 2px 2px 4px;
+		}
+
+		span {
+			margin-left: 0.5rem;
+		}
+	}
+}

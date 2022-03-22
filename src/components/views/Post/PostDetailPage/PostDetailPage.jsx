@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import { ArrowLeftOutlined } from '@ant-design/icons';
@@ -10,6 +10,7 @@ import profileImg from '../../../utils/image/quokka.jpg';
 
 const PostDetailPage = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const { userInfo } = useSelector(({ user }) => user);
 	const { id: postId } = useParams();
 	const [post, setPost] = useState({});

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import queryString from 'query-string';
 import Post from '../Post/Post';
 import StackPage from '../StackPage/StackPage';
+import FilterPage from '../FilterPage/FilterPage';
 import { getPosts, clearPosts } from '../../../_actions/postAction';
 
 const LandingPage = () => {
@@ -12,6 +13,7 @@ const LandingPage = () => {
 	const [page, setPage] = useState(1);
 	const [isMoreBtn, setIsMoreBtn] = useState(false);
 	const [updateState, setUpdateState] = useState('stackUpdate');
+	const [isRecruitState, setIsRecruitState] = useState(true);
 
 	useEffect(() => {
 		const query = queryString.stringify(
@@ -49,8 +51,21 @@ const LandingPage = () => {
 		setSelectStack(stacks);
 	};
 
+	// 최신, 인기, 모집 중인 글만 보기 추가
+
+	/** 모집 중인 글만 보기 */
+	const handleRecruitmentPosts = (value) => {
+		console.log('서버로 요청 보내기');
+
+		if (isRecruitState) {
+			console.log('모집 중인 글만 보기 서버로 요청 보내기');
+		} else {
+			console.log('전체 글 보기 (모집 끝난 글도 보기)');
+		}
+	};
+
 	/** 더 보기 로직 */
-	const handleIsMore = () => {
+	const handleIsMorePost = () => {
 		let nextPage = page + 1;
 		setPage(nextPage);
 		setUpdateState('morePosts');
@@ -63,10 +78,13 @@ const LandingPage = () => {
 				<StackPage stackCheck={handleStackCheck} />
 			</section>
 			{/* TODO: filter section(recent, like, recruiting) */}
+			<section className='filter-section'>
+				<FilterPage recruitingPost={handleRecruitmentPosts} />
+			</section>
 			<section className='post-section'>{renderPost()}</section>
 			<section className='more-post-section'>
 				{isLastPost === false && (
-					<button onClick={handleIsMore}>더 보기</button>
+					<button onClick={handleIsMorePost}>더 보기</button>
 				)}
 			</section>
 		</div>

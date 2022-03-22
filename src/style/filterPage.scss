@@ -1,0 +1,25 @@
+.filter-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	font-size: 1.2rem;
+	margin: 6rem 0 4rem;
+
+	.left-filter {
+		display: flex;
+		cursor: pointer;
+		font-weight: bold;
+
+		span {
+			margin-left: 0.3rem;
+		}
+
+		&_recent {
+			margin-right: 0.8rem;
+		}
+
+		&_like {
+		}
+	}
+}

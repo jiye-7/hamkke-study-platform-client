@@ -20,3 +20,4 @@ export const CLEAR_POSTS = 'clear_posts';
 export const GET_POST = 'get_post';
 export const DELETE_POST = 'delete_post';
 export const UPDATE_POST = 'update_post';
+export const NONEXISTENCE_POST = 'nonexistence_post';

@@ -24,7 +24,10 @@ const userReducer = (state = defaultState, action) => {
 
 	switch (type) {
 		case AUTH_USER:
-			return { ...state, userInfo: payload.user };
+			return {
+				...state,
+				userInfo: payload.user,
+			};
 		case LOGIN_USER:
 			return { ...state, userInfo: payload, loginSuccess: true };
 		case LOGIN_FAIL:

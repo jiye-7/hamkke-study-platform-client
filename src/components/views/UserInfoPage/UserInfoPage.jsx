@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
@@ -26,12 +26,18 @@ const UserInfoPage = () => {
 	const navigate = useNavigate();
 
 	const user = useSelector(({ user }) => user.userInfo);
-
-	const [stacks, setStacks] = useState([]);
+	const [stacks, setStacks] = useState([...user.stacks]);
 	const [isNicknameDisable, setIsNicknameDisable] = useState(true);
 	const [isPasswordDisable, setIsPasswordDisable] = useState(true);
 	const [nicknameUpdateFail, setNicknameUpdateFail] = useState(false);
 	const [passwordUpdateFail, setPasswordUpdateFail] = useState(false);
+
+	const hashStack = useMemo(() => {
+		return stacks.reduce((acc, cur) => {
+			acc[cur] = 1;
+			return acc;
+		}, {});
+	}, [stacks]);
 
 	const handleNicknameDisable = (setFieldValue) => {
 		setFieldValue('nickname', '');
@@ -85,6 +91,7 @@ const UserInfoPage = () => {
 		// const newStacks = [];
 		// values.forEach((value) => newStacks.push(value.label));
 		const newStacks = values.map((value) => value.value);
+		console.log(newStacks);
 		setStacks(newStacks);
 
 		const { id: userId } = user;
@@ -170,7 +177,6 @@ const UserInfoPage = () => {
 										</Button>
 									)}
 								</div>
-
 								<p>Hamkke에서 사용되는 이름입니다.</p>
 							</section>
 							<section>
@@ -231,6 +237,9 @@ const UserInfoPage = () => {
 										isMulti
 										options={languageOptions}
 										placeholder='관심 태그를 선택해주세요 :)'
+										value={languageOptions.filter((option) => {
+											return option.value in hashStack;
+										})}
 										onChange={(value) => handleStackValueChange(value)}
 									/>
 								</div>

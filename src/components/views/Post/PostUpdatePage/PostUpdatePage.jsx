@@ -17,7 +17,6 @@ const PostUpdatePage = () => {
 	useEffect(() => {
 		async function post() {
 			const { payload } = await getPost(postId);
-
 			if (payload && payload.post) {
 				setTitle(payload.post.title);
 				setSelectTags(payload.post.stacks.map((tag) => ({ value: tag })));

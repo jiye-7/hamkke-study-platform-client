@@ -28,6 +28,7 @@ const FilterPage = (props) => {
 				<CheckBox
 					message={`모집 중인 글만 보기`}
 					recruitingPost={props.recruitingPost}
+					recruitState={props.recruitState}
 				/>
 			</div>
 		</div>

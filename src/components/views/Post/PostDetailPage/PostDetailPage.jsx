@@ -3,7 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { getPost, deletePost } from '../../../../_actions/postAction';
+import {
+	getPost,
+	deletePost,
+	completionOfRecruitment,
+} from '../../../../_actions/postAction';
 import Tag from './Tag';
 import handleConfirm from '../../../utils/Alert/Alert';
 import profileImg from '../../../utils/image/quokka.jpg';
@@ -20,6 +24,7 @@ const PostDetailPage = () => {
 		async function post() {
 			const { payload } = await getPost(postId);
 			setPost(payload.post);
+			setPostDeadline(payload.post.completed);
 		}
 		post();
 	}, []);
@@ -30,11 +35,15 @@ const PostDetailPage = () => {
 	/** 마감하기 */
 	const handlePostDeadlineCheck = () => {
 		setPostDeadline(true);
+		completionOfRecruitment(postId);
+		setPost({ ...post, completed: true });
 	};
 
 	/** 마감 취소 */
 	const handlePostDeadlineCancel = () => {
 		setPostDeadline(false);
+		completionOfRecruitment(postId);
+		setPost({ ...post, completed: false });
 	};
 
 	/** 마감 처리 alert (필터에서 모집 중인 글 보기쪽에서 사라짐) */

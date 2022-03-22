@@ -46,7 +46,7 @@ const PostDetailPage = () => {
 		setPost({ ...post, completed: false });
 	};
 
-	/** 마감 처리 alert (필터에서 모집 중인 글 보기쪽에서 사라짐) */
+	/** 마감 처리 alert */
 	const handleDeadlineConfirm = () => {
 		postDeadline
 			? handleConfirm({
@@ -65,7 +65,7 @@ const PostDetailPage = () => {
 			  });
 	};
 
-	/** 글 수정하기 -> 바로 수정 창으로 이동 */
+	/** 글 수정하기 */
 	const handlePostUpdate = () => {
 		navigate(`/alteration/${postId}`);
 	};

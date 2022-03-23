@@ -37,7 +37,6 @@ export default (SpecificComponent, option, adminRoute = null) => {
 					}
 				})
 				.catch((err) => {
-					console.dir(err);
 					handleConfirm({
 						title: '서비스를 점검하고 있습니다.',
 						text: '잠시 후 다시 시도해주시기 바랍니다.',

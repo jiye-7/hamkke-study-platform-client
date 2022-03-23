@@ -14,10 +14,17 @@ const LandingPage = () => {
 	const [isMoreBtn, setIsMoreBtn] = useState(false);
 	const [updateState, setUpdateState] = useState('stackUpdate');
 	const [isRecruitState, setIsRecruitState] = useState(true);
+	const [isSort, setIsSort] = useState('recent');
 
 	useEffect(() => {
 		const query = queryString.stringify(
-			{ stacks: selectStack, limit: 6, page, completed: !isRecruitState },
+			{
+				stacks: selectStack,
+				limit: 6,
+				page,
+				completed: !isRecruitState,
+				sort: isSort,
+			},
 			{ arrayFormat: 'bracket' },
 		);
 
@@ -29,7 +36,7 @@ const LandingPage = () => {
 		} else {
 			dispatch(getPosts(query));
 		}
-	}, [selectStack, page, updateState, isRecruitState]);
+	}, [selectStack, page, updateState, isRecruitState, isSort]);
 
 	useEffect(() => {
 		return () => dispatch(clearPosts());
@@ -51,7 +58,14 @@ const LandingPage = () => {
 		setSelectStack(stacks);
 	};
 
-	// 최신, 인기 글 보기 추가
+	/** 최신, 인기 글 보기 추가 */
+	const handleSortPostsFilter = (value) => {
+		if (value === 'recent') {
+			setIsSort('recent');
+		} else {
+			setIsSort('hit');
+		}
+	};
 
 	/** 모집 중인 글만 보기 */
 	const handleRecruitmentPosts = () => {
@@ -76,6 +90,8 @@ const LandingPage = () => {
 				<FilterPage
 					recruitingPost={handleRecruitmentPosts}
 					recruitState={isRecruitState}
+					handleSortPostsFilter={handleSortPostsFilter}
+					isSort={isSort}
 				/>
 			</section>
 			<section className='post-section'>{renderPost()}</section>

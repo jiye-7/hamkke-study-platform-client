@@ -81,7 +81,6 @@ const LandingPage = () => {
 			<section className='stackFilter-section'>
 				<StackPage stackCheck={handleStackCheck} />
 			</section>
-			{/* TODO: filter section(recent, like, recruiting) */}
 			<section className='filter-section'>
 				<FilterPage
 					recruitingPost={handleRecruitmentPosts}

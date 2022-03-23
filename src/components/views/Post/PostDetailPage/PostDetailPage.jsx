@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import queryString from 'query-string';
 import DOMPurify from 'dompurify';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import {
 	getPost,
 	deletePost,
 	completionOfRecruitment,
+	likePost,
 } from '../../../../_actions/postAction';
 import Tag from './Tag';
 import PostInfoItem from '../PostInfoItem/PostInfoItem';
@@ -22,8 +24,17 @@ const PostDetailPage = () => {
 	const [postDeadline, setPostDeadline] = useState(false);
 
 	useEffect(() => {
+		const query = queryString.stringify(
+			{
+				userId: userInfo.id,
+			},
+			{
+				arrayFormat: 'bracket',
+			},
+		);
+
 		async function post() {
-			const { payload } = await getPost(postId);
+			const { payload } = await getPost(postId, query);
 			setPost(payload.post);
 			setPostDeadline(payload.post.completed);
 		}
@@ -126,8 +137,14 @@ const PostDetailPage = () => {
 	};
 
 	/** 좋아요 */
-	const handleLikePost = () => {
-		console.log('이 포스트 좋아요 등록할래!');
+	const handleLikePost = async () => {
+		let { payload } = await likePost({ postId, userId: userInfo.id });
+
+		if (payload && payload.like) {
+			setPost({ ...post, isLike: payload.like, like: post.like + 1 });
+		} else {
+			setPost({ ...post, isLike: payload.like, like: post.like - 1 });
+		}
 	};
 
 	return (
@@ -161,6 +178,7 @@ const PostDetailPage = () => {
 					page={'detail'}
 					post={post}
 					handleLikePost={handleLikePost}
+					userInfo={userInfo}
 				/>
 			</div>
 		</section>

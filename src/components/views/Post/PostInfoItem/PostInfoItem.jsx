@@ -14,7 +14,7 @@ const PostInfoPage = (props) => {
 				>
 					<div>
 						<CommentOutlined />
-						<span>10</span>
+						<span>100</span>
 					</div>
 					<div>
 						<EyeOutlined />
@@ -22,7 +22,7 @@ const PostInfoPage = (props) => {
 					</div>
 					<div>
 						<HeartOutlined />
-						<span>30</span>
+						<span>{props.post.like}</span>
 					</div>
 				</div>
 			) : (
@@ -31,9 +31,12 @@ const PostInfoPage = (props) => {
 						<EyeOutlined />
 						<span>{props.post.hit}</span>
 					</div>
-					<div onClick={props.handleLikePost}>
-						<HeartOutlined />
-						<span>123</span>
+					<div>
+						<HeartOutlined
+							className={`${props.post.isLike ? 'like' : 'unlike'}`}
+							onClick={props.userInfo.id && props.handleLikePost}
+						/>
+						<span>{props.post.like}</span>
 					</div>
 				</div>
 			)}

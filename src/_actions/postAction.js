@@ -6,7 +6,7 @@ import {
 	DELETE_POST,
 	UPDATE_POST,
 	NONEXISTENCE_POST,
-	COMPLETION_OF_RECRUITMENT,
+	LIKE_POST,
 } from './types';
 import {
 	createPostAPI,
@@ -15,6 +15,7 @@ import {
 	deletePostAPI,
 	updatePostAPI,
 	completionOfRecruitmentAPI,
+	likePostAPI,
 } from '../_module/postApi';
 
 /** 글 작성하기 */
@@ -51,8 +52,8 @@ export const clearPosts = () => {
 };
 
 /** 1개 글 가져오기 */
-export const getPost = (postId) => {
-	return getPostAPI(postId)
+export const getPost = (postId, query) => {
+	return getPostAPI(postId, query)
 		.then((data) => ({
 			type: GET_POST,
 			payload: data,
@@ -83,4 +84,14 @@ export const updatePost = (dataToSubmit) => {
 /** 모집 완료 */
 export const completionOfRecruitment = (postId) => {
 	return completionOfRecruitmentAPI(postId).then((data) => data);
+};
+
+/** 좋아요 */
+export const likePost = (dataToSubmit) => {
+	return likePostAPI(dataToSubmit)
+		.then((data) => ({
+			type: LIKE_POST,
+			payload: data,
+		}))
+		.catch((err) => err);
 };

@@ -4,7 +4,6 @@ import queryString from 'query-string';
 import Post from '../Post/Post';
 import StackPage from '../StackPage/StackPage';
 import FilterPage from '../FilterPage/FilterPage';
-import PostInfoItem from '../Post/PostInfoItem/PostInfoItem';
 import { getPosts, clearPosts } from '../../../_actions/postAction';
 
 const LandingPage = () => {

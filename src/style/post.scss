@@ -1,25 +1,44 @@
-.post-item-container {
-	width: 15rem;
-	height: 15rem;
-	margin: 0.625rem;
-	padding: 1.5rem;
-	box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
-	border-radius: 1.5rem;
-	cursor: pointer;
-	transition: transform 0.15s ease-in-out; // 어떤 변하는 값을 추적하여 부드럽게 만드는 옵션
+.post-container-div {
+	position: relative;
 
-	h1 {
+	.post-item-container {
+		width: 15rem;
+		height: 15rem;
+		margin: 0.625rem;
+		padding: 1.5rem;
+		box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
+		border-radius: 1.5rem;
+		cursor: pointer;
+		transition: transform 0.15s ease-in-out; // 어떤 변하는 값을 추적하여 부드럽게 만드는 옵션
+
+		h1 {
+			font-size: 1.2rem;
+			width: 100%;
+		}
+
+		p {
+			font-size: 0.7rem;
+			width: 100%;
+			text-overflow: ellipsis;
+		}
+	}
+
+	.post-container:hover {
+		transform: scale(1.05); // 변화시키기 위한 값 (translate, scale, rotate)
+	}
+
+	.post-item-container.completed {
+		opacity: 0.5;
+	}
+
+	.post-completed {
+		position: absolute;
+		transform: translate(70%, -350%);
+		padding: 6px 20px;
+		border-radius: 5px;
+		font-weight: bold;
 		font-size: 1.2rem;
-		width: 100%;
+		background-color: rgb(83, 82, 82);
+		color: #fff;
 	}
-
-	p {
-		font-size: 0.7rem;
-		width: 100%;
-		text-overflow: ellipsis;
-	}
-}
-
-.post-container:hover {
-	transform: scale(1.05); // 변화시키기 위한 값 (translate, scale, rotate)
 }

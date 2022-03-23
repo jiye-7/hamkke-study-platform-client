@@ -10,10 +10,20 @@ const Post = ({ post }) => {
 	};
 
 	return (
-		<div className='post-item-container' onClick={handleSelectPost}>
-			<h1>{post.title}</h1>
-			<p>{post.stacks.join(', ')}</p>
-			<PostInfoItem page={'landing'} post={post} />
+		<div className='post-container-div'>
+			<div
+				className={`${
+					post.completed
+						? 'post-item-container completed'
+						: 'post-item-container'
+				}`}
+				onClick={handleSelectPost}
+			>
+				<h1>{post.title}</h1>
+				<p>{post.stacks.join(', ')}</p>
+				<PostInfoItem page={'landing'} post={post} />
+			</div>
+			{post.completed ? <div className='post-completed'>모집 완료</div> : ''}
 		</div>
 	);
 };

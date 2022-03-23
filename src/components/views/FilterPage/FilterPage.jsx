@@ -26,9 +26,7 @@ const FilterPage = (props) => {
 					onClick={() => props.handleSortPostsFilter('hit')}
 				>
 					<FireOutlined />
-					<span className={`${props.isSort === 'hit' ? 'hit-sort' : ''}`}>
-						인기
-					</span>
+					<span>인기</span>
 				</div>
 			</div>
 			<div className='right-filter'>

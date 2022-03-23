@@ -1,0 +1,76 @@
+.post-item-container {
+	position: relative;
+
+	.post-info-container {
+		.landing-page {
+			position: absolute;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			bottom: 20px;
+			right: 10px;
+
+			* {
+				font-size: 1rem;
+				margin-right: 2px;
+			}
+
+			.anticon.anticon-heart {
+				color: red;
+			}
+		}
+
+		.landing-page > div {
+			display: flex;
+			align-items: center;
+
+			> span:first-child {
+				transform: translateX(15%);
+				color: gray;
+			}
+
+			> span:last-child {
+				font-size: 0.8rem;
+			}
+		}
+	}
+}
+
+.post-detail-container {
+	.info-container {
+		position: relative;
+		width: 70%;
+
+		.detail-page {
+			display: flex;
+			position: absolute;
+			margin: 50px 0px;
+			right: 20px;
+
+			* {
+				font-size: 2rem;
+				margin-right: 5px;
+				cursor: pointer;
+			}
+
+			.anticon.anticon-heart.like {
+				// 좋아요 기능 추가할 때 class 추가
+				color: red;
+			}
+		}
+
+		.detail-page > div {
+			display: flex;
+			align-items: center;
+			color: gray;
+
+			> span:first-child {
+				transform: translateX(15%);
+			}
+
+			> span:last-child {
+				font-size: 1.2rem;
+			}
+		}
+	}
+}

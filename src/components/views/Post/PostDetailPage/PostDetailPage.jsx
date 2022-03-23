@@ -9,6 +9,7 @@ import {
 	completionOfRecruitment,
 } from '../../../../_actions/postAction';
 import Tag from './Tag';
+import PostInfoItem from '../PostInfoItem/PostInfoItem';
 import handleConfirm from '../../../utils/Alert/Alert';
 import profileImg from '../../../utils/image/quokka.jpg';
 
@@ -149,6 +150,9 @@ const PostDetailPage = () => {
 					className='post-content'
 					dangerouslySetInnerHTML={createMarkup()}
 				></div>
+			</div>
+			<div className='info-container'>
+				<PostInfoItem page={'detail'} post={post} />
 			</div>
 		</section>
 	);

@@ -1,0 +1,45 @@
+.post-item-container {
+	position: relative;
+
+	.post-info-container {
+		.landing-page {
+			position: absolute;
+			display: flex;
+			justify-content: flex-end;
+			bottom: 20px;
+			right: 10px;
+
+			* {
+				font-size: 1rem;
+				margin-right: 5px;
+			}
+
+			span:last-child {
+				color: red;
+			}
+		}
+	}
+}
+
+.post-detail-container {
+	.info-container {
+		position: relative;
+		width: 70%;
+
+		.detail-page {
+			position: absolute;
+			margin: 50px 0px;
+			right: 20px;
+
+			* {
+				font-size: 2rem;
+				margin-right: 5px;
+				cursor: pointer;
+			}
+
+			span:last-child {
+				color: red;
+			}
+		}
+	}
+}

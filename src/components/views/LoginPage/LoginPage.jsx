@@ -3,12 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Form, Input, Button, Checkbox, Typography } from 'antd';
+import { Form, Input, Button, Checkbox } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import { loginUser } from '../../../_actions/userAction';
 import styled from 'styled-components';
-
-const { Title } = Typography;
 
 const ForgotPassword = styled.a`
 	float: right;
@@ -56,7 +54,7 @@ function LoginPage(props) {
 					email: values.email,
 					password: values.password,
 				};
-				// redux 만들기
+
 				const { type } = await dispatch(loginUser(dataToSubmit));
 
 				if (type === 'login_user') {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import queryString from 'query-string';
 import DOMPurify from 'dompurify';
@@ -17,7 +17,6 @@ import profileImg from '../../../utils/image/quokka.jpg';
 
 const PostDetailPage = () => {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
 	const { userInfo } = useSelector(({ user }) => user);
 	const { id: postId } = useParams();
 	const [post, setPost] = useState({});

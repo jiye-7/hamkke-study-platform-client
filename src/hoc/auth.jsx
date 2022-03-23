@@ -11,9 +11,9 @@ import handleConfirm from '../components/utils/Alert/Alert';
  *  true: 로그인 한 유저만 출입 가능한 페이지
  *  false: 로그인하지 않았을 때만 출입 가능한 페이지
  *
- * SpecificComponent: component
- * option: boolean
- * adminRoute: boolean
+ * 	SpecificComponent: component
+ * 	option: boolean
+ * 	adminRoute: boolean
  */
 
 // eslint-disable-next-line import/no-anonymous-default-export

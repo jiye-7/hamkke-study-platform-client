@@ -125,6 +125,11 @@ const PostDetailPage = () => {
 		}
 	};
 
+	/** 좋아요 */
+	const handleLikePost = () => {
+		console.log('이 포스트 좋아요 등록할래!');
+	};
+
 	return (
 		<section className='post-detail-container'>
 			<div className='content-container'>
@@ -152,7 +157,11 @@ const PostDetailPage = () => {
 				></div>
 			</div>
 			<div className='info-container'>
-				<PostInfoItem page={'detail'} post={post} />
+				<PostInfoItem
+					page={'detail'}
+					post={post}
+					handleLikePost={handleLikePost}
+				/>
 			</div>
 		</section>
 	);

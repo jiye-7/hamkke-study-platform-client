@@ -152,7 +152,7 @@ const PostDetailPage = () => {
 				></div>
 			</div>
 			<div className='info-container'>
-				<PostInfoItem page={'detail'} />
+				<PostInfoItem page={'detail'} post={post} />
 			</div>
 		</section>
 	);

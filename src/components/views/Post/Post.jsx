@@ -13,7 +13,7 @@ const Post = ({ post }) => {
 		<div className='post-item-container' onClick={handleSelectPost}>
 			<h1>{post.title}</h1>
 			<p>{post.stacks.join(', ')}</p>
-			<PostInfoItem page={'landing'} />
+			<PostInfoItem page={'landing'} post={post} />
 		</div>
 	);
 };

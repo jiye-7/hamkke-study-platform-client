@@ -26,7 +26,15 @@ const PostInfoPage = (props) => {
 	return (
 		<div className='post-info-container'>
 			{props.page === 'landing' ? (
-				<div className='landing-page'>{renderPost()}</div>
+				<div
+					className={`${
+						props.recruitmentEnd
+							? 'landing-page recruitment-end'
+							: 'landing-page'
+					}`}
+				>
+					{renderPost()}
+				</div>
 			) : (
 				<div className='detail-page'>{renderPost()}</div>
 			)}

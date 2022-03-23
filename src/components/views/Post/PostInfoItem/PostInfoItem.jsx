@@ -5,13 +5,11 @@ const PostInfoPage = (props) => {
 	const renderPost = () => {
 		return (
 			<>
-				{props.page === 'landing' ? (
+				{props.page === 'landing' && (
 					<div>
 						<CommentOutlined />
 						<span>100</span>
 					</div>
-				) : (
-					''
 				)}
 				<div>
 					<EyeOutlined />

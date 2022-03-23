@@ -60,11 +60,7 @@ const LandingPage = () => {
 
 	/** 최신, 인기 글 보기 추가 */
 	const handleSortPostsFilter = (value) => {
-		if (value === 'recent') {
-			setIsSort('recent');
-		} else {
-			setIsSort('hit');
-		}
+		setIsSort(value);
 	};
 
 	/** 모집 중인 글만 보기 */

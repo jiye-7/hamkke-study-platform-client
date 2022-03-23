@@ -21,7 +21,11 @@ const Post = ({ post }) => {
 			>
 				<h1>{post.title}</h1>
 				<p>{post.stacks.join(', ')}</p>
-				<PostInfoItem page={'landing'} post={post} />
+				<PostInfoItem
+					page={'landing'}
+					post={post}
+					recruitmentEnd={post.completed}
+				/>
 			</div>
 			{post.completed ? <div className='post-completed'>모집 완료</div> : ''}
 		</div>

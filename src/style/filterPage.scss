@@ -15,11 +15,24 @@
 			margin-left: 0.3rem;
 		}
 
-		&_recent {
-			margin-right: 0.8rem;
+		.anticon.anticon-fire,
+		.anticon.anticon-calendar {
+			font-size: 115%;
+			transform: translateY(10%);
 		}
 
-		&_like {
+		&_recent {
+			margin-right: 0.8rem;
+			color: gray;
+		}
+
+		&_recent.sorted,
+		&_hit.sorted {
+			color: rgb(44, 101, 175);
+		}
+
+		&_hit {
+			color: gray;
 		}
 	}
 }

@@ -28,7 +28,10 @@
 	}
 
 	.post-item-container.completed {
-		opacity: 0.5;
+		h1,
+		p {
+			opacity: 0.3;
+		}
 	}
 
 	.post-completed {

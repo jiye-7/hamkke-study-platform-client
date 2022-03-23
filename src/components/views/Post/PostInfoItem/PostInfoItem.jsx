@@ -24,18 +24,6 @@ const PostInfoPage = (props) => {
 			</>
 		);
 	};
-	/* const renderPostDetailInfo = () => {
-		return (
-			<>
-				<div>
-					<EyeOutlined />
-				</div>
-				<div>
-					<HeartOutlined />
-				</div>
-			</>
-		);
-	}; */
 
 	return (
 		<div className='post-info-container'>

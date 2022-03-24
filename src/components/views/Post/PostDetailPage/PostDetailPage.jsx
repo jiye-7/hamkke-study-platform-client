@@ -11,6 +11,7 @@ import {
 	likePost,
 } from '../../../../_actions/postAction';
 import Tag from './Tag';
+import Comment from '../../Comment/Comment';
 import PostInfoItem from '../PostInfoItem/PostInfoItem';
 import handleConfirm from '../../../utils/Alert/Alert';
 import profileImg from '../../../utils/image/quokka.jpg';
@@ -179,6 +180,9 @@ const PostDetailPage = () => {
 					handleLikePost={handleLikePost}
 					userInfo={userInfo}
 				/>
+			</div>
+			<div className='comment-container'>
+				<Comment />
 			</div>
 		</section>
 	);

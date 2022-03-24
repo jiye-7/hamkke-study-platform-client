@@ -6,3 +6,9 @@ export const createReplyAPI = (dataToSubmit) => {
 		.post(`${process.env.REACT_APP_SERVER_API + REPLY_SERVER}/`, dataToSubmit)
 		.then((response) => response.data);
 };
+
+export const getRepliesAPI = (postId) => {
+	return axios
+		.get(`${process.env.REACT_APP_SERVER_API + REPLY_SERVER}?postId=${postId}`)
+		.then((response) => response.data);
+};

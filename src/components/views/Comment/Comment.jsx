@@ -49,14 +49,13 @@ const Comment = ({ post, userId }) => {
 	};
 
 	const handleCommentSubmit = async () => {
-		// console.log(post.id, userId);
 		const data = {
 			postId: post.id,
 			userId,
 			contents: isInputValue,
 		};
-		// console.log(data);
-		let { payload } = await createReply(data);
+
+		const { payload } = await createReply(data);
 
 		if (payload && payload.success) {
 			setInputValue(isInputValue);

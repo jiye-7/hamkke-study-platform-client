@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import queryString from 'query-string';
 import DOMPurify from 'dompurify';
@@ -10,6 +10,7 @@ import {
 	completionOfRecruitment,
 	likePost,
 } from '../../../../_actions/postAction';
+import { getReplies } from '../../../../_actions/replyAction';
 import Tag from './Tag';
 import Comment from '../../Comment/Comment';
 import PostInfoItem from '../PostInfoItem/PostInfoItem';
@@ -18,6 +19,7 @@ import profileImg from '../../../utils/image/quokka.jpg';
 
 const PostDetailPage = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const { userInfo } = useSelector(({ user }) => user);
 	const { id: postId } = useParams();
 	const [post, setPost] = useState({});
@@ -42,6 +44,14 @@ const PostDetailPage = () => {
 			}
 		}
 		post();
+	}, []);
+
+	useEffect(() => {
+		if (postId) {
+			(async () => {
+				await dispatch(getReplies(postId));
+			})();
+		}
 	}, []);
 
 	/** dangerouslySetInnerHTML 설정 */

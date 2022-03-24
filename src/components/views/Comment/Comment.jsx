@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createReply } from '../../../_actions/replyAction';
+import CommentItem from './CommenItem/CommenItem';
 import myProfile from '../../utils/image/quokka.jpg';
 import styled from 'styled-components';
 
@@ -25,7 +26,7 @@ const CommentSubmitButton = styled.button`
 	cursor: pointer;
 `;
 
-const Comment = ({ post, userId }) => {
+const Comment = ({ post, replies, userId }) => {
 	const [isInputFocus, setInputFocus] = useState(false);
 	const [isInputValue, setInputValue] = useState('');
 	const [isCommentComplete, setCommentComplete] = useState(false);
@@ -106,20 +107,9 @@ const Comment = ({ post, userId }) => {
 				</div>
 			</div>
 			<div className='comment-view'>
-				<div className='comment-view_left'>
-					<img
-						src={myProfile}
-						alt='profile img'
-						style={{ width: '45px', height: '45px', borderRadius: '50%' }}
-					/>
-				</div>
-				<div className='comment-view_right'>
-					<span>닉네임</span>
-					<p>
-						댓글 내용: 안녕하세요~~~~~~~!!!! 저도 스터디에 참여하고 싶어용!!!!
-					</p>
-					<button>...</button>
-				</div>
+				{replies.map((reply) => {
+					return <CommentItem reply={reply} key={reply.id} />;
+				})}
 			</div>
 		</div>
 	);

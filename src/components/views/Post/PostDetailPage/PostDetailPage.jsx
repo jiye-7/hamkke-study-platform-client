@@ -24,6 +24,7 @@ const PostDetailPage = () => {
 	const { id: postId } = useParams();
 	const [post, setPost] = useState({});
 	const [postDeadline, setPostDeadline] = useState(false);
+	const [replies, setReplies] = useState([]);
 
 	useEffect(() => {
 		const query = queryString.stringify(
@@ -49,7 +50,11 @@ const PostDetailPage = () => {
 	useEffect(() => {
 		if (postId) {
 			(async () => {
-				await dispatch(getReplies(postId));
+				const { payload } = await dispatch(getReplies(postId));
+
+				if (payload) {
+					setReplies(payload);
+				}
 			})();
 		}
 	}, []);
@@ -195,7 +200,7 @@ const PostDetailPage = () => {
 				/>
 			</div>
 			<div className='comment-container'>
-				<Comment post={post} userId={userInfo.id} />
+				<Comment post={post} replies={replies} userId={userInfo.id} />
 			</div>
 		</section>
 	);

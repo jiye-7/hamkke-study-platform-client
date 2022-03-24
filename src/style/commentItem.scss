@@ -1,0 +1,10 @@
+.comment-view {
+	.comment-item-container {
+		display: flex;
+		padding-bottom: 30px;
+
+		.comment-view_left {
+			padding-right: 20px;
+		}
+	}
+}

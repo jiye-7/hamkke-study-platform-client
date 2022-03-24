@@ -35,8 +35,11 @@ const PostDetailPage = () => {
 
 		async function post() {
 			const { payload } = await getPost(postId, query);
-			setPost(payload.post);
-			setPostDeadline(payload.post.completed);
+
+			if (payload && payload.post) {
+				setPost(payload.post);
+				setPostDeadline(payload.post.completed);
+			}
 		}
 		post();
 	}, []);
@@ -182,7 +185,7 @@ const PostDetailPage = () => {
 				/>
 			</div>
 			<div className='comment-container'>
-				<Comment />
+				<Comment post={post} userId={userInfo.id} />
 			</div>
 		</section>
 	);

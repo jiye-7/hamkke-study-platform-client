@@ -1,10 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
+import { createReply } from '../../../_actions/replyAction';
 import myProfile from '../../utils/image/quokka.jpg';
 import styled from 'styled-components';
 
-/** 1개의 댓글 보여주기
+/**
+ * 1개의 댓글 보여주기
  * 프로필 사진, 닉네임, 댓글 내용
- *
  */
 
 /**
@@ -24,28 +25,48 @@ const CommentSubmitButton = styled.button`
 	cursor: pointer;
 `;
 
-const Comment = () => {
-	const [isInputFocus, setIsInputFocus] = useState(false);
-	const [isInputValue, setIsInputValue] = useState('');
-	const [isCommentComplete, setIsCommentComplete] = useState(false);
+const Comment = ({ post, userId }) => {
+	const [isInputFocus, setInputFocus] = useState(false);
+	const [isInputValue, setInputValue] = useState('');
+	const [isCommentComplete, setCommentComplete] = useState(false);
 
 	const handleInputFocusIn = (e) => {
 		if (e.currentTarget === e.target) {
-			setIsInputFocus(true);
+			setInputFocus(true);
 		} else {
-			setIsInputFocus(true);
+			setInputFocus(true);
 		}
 	};
 
 	const handleCancel = () => {
-		setIsInputValue('');
-		setIsInputFocus(false);
+		if (isCommentComplete) {
+			setInputValue(isInputValue);
+			setInputFocus(false);
+		} else {
+			setInputValue('');
+			setInputFocus(false);
+		}
 	};
 
-	const handleCommentSubmit = () => {
-		setIsInputValue(isInputValue);
-		setIsCommentComplete(true);
-		setIsInputFocus(false);
+	const handleCommentSubmit = async () => {
+		// console.log(post.id, userId);
+		const data = {
+			postId: post.id,
+			userId,
+			contents: isInputValue,
+		};
+		// console.log(data);
+		let { payload } = await createReply(data);
+
+		if (payload && payload.success) {
+			setInputValue(isInputValue);
+			setCommentComplete(true);
+			setInputFocus(false);
+		} else {
+			setInputValue('');
+			setCommentComplete(false);
+			setInputFocus(false);
+		}
 	};
 
 	return (
@@ -62,7 +83,8 @@ const Comment = () => {
 					<input
 						type='text'
 						placeholder='댓글 입력'
-						onChange={(e) => setIsInputValue(e.target.value)}
+						onChange={(e) => setInputValue(e.target.value)}
+						value={isInputValue}
 					/>
 					<div className='comment-write-right-button'>
 						{isInputFocus && (
@@ -82,6 +104,22 @@ const Comment = () => {
 							</>
 						)}
 					</div>
+				</div>
+			</div>
+			<div className='comment-view'>
+				<div className='comment-view_left'>
+					<img
+						src={myProfile}
+						alt='profile img'
+						style={{ width: '45px', height: '45px', borderRadius: '50%' }}
+					/>
+				</div>
+				<div className='comment-view_right'>
+					<span>닉네임</span>
+					<p>
+						댓글 내용: 안녕하세요~~~~~~~!!!! 저도 스터디에 참여하고 싶어용!!!!
+					</p>
+					<button>...</button>
 				</div>
 			</div>
 		</div>

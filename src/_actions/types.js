@@ -23,3 +23,7 @@ export const UPDATE_POST = 'update_post';
 export const NONEXISTENCE_POST = 'nonexistence_post';
 export const COMPLETION_OF_RECRUITMENT = 'completion_of_recruitment';
 export const LIKE_POST = 'like_post';
+
+// reply
+export const CREATE_REPLY = 'create_reply';
+export const GET_REPLIES = 'get_replies';

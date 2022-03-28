@@ -27,3 +27,4 @@ export const LIKE_POST = 'like_post';
 // reply
 export const CREATE_REPLY = 'create_reply';
 export const GET_REPLIES = 'get_replies';
+export const DELETE_REPLY = 'delete_reply';

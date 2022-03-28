@@ -1,5 +1,9 @@
-import { CREATE_REPLY, GET_REPLIES } from './types';
-import { createReplyAPI, getRepliesAPI } from '../_module/replyApi';
+import { CREATE_REPLY, GET_REPLIES, DELETE_REPLY } from './types';
+import {
+	createReplyAPI,
+	getRepliesAPI,
+	deleteReplyAPI,
+} from '../_module/replyApi';
 
 export const createReply = (dataToSubmit) => {
 	return createReplyAPI(dataToSubmit)
@@ -11,10 +15,17 @@ export const createReply = (dataToSubmit) => {
 };
 
 export const getReplies = (postId) => {
-	return getRepliesAPI(postId)
+	return getRepliesAPI(postId) /*.then((data) => console.log(data)); */
 		.then((data) => ({
 			type: GET_REPLIES,
 			payload: data.reply,
 		}))
-		.catch((err) => err);
+		.catch((err) => console.log(err));
+};
+
+export const deleteReply = (replyId) => {
+	return deleteReplyAPI(replyId).then((data) => ({
+		type: DELETE_REPLY,
+		payload: data,
+	}));
 };

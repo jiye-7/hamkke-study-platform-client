@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import queryString from 'query-string';
 import DOMPurify from 'dompurify';
@@ -10,21 +10,19 @@ import {
 	completionOfRecruitment,
 	likePost,
 } from '../../../../_actions/postAction';
-import { getReplies } from '../../../../_actions/replyAction';
 import Tag from './Tag';
-import Comment from '../../Comment/Comment';
+import CommentPage from '../../Comment/CommentPage';
 import PostInfoItem from '../PostInfoItem/PostInfoItem';
 import handleConfirm from '../../../utils/Alert/Alert';
 import profileImg from '../../../utils/image/quokka.jpg';
 
 const PostDetailPage = () => {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
 	const { userInfo } = useSelector(({ user }) => user);
 	const { id: postId } = useParams();
 	const [post, setPost] = useState({});
 	const [postDeadline, setPostDeadline] = useState(false);
-	const [replies, setReplies] = useState([]);
+	/* const [replies, setReplies] = useState([]); */
 
 	useEffect(() => {
 		const query = queryString.stringify(
@@ -47,7 +45,7 @@ const PostDetailPage = () => {
 		post();
 	}, []);
 
-	useEffect(() => {
+	/* useEffect(() => {
 		if (postId) {
 			(async () => {
 				const { payload } = await dispatch(getReplies(postId));
@@ -57,7 +55,7 @@ const PostDetailPage = () => {
 				}
 			})();
 		}
-	}, []);
+	}, []); */
 
 	/** dangerouslySetInnerHTML 설정 */
 	const createMarkup = () => ({ __html: DOMPurify.sanitize(post.contents) });
@@ -200,7 +198,10 @@ const PostDetailPage = () => {
 				/>
 			</div>
 			<div className='comment-container'>
-				<Comment post={post} replies={replies} userId={userInfo.id} />
+				<CommentPage
+					post={post}
+					/* replies={replies}  */ userId={userInfo.id}
+				/>
 			</div>
 		</section>
 	);

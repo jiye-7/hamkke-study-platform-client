@@ -27,13 +27,27 @@
 			.comment-more {
 				flex: 2;
 				background-color: red;
+				position: relative;
 
 				button {
 					border: none;
-					margin-right: 5px;
-					width: 45px;
+					margin-right: 3px;
+					width: 47px;
 					cursor: pointer;
 					transition: background-color 0.2s linear;
+				}
+
+				.modal {
+					animation: modalSmooth 0.3s;
+				}
+
+				@keyframes modalSmooth {
+					from {
+						transform: translate(35%, -10%);
+					}
+					to {
+						transform: translate(35%, 0%);
+					}
 				}
 
 				button:hover {
@@ -50,5 +64,9 @@
 				}
 			}
 		}
+	}
+
+	.active {
+		display: block;
 	}
 }

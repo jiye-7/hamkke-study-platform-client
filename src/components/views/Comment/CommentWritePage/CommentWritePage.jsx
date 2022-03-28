@@ -14,12 +14,8 @@ const CommentSubmitButton = styled.button`
 	cursor: pointer;
 `;
 
-const CommentWritePage = ({
-	post,
-	userId,
-	isCommentComplete,
-	handleCommentComplete,
-}) => {
+const CommentWritePage = (props) => {
+	const { post, userId, isCommentComplete, handleCommentComplete } = props;
 	const [isInputFocus, setInputFocus] = useState(false);
 	const [isInputValue, setInputValue] = useState('');
 

@@ -37,13 +37,8 @@ const Overlay = styledComponents.div`
 
 const CommentItem = (props) => {
 	const { reply, userId } = props;
-	// const [isClick, setIsClick] = useState(false);
 	const [isModalState, setModalState] = useState(false);
 	// const [isUpdateState, setUpdateState] = useState('');
-
-	/* const handleMoreMenu = () => {
-		setIsClick(true);
-	}; */
 
 	const handleOpenModal = () => {
 		setModalState(true);
@@ -54,14 +49,11 @@ const CommentItem = (props) => {
 		setModalState(false);
 	};
 
-	const handleDeleteComment = () => deleteReply(reply.id);
-
-	const handleChangeComment = async (e, value) => {
+	const handleChangeComment = (e, value) => {
 		if (value === 'delete') {
 			handleConfirm({
 				title: '정말 댓글을 삭제하시겠습니까?',
-				confirmFunction: handleDeleteComment,
-				// cancelFunction: setIsClick(false),
+				confirmFunction: () => props.handleDeleteComment(reply.id),
 			});
 		} else {
 			console.log('댓글 수정할래!');

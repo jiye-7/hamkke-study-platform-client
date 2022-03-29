@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getReplies } from '../../../_actions/replyAction';
+import { deleteReply, getReplies } from '../../../_actions/replyAction';
 import CommentWritePage from './CommentWritePage/CommentWritePage';
 import CommentItem from './CommentItem/CommentItem';
 
@@ -25,6 +25,15 @@ const Comment = ({ post, userId }) => {
 		setCommentComplete(state);
 	};
 
+	const handleDeleteComment = async (replyId) => {
+		const { payload } = await dispatch(deleteReply(replyId));
+
+		if (payload.success) {
+			const newReplies = replies.filter((reply) => reply.id !== replyId);
+			setReplies(newReplies);
+		}
+	};
+
 	return (
 		<div className='post-comment-container'>
 			<CommentWritePage
@@ -35,7 +44,14 @@ const Comment = ({ post, userId }) => {
 			/>
 			<div className='comment-view'>
 				{replies?.map((reply) => {
-					return <CommentItem reply={reply} key={reply.id} userId={userId} />;
+					return (
+						<CommentItem
+							reply={reply}
+							key={reply.id}
+							userId={userId}
+							handleDeleteComment={handleDeleteComment}
+						/>
+					);
 				})}
 			</div>
 		</div>

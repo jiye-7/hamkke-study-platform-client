@@ -15,6 +15,7 @@ const handleConfirm = (props) => {
 		cancelButtonColor = '#d33', // #6e7881
 		confirmFunction = () => {},
 		cancelFunction = () => {},
+		className = '',
 	} = props;
 
 	Swal.fire({
@@ -28,6 +29,7 @@ const handleConfirm = (props) => {
 		cancelButtonText,
 		confirmButtonColor,
 		cancelButtonColor,
+		className,
 		// didClose: cancelFunction,
 	}).then((result) => {
 		if (result.isConfirmed) {

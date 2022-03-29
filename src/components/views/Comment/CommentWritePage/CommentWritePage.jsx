@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import myProfile from '../../../utils/image/quokka.jpg';
 import styled from 'styled-components';
-import { createReply, getReplies } from '../../../../_actions/replyAction';
+import { createReply } from '../../../../_actions/replyAction';
 
 const CommentSubmitButton = styled.button`
 	background-color: #0a5ed5;
@@ -15,7 +14,7 @@ const CommentSubmitButton = styled.button`
 `;
 
 const CommentWritePage = (props) => {
-	const { post, userId, isCommentComplete, handleCommentComplete } = props;
+	const { isCommentComplete, handleCommentComplete } = props;
 	const [isInputFocus, setInputFocus] = useState(false);
 	const [isInputValue, setInputValue] = useState('');
 
@@ -38,6 +37,7 @@ const CommentWritePage = (props) => {
 	};
 
 	const handleCommentSubmit = async () => {
+		const { post, userId } = props;
 		const data = {
 			postId: post.id,
 			userId,

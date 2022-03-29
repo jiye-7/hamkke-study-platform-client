@@ -26,6 +26,6 @@ export const getReplies = (postId) => {
 export const deleteReply = (replyId) => {
 	return deleteReplyAPI(replyId).then((data) => ({
 		type: DELETE_REPLY,
-		payload: data,
+		payload: +data.replyId,
 	}));
 };

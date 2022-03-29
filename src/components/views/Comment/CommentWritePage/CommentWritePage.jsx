@@ -15,6 +15,7 @@ const CommentSubmitButton = styled.button`
 `;
 
 const CommentWritePage = (props) => {
+	const { post, userInfo } = props;
 	const dispatch = useDispatch();
 	const [isInputFocus, setInputFocus] = useState(false);
 	const [isInputValue, setInputValue] = useState('');
@@ -33,14 +34,13 @@ const CommentWritePage = (props) => {
 	};
 
 	const handleCommentSubmit = async () => {
-		const { post, userId } = props;
 		const data = {
 			postId: post.id,
-			userId,
+			userId: userInfo.id,
 			contents: isInputValue,
 		};
 
-		const { payload } = await dispatch(createReply(data));
+		const { payload } = await dispatch(createReply(data, userInfo.nickname));
 
 		if (payload && payload.success) {
 			setInputValue('');

@@ -5,17 +5,17 @@ import {
 	deleteReplyAPI,
 } from '../_module/replyApi';
 
-export const createReply = (dataToSubmit) => {
+export const createReply = (dataToSubmit, nickname) => {
 	return createReplyAPI(dataToSubmit)
 		.then((data) => ({
 			type: CREATE_REPLY,
-			payload: data,
+			payload: { ...data.reply, nickname },
 		}))
 		.catch((err) => err);
 };
 
 export const getReplies = (postId) => {
-	return getRepliesAPI(postId) /*.then((data) => console.log(data)); */
+	return getRepliesAPI(postId)
 		.then((data) => ({
 			type: GET_REPLIES,
 			payload: data.reply,

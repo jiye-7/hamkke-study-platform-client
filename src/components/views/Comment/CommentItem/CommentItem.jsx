@@ -53,8 +53,10 @@ const CommentItem = (props) => {
 				title: '정말 댓글을 삭제하시겠습니까?',
 				confirmFunction: () => props.handleDeleteComment(reply.id),
 			});
+			handleCloseModal(e);
 		} else {
 			console.log('댓글 수정할래!');
+			handleCloseModal(e);
 		}
 	};
 
@@ -65,7 +67,7 @@ const CommentItem = (props) => {
 					<ProfileImg src={myProfile} alt='profile img' />
 				</div>
 				<div className='comment-view_right'>
-					{userInfo.id && <span>{userInfo.nickname}</span>}
+					<span>{reply.nickname}</span>
 					<p>{reply.contents}</p>
 					{reply.userId === userInfo.id && (
 						<div className='comment-more'>

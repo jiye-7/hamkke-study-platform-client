@@ -22,7 +22,7 @@ const Comment = ({ post, userInfo }) => {
 
 	return (
 		<div className='post-comment-container'>
-			<CommentWritePage post={post} userInfo={userInfo} />
+			<CommentWritePage post={post} userInfo={userInfo} type={'write'} />
 			<div className='comment-view'>
 				{replies?.map((reply) => {
 					return (

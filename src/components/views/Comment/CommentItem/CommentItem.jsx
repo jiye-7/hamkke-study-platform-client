@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styledComponents from 'styled-components';
 import { MoreOutlined } from '@ant-design/icons';
+import CommentWritePage from '../CommentWritePage/CommentWritePage';
 import handleConfirm from '../../../utils/Alert/Alert';
 import myProfile from '../../../utils/image/quokka.jpg';
 
@@ -37,6 +38,7 @@ const Overlay = styledComponents.div`
 const CommentItem = (props) => {
 	const { reply, userInfo } = props;
 	const [isModalState, setModalState] = useState(false);
+	const [isCommentUpdateState, setCommentUpdateState] = useState(false);
 
 	const handleOpenModal = () => {
 		setModalState(true);
@@ -55,43 +57,61 @@ const CommentItem = (props) => {
 			});
 			handleCloseModal(e);
 		} else {
-			console.log('댓글 수정할래!');
 			handleCloseModal(e);
+			handleCommentUpdate();
 		}
+	};
+
+	const handleCommentUpdate = () => {
+		setCommentUpdateState(true);
+	};
+
+	const handleCommentUpdateCancel = () => {
+		setCommentUpdateState(false);
 	};
 
 	return (
 		<>
-			<div className='comment-item-container'>
-				<div className='comment-view_left'>
-					<ProfileImg src={myProfile} alt='profile img' />
+			{isCommentUpdateState ? (
+				<CommentWritePage
+					type={'update'}
+					contents={reply.contents}
+					handleCommentUpdateCancel={handleCommentUpdateCancel}
+					replyId={reply.id}
+					userInfo={userInfo}
+				/>
+			) : (
+				<div className='comment-item-container'>
+					<div className='comment-view_left'>
+						<ProfileImg src={myProfile} alt='profile img' />
+					</div>
+					<div className='comment-view_right'>
+						<span>{reply.nickname}</span>
+						<p>{reply.contents}</p>
+						{reply.userId === userInfo.id && (
+							<div className='comment-more'>
+								<MoreOutlined onClick={handleOpenModal} />
+								{isModalState && (
+									<Container isModalState={isModalState} className='modal'>
+										<button
+											className='delete'
+											onClick={(e) => handleChangeComment(e, 'delete')}
+										>
+											삭제
+										</button>
+										<button
+											className='update'
+											onClick={(e) => handleChangeComment(e, 'update')}
+										>
+											수정
+										</button>
+									</Container>
+								)}
+							</div>
+						)}
+					</div>
 				</div>
-				<div className='comment-view_right'>
-					<span>{reply.nickname}</span>
-					<p>{reply.contents}</p>
-					{reply.userId === userInfo.id && (
-						<div className='comment-more'>
-							<MoreOutlined onClick={handleOpenModal} />
-							{isModalState && (
-								<Container isModalState={isModalState} className='modal'>
-									<button
-										className='delete'
-										onClick={(e) => handleChangeComment(e, 'delete')}
-									>
-										삭제
-									</button>
-									<button
-										className='update'
-										onClick={(e) => handleChangeComment(e, 'update')}
-									>
-										수정
-									</button>
-								</Container>
-							)}
-						</div>
-					)}
-				</div>
-			</div>
+			)}
 			<Overlay
 				onClick={handleCloseModal}
 				className={isModalState && `active`}

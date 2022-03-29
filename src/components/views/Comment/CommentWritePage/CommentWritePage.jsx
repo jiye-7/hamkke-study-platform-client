@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import myProfile from '../../../utils/image/quokka.jpg';
 import styled from 'styled-components';
-import { createReply } from '../../../../_actions/replyAction';
+import { createReply, updateReply } from '../../../../_actions/replyAction';
 
 const CommentSubmitButton = styled.button`
 	background-color: #0a5ed5;
@@ -15,10 +15,12 @@ const CommentSubmitButton = styled.button`
 `;
 
 const CommentWritePage = (props) => {
-	const { post, userInfo } = props;
+	const { post, userInfo, type } = props;
 	const dispatch = useDispatch();
 	const [isInputFocus, setInputFocus] = useState(false);
-	const [isInputValue, setInputValue] = useState('');
+	const [isInputValue, setInputValue] = useState(
+		type === 'write' ? '' : props.contents,
+	);
 
 	const handleInputFocusIn = (e) => {
 		if (e.currentTarget === e.target) {
@@ -29,8 +31,14 @@ const CommentWritePage = (props) => {
 	};
 
 	const handleCancel = () => {
-		setInputValue('');
-		setInputFocus(false);
+		if (type === 'write') {
+			setInputValue('');
+			setInputFocus(false);
+		} else {
+			setInputValue(props.contents);
+			setInputFocus(false);
+			props.handleCommentUpdateCancel();
+		}
 	};
 
 	const handleCommentSubmit = async () => {
@@ -51,13 +59,31 @@ const CommentWritePage = (props) => {
 		}
 	};
 
+	/** update */
+	const handleCommentUpdate = async () => {
+		const data = { replyId: props.replyId, contents: isInputValue };
+		const payload = await dispatch(updateReply(data, userInfo.nickname));
+
+		if (payload.type === 'update_reply') {
+			props.handleCommentUpdateCancel();
+		}
+	};
+
 	return (
 		<div className='comment-write'>
-			<div className='comment-write-left'>
+			<div
+				className={
+					type === 'create' ? 'comment-write-left' : 'comment-update-left'
+				}
+			>
 				<img
 					src={myProfile}
 					alt='profile img'
-					style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+					style={{
+						width: `${type === 'create' ? '50px' : '45px'}`,
+						height: `${type === 'create' ? '50px' : '45px'}`,
+						borderRadius: '50%',
+					}}
 				/>
 			</div>
 			<div className='comment-write-right' onFocus={handleInputFocusIn}>
@@ -74,7 +100,11 @@ const CommentWritePage = (props) => {
 								취소
 							</button>
 							{isInputValue.length > 1 ? (
-								<CommentSubmitButton onClick={handleCommentSubmit}>
+								<CommentSubmitButton
+									onClick={
+										type === 'write' ? handleCommentSubmit : handleCommentUpdate
+									}
+								>
 									댓글
 								</CommentSubmitButton>
 							) : (

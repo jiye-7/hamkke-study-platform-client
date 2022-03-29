@@ -20,3 +20,9 @@ export const deleteReplyAPI = (replyId) => {
 		)
 		.then((response) => response.data);
 };
+
+export const updateReplyAPI = (dataToSubmit) => {
+	return axios
+		.put(`${process.env.REACT_APP_SERVER_API + REPLY_SERVER}/`, dataToSubmit)
+		.then((response) => response.data);
+};

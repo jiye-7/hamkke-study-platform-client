@@ -6,6 +6,7 @@
 	.post-comment-container {
 		.comment-write {
 			display: flex;
+			transform: translateY(100%);
 
 			&-right {
 				flex: 7;
@@ -45,10 +46,15 @@
 					}
 				}
 			}
+
+			/* update */
+			.comment-update-left {
+				// background-color: antiquewhite;
+			}
 		}
 
 		.comment-view {
-			transform: translateY(30%);
+			transform: translateY(20%);
 		}
 	}
 }

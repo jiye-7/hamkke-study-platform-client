@@ -1,8 +1,9 @@
-import { CREATE_REPLY, GET_REPLIES, DELETE_REPLY } from './types';
+import { CREATE_REPLY, GET_REPLIES, DELETE_REPLY, UPDATE_REPLY } from './types';
 import {
 	createReplyAPI,
 	getRepliesAPI,
 	deleteReplyAPI,
+	updateReplyAPI,
 } from '../_module/replyApi';
 
 export const createReply = (dataToSubmit, nickname) => {
@@ -28,4 +29,17 @@ export const deleteReply = (replyId) => {
 		type: DELETE_REPLY,
 		payload: data,
 	}));
+};
+
+export const updateReply = (dataToSubmit, nickname) => {
+	return updateReplyAPI(dataToSubmit)
+		.then((data) => {
+			if (data.success) {
+				return {
+					type: UPDATE_REPLY,
+					payload: { ...dataToSubmit, nickname },
+				};
+			}
+		})
+		.catch((err) => err);
 };

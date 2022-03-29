@@ -6,7 +6,8 @@
 	.post-comment-container {
 		.comment-write {
 			display: flex;
-			transform: translateY(100%);
+			// transform: translateY(20%);
+			// margin-bottom: 20px;
 
 			&-right {
 				flex: 7;
@@ -54,7 +55,7 @@
 		}
 
 		.comment-view {
-			transform: translateY(20%);
+			transform: translateY(5%);
 		}
 	}
 }

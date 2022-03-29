@@ -8,6 +8,7 @@ const Comment = ({ post, userId }) => {
 	const dispatch = useDispatch();
 	const [replies, setReplies] = useState([]);
 	const [isCommentComplete, setCommentComplete] = useState(false);
+	const [deleteComplete, setDeleteComplete] = useState(false);
 
 	useEffect(() => {
 		if (post.id) {
@@ -19,7 +20,7 @@ const Comment = ({ post, userId }) => {
 				}
 			})();
 		}
-	}, [post.id, isCommentComplete]);
+	}, [post.id, isCommentComplete, deleteComplete]);
 
 	const handleCommentComplete = (state) => {
 		setCommentComplete(state);
@@ -27,10 +28,10 @@ const Comment = ({ post, userId }) => {
 
 	const handleDeleteComment = async (replyId) => {
 		const { payload } = await dispatch(deleteReply(replyId));
-
 		if (payload.success) {
 			const newReplies = replies.filter((reply) => reply.id !== replyId);
 			setReplies(newReplies);
+			setDeleteComplete(true);
 		}
 	};
 

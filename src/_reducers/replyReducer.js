@@ -11,7 +11,7 @@ const replyReducer = (state = defaultState, action) => {
 		case GET_REPLIES:
 			return { ...state, replies: payload };
 		case DELETE_REPLY:
-			const replyId = payload;
+			const replyId = +payload.replyId;
 			const newReplies = state.replies.filter((reply) => reply.id !== replyId);
 			return { ...state, replies: newReplies };
 		default:

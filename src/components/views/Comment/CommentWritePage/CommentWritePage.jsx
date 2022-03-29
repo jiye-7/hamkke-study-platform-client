@@ -59,7 +59,6 @@ const CommentWritePage = (props) => {
 		}
 	};
 
-	/** update */
 	const handleCommentUpdate = async () => {
 		const data = { replyId: props.replyId, contents: isInputValue };
 		const payload = await dispatch(updateReply(data, userInfo.nickname));

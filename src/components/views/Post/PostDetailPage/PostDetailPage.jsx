@@ -22,7 +22,6 @@ const PostDetailPage = () => {
 	const { id: postId } = useParams();
 	const [post, setPost] = useState({});
 	const [postDeadline, setPostDeadline] = useState(false);
-	/* const [replies, setReplies] = useState([]); */
 
 	useEffect(() => {
 		const query = queryString.stringify(
@@ -44,18 +43,6 @@ const PostDetailPage = () => {
 		}
 		post();
 	}, []);
-
-	/* useEffect(() => {
-		if (postId) {
-			(async () => {
-				const { payload } = await dispatch(getReplies(postId));
-
-				if (payload) {
-					setReplies(payload);
-				}
-			})();
-		}
-	}, []); */
 
 	/** dangerouslySetInnerHTML 설정 */
 	const createMarkup = () => ({ __html: DOMPurify.sanitize(post.contents) });
@@ -198,10 +185,7 @@ const PostDetailPage = () => {
 				/>
 			</div>
 			<div className='comment-container'>
-				<CommentPage
-					post={post}
-					/* replies={replies}  */ userId={userInfo.id}
-				/>
+				<CommentPage post={post} userInfo={userInfo} />
 			</div>
 		</section>
 	);

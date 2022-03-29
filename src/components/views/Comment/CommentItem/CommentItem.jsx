@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styledComponents from 'styled-components';
 import { MoreOutlined } from '@ant-design/icons';
-import { deleteReply } from '../../../../_actions/replyAction';
 import handleConfirm from '../../../utils/Alert/Alert';
 import myProfile from '../../../utils/image/quokka.jpg';
 
@@ -36,9 +35,8 @@ const Overlay = styledComponents.div`
 `;
 
 const CommentItem = (props) => {
-	const { reply, userId } = props;
+	const { reply, userInfo } = props;
 	const [isModalState, setModalState] = useState(false);
-	// const [isUpdateState, setUpdateState] = useState('');
 
 	const handleOpenModal = () => {
 		setModalState(true);
@@ -67,9 +65,9 @@ const CommentItem = (props) => {
 					<ProfileImg src={myProfile} alt='profile img' />
 				</div>
 				<div className='comment-view_right'>
-					<span>{reply.nickname}</span>
+					{userInfo.id && <span>{userInfo.nickname}</span>}
 					<p>{reply.contents}</p>
-					{reply.userId === userId && (
+					{reply.userId === userInfo.id && (
 						<div className='comment-more'>
 							<MoreOutlined onClick={handleOpenModal} />
 							{isModalState && (

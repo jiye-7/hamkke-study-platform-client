@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import myProfile from '../../../utils/image/quokka.jpg';
 import styled from 'styled-components';
 import { createReply } from '../../../../_actions/replyAction';
@@ -14,7 +15,7 @@ const CommentSubmitButton = styled.button`
 `;
 
 const CommentWritePage = (props) => {
-	const { isCommentComplete, handleCommentComplete } = props;
+	const dispatch = useDispatch();
 	const [isInputFocus, setInputFocus] = useState(false);
 	const [isInputValue, setInputValue] = useState('');
 
@@ -27,13 +28,8 @@ const CommentWritePage = (props) => {
 	};
 
 	const handleCancel = () => {
-		if (isCommentComplete) {
-			setInputValue(isInputValue);
-			setInputFocus(false);
-		} else {
-			setInputValue('');
-			setInputFocus(false);
-		}
+		setInputValue('');
+		setInputFocus(false);
 	};
 
 	const handleCommentSubmit = async () => {
@@ -44,15 +40,13 @@ const CommentWritePage = (props) => {
 			contents: isInputValue,
 		};
 
-		const { payload } = await createReply(data);
+		const { payload } = await dispatch(createReply(data));
 
 		if (payload && payload.success) {
-			setInputValue(''); // 기존 inputValue를 넣었는데 댓글 보내면, 값을 비우고, getReply 요청으로 가져와서 commentItem에서 보여준다.
-			handleCommentComplete(true);
+			setInputValue('');
 			setInputFocus(false);
 		} else {
 			setInputValue('');
-			handleCommentComplete(false);
 			setInputFocus(false);
 		}
 	};

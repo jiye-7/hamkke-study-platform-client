@@ -1,55 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteReply, getReplies } from '../../../_actions/replyAction';
 import CommentWritePage from './CommentWritePage/CommentWritePage';
 import CommentItem from './CommentItem/CommentItem';
 
-const Comment = ({ post, userId }) => {
+const Comment = ({ post, userInfo }) => {
 	const dispatch = useDispatch();
-	const [replies, setReplies] = useState([]);
-	const [isCommentComplete, setCommentComplete] = useState(false);
-	const [deleteComplete, setDeleteComplete] = useState(false);
+	const { replies } = useSelector(({ reply }) => reply);
 
 	useEffect(() => {
 		if (post.id) {
 			(async () => {
-				const { payload } = await dispatch(getReplies(post.id));
-
-				if (payload) {
-					setReplies(payload);
-				}
+				await dispatch(getReplies(post.id));
 			})();
 		}
-	}, [post.id, isCommentComplete, deleteComplete]);
-
-	const handleCommentComplete = (state) => {
-		setCommentComplete(state);
-	};
+	}, [post.id]);
 
 	const handleDeleteComment = async (replyId) => {
-		const { payload } = await dispatch(deleteReply(replyId));
-		if (payload.success) {
-			const newReplies = replies.filter((reply) => reply.id !== replyId);
-			setReplies(newReplies);
-			setDeleteComplete(true);
-		}
+		await dispatch(deleteReply(replyId));
 	};
 
 	return (
 		<div className='post-comment-container'>
-			<CommentWritePage
-				post={post}
-				userId={userId}
-				isCommentComplete={isCommentComplete}
-				handleCommentComplete={handleCommentComplete}
-			/>
+			<CommentWritePage post={post} userId={userInfo.id} />
 			<div className='comment-view'>
 				{replies?.map((reply) => {
 					return (
 						<CommentItem
 							reply={reply}
 							key={reply.id}
-							userId={userId}
+							userInfo={userInfo}
 							handleDeleteComment={handleDeleteComment}
 						/>
 					);

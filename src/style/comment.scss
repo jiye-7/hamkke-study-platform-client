@@ -6,8 +6,7 @@
 	.post-comment-container {
 		.comment-write {
 			display: flex;
-			// transform: translateY(20%);
-			// margin-bottom: 20px;
+			margin-bottom: 30px;
 
 			&-right {
 				flex: 7;
@@ -50,7 +49,6 @@
 
 			/* update */
 			.comment-update-left {
-				// background-color: antiquewhite;
 			}
 		}
 

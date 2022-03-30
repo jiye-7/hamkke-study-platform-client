@@ -1,12 +1,39 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PostInfoItem from './PostInfoItem/PostInfoItem';
+import languageOptions from '../../utils/data/language';
 
 const Post = ({ post }) => {
 	const navigate = useNavigate();
+	const [stacks] = useState(post.stacks);
 
 	const handleSelectPost = () => {
 		navigate(`/post/${post.id}`);
+	};
+
+	const hashStacks = () => {
+		return stacks.reduce((acc, cur) => {
+			acc[cur] = 1;
+			return acc;
+		}, {});
+	};
+
+	const renderStacks = () => {
+		const hashStackResult = hashStacks();
+		return languageOptions
+			.filter((option) => {
+				return option.value in hashStackResult;
+			})
+			.map((stackInfo) => (
+				<div className='stack-container'>
+					<img
+						src={stackInfo.src}
+						alt={`${stackInfo.value + 'logo'}`}
+						style={{ width: '45px', height: '45px' }}
+					/>
+					<p>{stackInfo.value}</p>
+				</div>
+			));
 	};
 
 	return (
@@ -20,7 +47,7 @@ const Post = ({ post }) => {
 				onClick={handleSelectPost}
 			>
 				<h1>{post.title}</h1>
-				<p>{post.stacks.join(', ')}</p>
+				{renderStacks()}
 				<PostInfoItem
 					page={'landing'}
 					post={post}

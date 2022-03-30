@@ -2,6 +2,8 @@
 	position: relative;
 
 	.post-item-container {
+		display: flex;
+		flex-direction: column;
 		width: 15rem;
 		height: 15rem;
 		margin: 0.625rem;
@@ -16,10 +18,12 @@
 			width: 100%;
 		}
 
-		p {
-			font-size: 0.7rem;
-			width: 100%;
-			text-overflow: ellipsis;
+		.stack-container {
+			p {
+				font-size: 0.7rem;
+				width: 100%;
+				text-overflow: ellipsis;
+			}
 		}
 	}
 

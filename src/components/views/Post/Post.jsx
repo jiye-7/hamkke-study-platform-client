@@ -6,7 +6,6 @@ import languageOptions from '../../utils/data/language';
 const Post = ({ post }) => {
 	const navigate = useNavigate();
 	const [stacks] = useState(post.stacks);
-	console.log('commentCount:::::', post.comment);
 
 	const handleSelectPost = () => {
 		navigate(`/post/${post.id}`, { state: { commentCount: post.comment } });

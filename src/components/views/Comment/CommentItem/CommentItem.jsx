@@ -54,9 +54,9 @@ const CommentItem = (props) => {
 				title: '정말 댓글을 삭제하시겠습니까?',
 				confirmFunction: () => props.handleDeleteComment(reply.id),
 			});
-			handleCloseModal(e);
+			handleCloseModal();
 		} else {
-			handleCloseModal(e);
+			handleCloseModal();
 			handleCommentUpdate();
 		}
 	};

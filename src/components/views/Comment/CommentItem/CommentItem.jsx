@@ -44,8 +44,7 @@ const CommentItem = (props) => {
 		setModalState(true);
 	};
 
-	const handleCloseModal = (e) => {
-		e.preventDefault();
+	const handleCloseModal = () => {
 		setModalState(false);
 	};
 

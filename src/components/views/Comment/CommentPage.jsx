@@ -20,21 +20,21 @@ const Comment = ({ post, userInfo }) => {
 		await dispatch(deleteReply(replyId));
 	};
 
+	const renderCommentItems = () => {
+		return replies?.map((reply) => (
+			<CommentItem
+				reply={reply}
+				key={reply.id}
+				userInfo={userInfo}
+				handleDeleteComment={handleDeleteComment}
+			/>
+		));
+	};
+
 	return (
 		<div className='post-comment-container'>
 			<CommentWritePage post={post} userInfo={userInfo} type={'write'} />
-			<div className='comment-view'>
-				{replies?.map((reply) => {
-					return (
-						<CommentItem
-							reply={reply}
-							key={reply.id}
-							userInfo={userInfo}
-							handleDeleteComment={handleDeleteComment}
-						/>
-					);
-				})}
-			</div>
+			<div className='comment-view'>{renderCommentItems()}</div>
 		</div>
 	);
 };

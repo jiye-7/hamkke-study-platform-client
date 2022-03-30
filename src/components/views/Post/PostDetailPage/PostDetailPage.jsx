@@ -18,7 +18,6 @@ import profileImg from '../../../utils/image/quokka.jpg';
 
 const PostDetailPage = () => {
 	const navigate = useNavigate();
-	const location = useLocation();
 	const { userInfo } = useSelector(({ user }) => user);
 	const { id: postId } = useParams();
 	const [post, setPost] = useState({});
@@ -185,10 +184,6 @@ const PostDetailPage = () => {
 					userInfo={userInfo}
 				/>
 			</div>
-			<div>
-				<h1>{location.state.commentCount}개의 댓글이 있습니다.</h1>
-			</div>
-
 			<div className='comment-container'>
 				<CommentPage post={post} userInfo={userInfo} />
 			</div>

@@ -33,6 +33,7 @@ const Comment = ({ post, userInfo }) => {
 
 	return (
 		<div className='post-comment-container'>
+			<h1 className='comment-counter'>{replies.length}개의 댓글이 있습니다.</h1>
 			<CommentWritePage post={post} userInfo={userInfo} type={'write'} />
 			<div className='comment-view'>{renderCommentItems()}</div>
 		</div>

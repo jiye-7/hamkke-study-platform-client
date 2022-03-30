@@ -2,9 +2,11 @@ import React from 'react';
 import { CommentOutlined, EyeOutlined, HeartOutlined } from '@ant-design/icons';
 
 const PostInfoPage = (props) => {
+	const { page, userInfo, handleLikePost, post } = props;
+
 	return (
 		<div className='post-info-container'>
-			{props.page === 'landing' ? (
+			{page === 'landing' ? (
 				<div
 					className={`${
 						props.recruitmentEnd
@@ -14,29 +16,29 @@ const PostInfoPage = (props) => {
 				>
 					<div>
 						<CommentOutlined />
-						<span>100</span>
+						<span>{post.comment}</span>
 					</div>
 					<div>
 						<EyeOutlined />
-						<span>{props.post.hit}</span>
+						<span>{post.hit}</span>
 					</div>
 					<div>
 						<HeartOutlined />
-						<span>{props.post.like}</span>
+						<span>{post.like}</span>
 					</div>
 				</div>
 			) : (
 				<div className='detail-page'>
 					<div>
 						<EyeOutlined />
-						<span>{props.post.hit}</span>
+						<span>{post.hit}</span>
 					</div>
 					<div>
 						<HeartOutlined
-							className={`${props.post.isLike ? 'like' : 'unlike'}`}
-							onClick={props.userInfo.id && props.handleLikePost}
+							className={`${post.isLike ? 'like' : 'unlike'}`}
+							onClick={userInfo.id && handleLikePost}
 						/>
-						<span>{props.post.like}</span>
+						<span>{post.like}</span>
 					</div>
 				</div>
 			)}

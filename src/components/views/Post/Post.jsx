@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PostInfoItem from './PostInfoItem/PostInfoItem';
 import languageOptions from '../../utils/data/language';

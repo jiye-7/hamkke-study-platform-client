@@ -20,16 +20,17 @@ const Post = ({ post }) => {
 
 	const renderStacks = () => {
 		const hashStackResult = hashStacks();
+
 		return languageOptions
 			.filter((option) => {
 				return option.value in hashStackResult;
 			})
 			.map((stackInfo) => (
-				<div className='stack-container'>
+				<div className='stack-info' key={stackInfo.id + stackInfo.src}>
 					<img
 						src={stackInfo.src}
 						alt={`${stackInfo.value + 'logo'}`}
-						style={{ width: '45px', height: '45px' }}
+						style={{ width: '48px', height: '45px' }}
 					/>
 					<p>{stackInfo.value}</p>
 				</div>
@@ -47,7 +48,7 @@ const Post = ({ post }) => {
 				onClick={handleSelectPost}
 			>
 				<h1>{post.title}</h1>
-				{renderStacks()}
+				<div className='stack-container'>{renderStacks()}</div>
 				<PostInfoItem
 					page={'landing'}
 					post={post}

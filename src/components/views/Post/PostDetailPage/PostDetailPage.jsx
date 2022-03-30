@@ -11,6 +11,7 @@ import {
 	likePost,
 } from '../../../../_actions/postAction';
 import Tag from './Tag';
+import CommentPage from '../../Comment/CommentPage';
 import PostInfoItem from '../PostInfoItem/PostInfoItem';
 import handleConfirm from '../../../utils/Alert/Alert';
 import profileImg from '../../../utils/image/quokka.jpg';
@@ -34,8 +35,11 @@ const PostDetailPage = () => {
 
 		async function post() {
 			const { payload } = await getPost(postId, query);
-			setPost(payload.post);
-			setPostDeadline(payload.post.completed);
+
+			if (payload && payload.post) {
+				setPost(payload.post);
+				setPostDeadline(payload.post.completed);
+			}
 		}
 		post();
 	}, []);
@@ -179,6 +183,9 @@ const PostDetailPage = () => {
 					handleLikePost={handleLikePost}
 					userInfo={userInfo}
 				/>
+			</div>
+			<div className='comment-container'>
+				<CommentPage post={post} userInfo={userInfo} />
 			</div>
 		</section>
 	);

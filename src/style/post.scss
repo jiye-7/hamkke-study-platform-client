@@ -2,6 +2,8 @@
 	position: relative;
 
 	.post-item-container {
+		display: flex;
+		flex-direction: column;
 		width: 15rem;
 		height: 15rem;
 		margin: 0.625rem;
@@ -14,12 +16,26 @@
 		h1 {
 			font-size: 1.2rem;
 			width: 100%;
+			height: 35%;
 		}
 
-		p {
-			font-size: 0.7rem;
-			width: 100%;
-			text-overflow: ellipsis;
+		.stack-container {
+			display: flex;
+			justify-content: center;
+
+			.stack-info {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				margin-right: 10px;
+
+				p {
+					font-size: 0.7rem;
+					width: 100%;
+					text-align: center;
+					text-overflow: ellipsis;
+				}
+			}
 		}
 	}
 

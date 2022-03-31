@@ -47,3 +47,13 @@ export const likePostAPI = (dataToSubmit) => {
 		)
 		.then((response) => response.data);
 };
+
+export const getMyWritePostAPI = (userId) => {
+	return axios
+		.get(
+			`${
+				process.env.REACT_APP_SERVER_API + POST_SERVER
+			}/write/me?userId=${userId}`,
+		)
+		.then((response) => response.data);
+};

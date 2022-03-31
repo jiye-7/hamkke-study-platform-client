@@ -7,6 +7,7 @@ import {
 	UPDATE_POST,
 	NONEXISTENCE_POST,
 	LIKE_POST,
+	GET_MY_WRITE_POST,
 } from './types';
 import {
 	createPostAPI,
@@ -16,6 +17,7 @@ import {
 	updatePostAPI,
 	completionOfRecruitmentAPI,
 	likePostAPI,
+	getMyWritePostAPI,
 } from '../_module/postApi';
 
 /** 글 작성하기 */
@@ -94,4 +96,17 @@ export const likePost = (dataToSubmit) => {
 			payload: data,
 		}))
 		.catch((err) => err);
+};
+
+/** 내가 작성한 글 목록 가져오기 */
+export const myWritePost = (userId) => {
+	return getMyWritePostAPI(userId)
+		.then((data) => ({
+			type: GET_MY_WRITE_POST,
+			payload: data,
+		}))
+		.catch((err) => ({
+			success: 'fail',
+			message: err,
+		}));
 };

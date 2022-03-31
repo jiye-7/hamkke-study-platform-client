@@ -12,13 +12,22 @@ const MyWritePage = () => {
 		(async () => {
 			const { payload } = await dispatch(myWritePost(userInfo.id));
 			if (payload.success) {
-				setMyPosts(payload.posts);
-				const resultPost = await payload.posts.reduce((acc, cur) => {
-					cur.contents = cur.contents.replace(/(<([^>]+)>)/gi, '');
-					acc.push(cur);
-					return acc;
-				}, []);
+				const resultPost = payload.posts.map((post) => {
+					post.contents = post.contents.replace(/(<([^>]+)>)/gi, '');
+					post.contents = post.contents.substring(0, 20) + '...';
+					post.stacks = post.stacks.split(',').join(', ');
+					if (post.completed) {
+						post.completed = '마감 완료';
+					} else {
+						post.completed = '마감 전';
+					}
+					post.createdAt = post.createdAt.split('T')[0];
+					post.updatedAt = post.updatedAt.substring(0, 10);
+
+					return post;
+				});
 				setMyPosts(resultPost);
+				console.log(resultPost);
 			}
 		})();
 	}, []);
@@ -58,12 +67,12 @@ const MyWritePage = () => {
 				accessor: 'comment',
 			},
 			{
-				Header: 'CreateAt',
-				accessor: 'createAt',
+				Header: 'CreatedAt',
+				accessor: 'createdAt',
 			},
 			{
-				Header: 'UpdateAt',
-				accessor: 'updateAt',
+				Header: 'UpdatedAt',
+				accessor: 'updatedAt',
 			},
 		],
 		[],

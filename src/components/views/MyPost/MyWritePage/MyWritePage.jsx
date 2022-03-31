@@ -13,6 +13,12 @@ const MyWritePage = () => {
 			const { payload } = await dispatch(myWritePost(userInfo.id));
 			if (payload.success) {
 				setMyPosts(payload.posts);
+				const resultPost = await payload.posts.reduce((acc, cur) => {
+					cur.contents = cur.contents.replace(/(<([^>]+)>)/gi, '');
+					acc.push(cur);
+					return acc;
+				}, []);
+				setMyPosts(resultPost);
 			}
 		})();
 	}, []);
@@ -62,7 +68,7 @@ const MyWritePage = () => {
 		],
 		[],
 	);
-	const data = useMemo(() => myPosts, []);
+	const data = useMemo(() => myPosts, [myPosts]);
 	const tableInstance = useTable({ columns, data });
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
 		tableInstance;

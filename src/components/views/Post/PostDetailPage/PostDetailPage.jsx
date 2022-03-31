@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import queryString from 'query-string';
 import DOMPurify from 'dompurify';
 import { ArrowLeftOutlined } from '@ant-design/icons';

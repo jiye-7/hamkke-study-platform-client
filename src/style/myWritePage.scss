@@ -1,6 +1,19 @@
 .my-post-container {
-	position: relative;
-	transform: translateY(20%);
+	display: flex;
+	justify-content: center;
+	transform: translateY(80%);
 	width: 100%;
-	height: 100vh;
+
+	table {
+		width: 85%;
+
+		tbody {
+			tr > td {
+				padding: 10px;
+				border-bottom: solid 1px #a1887f;
+				background: #efebe9;
+				cursor: pointer;
+			}
+		}
+	}
 }

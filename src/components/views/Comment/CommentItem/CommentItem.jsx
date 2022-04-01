@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import styledComponents from 'styled-components';
+import styled from 'styled-components';
 import { MoreOutlined } from '@ant-design/icons';
 import CommentWritePage from '../CommentWritePage/CommentWritePage';
 import handleConfirm from '../../../utils/Alert/Alert';
 import myProfile from '../../../utils/image/quokka.jpg';
 
-const ProfileImg = styledComponents.img`
+const ProfileImg = styled.img`
 	width: 45px;
 	height: 45px;
 	border-radius: 50%;
 `;
 
-const Container = styledComponents.div`
+const Container = styled.div`
 	position: absolute;
 	z-index: 2;
 	transform: translateX(35%);
@@ -24,7 +24,7 @@ const Container = styledComponents.div`
 	background-color: #d7ccc8;
 `;
 
-const Overlay = styledComponents.div`
+const Overlay = styled.div`
 	display: none;
 	position: fixed;
 	z-index: 1;

@@ -50,8 +50,10 @@ const MyWritePage = () => {
 		});
 	};
 
-	const columns = useMemo(() => postsColumns, []);
-	const tableInstance = useTable({ columns, data: myPosts }, useSortBy);
+	const tableInstance = useTable(
+		{ columns: postsColumns, data: myPosts },
+		useSortBy,
+	);
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
 		tableInstance;
 

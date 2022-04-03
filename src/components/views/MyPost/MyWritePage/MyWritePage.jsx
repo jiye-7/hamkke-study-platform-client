@@ -20,10 +20,23 @@ const MyWritePage = () => {
 	const { userInfo } = useSelector(({ user }) => user);
 	const [myPosts, setMyPosts] = useState([]);
 
+	useEffect(() => {
+		(async () => {
+			const { payload } = await dispatch(myWritePost(userInfo.id));
+			if (payload.success) {
+				const resultPost = handlePostChange(payload);
+				setMyPosts(resultPost);
+			}
+		})();
+	}, []);
+
 	const handlePostChange = (payload) => {
 		return payload.posts.map((post) => {
-			post.contents = post.contents.replace(/(<([^>]+)>)/gi, '');
-			post.contents = post.contents.substring(0, 20) + '...';
+			if (post.contents) {
+				post.contents = post.contents.replace(/(<([^>]+)>)/gi, '');
+				post.contents.length > 20 &&
+					(post.contents = post.contents.substring(0, 20) + '...');
+			}
 			post.stacks = post.stacks.split(',').join(', ');
 			if (post.completed) {
 				post.completed = '마감 완료';
@@ -37,19 +50,8 @@ const MyWritePage = () => {
 		});
 	};
 
-	useEffect(() => {
-		(async () => {
-			const { payload } = await dispatch(myWritePost(userInfo.id));
-			if (payload.success) {
-				const resultPost = handlePostChange(payload);
-				setMyPosts(resultPost);
-			}
-		})();
-	}, []);
-
 	const columns = useMemo(() => postsColumns, []);
-	const data = useMemo(() => myPosts, [myPosts]);
-	const tableInstance = useTable({ columns, data }, useSortBy);
+	const tableInstance = useTable({ columns, data: myPosts }, useSortBy);
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
 		tableInstance;
 

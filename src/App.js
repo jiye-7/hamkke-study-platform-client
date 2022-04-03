@@ -9,6 +9,7 @@ import PostWritePage from './components/views/Post/PostWritePage/PostWritePage';
 import UserInfoPage from './components/views/UserInfoPage/UserInfoPage';
 import PostDetailPage from './components/views/Post/PostDetailPage/PostDetailPage';
 import PostUpdatePage from './components/views/Post/PostUpdatePage/PostUpdatePage';
+import MyWritePage from './components/views/MyPost/MyWritePage/MyWritePage';
 
 function App() {
 	return (
@@ -23,6 +24,7 @@ function App() {
 					<Route path='/userInfo' element={Auth(UserInfoPage, true)} />
 					<Route path='/post/:id' element={Auth(PostDetailPage, null)} />
 					<Route path='/alteration/:id' element={Auth(PostUpdatePage, true)} />
+					<Route path='/myPosts' element={Auth(MyWritePage, true)} />
 				</Routes>
 			</div>
 		</Router>

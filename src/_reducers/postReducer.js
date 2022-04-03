@@ -1,7 +1,8 @@
-import { GET_POSTS, CLEAR_POSTS } from '../_actions/types';
+import { GET_POSTS, CLEAR_POSTS, GET_MY_WRITE_POST } from '../_actions/types';
 
 const defaultState = {
 	posts: [],
+	myPosts: [],
 };
 
 const postReducer = (state = defaultState, action) => {
@@ -19,6 +20,8 @@ const postReducer = (state = defaultState, action) => {
 				...state,
 				posts: payload.posts,
 			};
+		case GET_MY_WRITE_POST:
+			return { ...state, myPosts: payload.posts };
 		default:
 			return state;
 	}

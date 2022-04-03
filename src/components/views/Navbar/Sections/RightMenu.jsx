@@ -43,7 +43,7 @@ function RightMenu() {
 						<Link to='/myPosts'>내 작성글</Link>
 					</Menu.Item>
 					<Menu.Item key='userInfo' icon={<IdcardOutlined />}>
-						<Link to='/userInfo'>마이 페이지</Link>
+						<Link to='userInfo'>마이 페이지</Link>
 					</Menu.Item>
 					<Menu.Item
 						key='logout'

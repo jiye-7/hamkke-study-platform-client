@@ -1,0 +1,19 @@
+.my-post-container {
+	display: flex;
+	justify-content: center;
+	transform: translateY(80%);
+	width: 100%;
+
+	table {
+		width: 85%;
+
+		tbody {
+			tr > td {
+				padding: 10px;
+				border-bottom: solid 1px #a1887f;
+				background: #efebe9;
+				cursor: pointer;
+			}
+		}
+	}
+}

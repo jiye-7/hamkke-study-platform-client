@@ -24,6 +24,7 @@ export const NONEXISTENCE_POST = 'nonexistence_post';
 export const COMPLETION_OF_RECRUITMENT = 'completion_of_recruitment';
 export const LIKE_POST = 'like_post';
 export const GET_MY_WRITE_POST = 'get_my_write_post';
+export const GET_MY_LIKE_POST = 'get_my_like_post';
 
 // reply
 export const CREATE_REPLY = 'create_reply';

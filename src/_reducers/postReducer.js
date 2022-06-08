@@ -30,6 +30,7 @@ const postReducer = (state = defaultState, action) => {
 			return { ...state, myPosts: payload.posts };
 		case GET_MY_LIKE_POST:
 			// return { ...state, myLikePosts: payload.posts };
+			// console.log(payload.posts.map((post) => post.));
 			return {
 				...state,
 				myLikePosts: [...state.myLikePosts, ...payload.posts],

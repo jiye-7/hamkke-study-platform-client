@@ -8,9 +8,9 @@ const MyLikePage = () => {
 	const dispatch = useDispatch();
 	const state = useSelector((state) => state);
 	const { userInfo } = state.user;
-	const { myLikePosts } = state.post;
+	// const { myLikePosts } = state.post;
+	const [likePosts, setMyLikePosts] = useState([]);
 	const [page, setPage] = useState(1);
-	const [myPosts, setMyLikePosts] = useState([]);
 	const [isLastPage, setIsLastPage] = useState(false);
 
 	useEffect(() => {
@@ -19,15 +19,18 @@ const MyLikePage = () => {
 				{ limit: 5, page, userId: userInfo.id },
 				{ dataFormat: 'bracket' },
 			);
+
 			const { type, payload } = await dispatch(myLikePost(query));
 
 			if (type === 'get_my_like_post') {
-				let resultPosts = payload.posts.map((post) => {
+				let resultPosts = payload.posts?.map((post) => {
 					post.stacks = post.stacks.split(',');
 					return post;
 				});
-				setMyLikePosts([...myLikePosts, ...resultPosts]);
+
+				setMyLikePosts(resultPosts);
 				setIsLastPage(payload.lastPage);
+				// setMyLikePosts([...myLikePosts, ...resultPosts]);
 			}
 		})();
 	}, [page]);
@@ -37,13 +40,13 @@ const MyLikePage = () => {
 	};
 
 	const renderLikePosts = () => {
-		return myPosts?.map((post) => <Post post={post} key={post.id} />);
+		return likePosts?.map((post) => <Post post={post} key={post.id} />);
 	};
 
 	return (
 		<>
 			<div className='my-like-container'>
-				{myPosts.length > 0 && renderLikePosts()}
+				{likePosts.length > 0 && renderLikePosts()}
 			</div>
 			{isLastPage === false && (
 				<button onClick={handleMoreLikePosts}>더 보기</button>

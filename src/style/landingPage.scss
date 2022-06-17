@@ -3,9 +3,23 @@
 	height: 100vh;
 	display: inline-block;
 
+	.logo-container {
+		&_img {
+			width: 100%;
+			object-fit: cover;
+		}
+		a {
+			position: absolute;
+			top: 600px;
+			right: 10px;
+			font-size: 10px;
+			color: #2c88a9;
+		}
+	}
+
 	/* stackFilter-section*/
 	.stackFilter-section {
-		margin-top: 400px;
+		margin-top: 200px;
 	}
 
 	/* post-section */

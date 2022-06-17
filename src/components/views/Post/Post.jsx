@@ -4,7 +4,6 @@ import PostInfoItem from './PostInfoItem/PostInfoItem';
 import languageOptions from '../../utils/data/language';
 
 const Post = (props) => {
-	// console.log(props.post);
 	const navigate = useNavigate();
 	const [stacks] = useState(props.post.stacks);
 
@@ -29,6 +28,7 @@ const Post = (props) => {
 			.filter((option) => {
 				return option.value in hashStackResult;
 			})
+			.slice(0, 3)
 			.map((stackInfo) => (
 				<div className='stack-info' key={stackInfo.id + stackInfo.src}>
 					<img

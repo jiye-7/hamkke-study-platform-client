@@ -14,6 +14,7 @@ const Post = (props) => {
 	};
 
 	const hashStacks = () => {
+		// console.log(stacks);
 		return stacks.reduce((acc, cur) => {
 			acc[cur] = 1;
 			return acc;

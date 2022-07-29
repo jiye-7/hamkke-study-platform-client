@@ -41,7 +41,7 @@ const LandingPage = () => {
 
 	useEffect(() => {
 		return () => dispatch(clearPosts());
-	}, []);
+	}, [dispatch]);
 
 	const renderPost = () => {
 		return posts.map((post) => <Post key={post.id} post={post} />);

@@ -57,3 +57,13 @@ export const getMyWritePostAPI = (userId) => {
 		)
 		.then((response) => response.data);
 };
+
+export const getMyLikePostAPI = (dataToSubmit) => {
+	return axios
+		.get(
+			`${
+				process.env.REACT_APP_SERVER_API + POST_SERVER
+			}/like/me?${dataToSubmit}`,
+		)
+		.then((response) => response.data);
+};

@@ -5,6 +5,7 @@ import Post from '../Post/Post';
 import StackPage from '../StackPage/StackPage';
 import FilterPage from '../FilterPage/FilterPage';
 import { getPosts, clearPosts } from '../../../_actions/postAction';
+import imgLogo from '../../utils/image/main_logo.png';
 
 const LandingPage = () => {
 	const dispatch = useDispatch();
@@ -78,6 +79,12 @@ const LandingPage = () => {
 
 	return (
 		<div className='main-container'>
+			<section className='logo-container'>
+				<img className='logo-container_img' src={imgLogo} alt='logo img' />
+				<a target='blank' href='https://www.freepik.com/'>
+					©Designed by Freepik
+				</a>
+			</section>
 			<section className='stackFilter-section'>
 				<StackPage stackCheck={handleStackCheck} />
 			</section>

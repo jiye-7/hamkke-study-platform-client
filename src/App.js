@@ -10,6 +10,7 @@ import UserInfoPage from './components/views/UserInfoPage/UserInfoPage';
 import PostDetailPage from './components/views/Post/PostDetailPage/PostDetailPage';
 import PostUpdatePage from './components/views/Post/PostUpdatePage/PostUpdatePage';
 import MyWritePage from './components/views/MyPost/MyWritePage/MyWritePage';
+import MyLikePage from './components/views/MyPost/MyLikePage/MyLikePage';
 
 function App() {
 	return (
@@ -25,6 +26,7 @@ function App() {
 					<Route path='/post/:id' element={Auth(PostDetailPage, null)} />
 					<Route path='/alteration/:id' element={Auth(PostUpdatePage, true)} />
 					<Route path='/myPosts' element={Auth(MyWritePage, true)} />
+					<Route path='/myLike' element={Auth(MyLikePage, true)} />
 				</Routes>
 			</div>
 		</Router>

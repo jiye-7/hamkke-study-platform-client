@@ -3,15 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import PostInfoItem from './PostInfoItem/PostInfoItem';
 import languageOptions from '../../utils/data/language';
 
-const Post = ({ post }) => {
+const Post = (props) => {
 	const navigate = useNavigate();
-	const [stacks] = useState(post.stacks);
+	const [stacks] = useState(props.post.stacks);
 
 	const handleSelectPost = () => {
-		navigate(`/post/${post.id}`, { state: { commentCount: post.comment } });
+		navigate(`/post/${props.post.id}`, {
+			state: { commentCount: props.post.comment },
+		});
 	};
 
 	const hashStacks = () => {
+		// console.log(stacks);
 		return stacks.reduce((acc, cur) => {
 			acc[cur] = 1;
 			return acc;
@@ -25,6 +28,7 @@ const Post = ({ post }) => {
 			.filter((option) => {
 				return option.value in hashStackResult;
 			})
+			.slice(0, 3)
 			.map((stackInfo) => (
 				<div className='stack-info' key={stackInfo.id + stackInfo.src}>
 					<img
@@ -41,21 +45,25 @@ const Post = ({ post }) => {
 		<div className='post-container-div'>
 			<div
 				className={`${
-					post.completed
+					props.post.completed
 						? 'post-item-container completed'
 						: 'post-item-container'
 				}`}
 				onClick={handleSelectPost}
 			>
-				<h1>{post.title}</h1>
+				<h1>{props.post.title}</h1>
 				<div className='stack-container'>{renderStacks()}</div>
 				<PostInfoItem
 					page={'landing'}
-					post={post}
-					recruitmentEnd={post.completed}
+					post={props.post}
+					recruitmentEnd={props.post.completed}
 				/>
 			</div>
-			{post.completed ? <div className='post-completed'>모집 완료</div> : ''}
+			{props.post.completed ? (
+				<div className='post-completed'>모집 완료</div>
+			) : (
+				''
+			)}
 		</div>
 	);
 };

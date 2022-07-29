@@ -11,6 +11,7 @@ import {
 	LogoutOutlined,
 	IdcardOutlined,
 	ReadOutlined,
+	LikeOutlined,
 } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
@@ -41,6 +42,9 @@ function RightMenu() {
 				<SubMenu key='submenu' title={user.nickname}>
 					<Menu.Item key='myPosts' icon={<ReadOutlined />}>
 						<Link to='/myPosts'>내 작성글</Link>
+					</Menu.Item>
+					<Menu.Item key='myLike' icon={<LikeOutlined />}>
+						<Link to='/myLike'>내 관심글</Link>
 					</Menu.Item>
 					<Menu.Item key='userInfo' icon={<IdcardOutlined />}>
 						<Link to='userInfo'>마이 페이지</Link>

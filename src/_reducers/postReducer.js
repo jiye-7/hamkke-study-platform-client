@@ -1,3 +1,4 @@
+import { GET_POSTS, CLEAR_POSTS, GET_MY_WRITE_POST } from '../_actions/types';
 import {
 	GET_POSTS,
 	CLEAR_POSTS,

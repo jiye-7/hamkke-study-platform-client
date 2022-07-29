@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useSortBy, useTable } from 'react-table/dist/react-table.development';
@@ -28,7 +28,7 @@ const MyWritePage = () => {
 				setMyPosts(resultPost);
 			}
 		})();
-	}, []);
+	}, [userInfo, dispatch]);
 
 	const handlePostChange = (payload) => {
 		return payload.posts.map((post) => {

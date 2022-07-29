@@ -33,7 +33,7 @@ const MyLikePage = () => {
 				// setMyLikePosts([...myLikePosts, ...resultPosts]);
 			}
 		})();
-	}, [page]);
+	}, [page, userInfo, dispatch]);
 
 	const handleMoreLikePosts = () => {
 		setPage(page + 1);

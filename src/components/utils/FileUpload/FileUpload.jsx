@@ -23,13 +23,13 @@ const FileUpload = (props) => {
 		}
 
 		// server로 요청 보내기
-		let result = await dispatch(updateUserProfile(userId, config, formData));
+		// let result = await dispatch(updateUserProfile(userId, config, formData));
 	};
 
 	// 이미지 제거 버튼 클릭 시-> 로고 이미지로 변경
 	const handleRemoveImage = () => {
 		const { id: userId } = props.user;
-		let result = dispatch(updateUserProfile(userId));
+		// let result = dispatch(updateUserProfile(userId));
 	};
 
 	return (

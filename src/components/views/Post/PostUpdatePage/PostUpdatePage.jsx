@@ -24,7 +24,7 @@ const PostUpdatePage = () => {
 			}
 		}
 		post();
-	}, []);
+	}, [postId]);
 
 	const hashStacks = useMemo(() => {
 		return selectTags.reduce((acc, cur) => {

@@ -47,7 +47,7 @@ export default (SpecificComponent, option, adminRoute = null) => {
 				.finally(() => {
 					setIsLoading(false);
 				});
-		}, []);
+		}, [navigate, dispatch]);
 
 		if (isLoading) {
 			return <Loading />;

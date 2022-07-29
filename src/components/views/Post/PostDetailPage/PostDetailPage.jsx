@@ -42,7 +42,7 @@ const PostDetailPage = () => {
 			}
 		}
 		post();
-	}, []);
+	}, [userInfo, postId]);
 
 	/** dangerouslySetInnerHTML 설정 */
 	const createMarkup = () => ({ __html: DOMPurify.sanitize(post.contents) });
@@ -157,7 +157,11 @@ const PostDetailPage = () => {
 				<h1>{post.title}</h1>
 				<div className='content-container_post-info'>
 					<div className='user-info'>
-						<img src={profileImg} className='user-info_profile' />
+						<img
+							src={profileImg}
+							alt='profile-img'
+							className='user-info_profile'
+						/>
 						<p className='user-info_nickname'>{post.user?.nickname}</p>
 					</div>
 					<p className='writing-date'>{post.createdAt?.split('T')[0]}</p>

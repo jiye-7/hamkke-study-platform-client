@@ -12,7 +12,7 @@ const LandingPage = () => {
 	const { posts, isLastPost } = useSelector(({ post }) => post);
 	const [selectStack, setSelectStack] = useState([]);
 	const [page, setPage] = useState(1);
-	const [isMoreBtn, setIsMoreBtn] = useState(false);
+	const [, setIsMoreBtn] = useState(false);
 	const [updateState, setUpdateState] = useState('stackUpdate');
 	const [isRecruitState, setIsRecruitState] = useState(true);
 	const [isSort, setIsSort] = useState('recent');
@@ -37,7 +37,7 @@ const LandingPage = () => {
 		} else {
 			dispatch(getPosts(query));
 		}
-	}, [selectStack, page, updateState, isRecruitState, isSort]);
+	}, [selectStack, page, updateState, isRecruitState, isSort, dispatch]);
 
 	useEffect(() => {
 		return () => dispatch(clearPosts());

@@ -14,7 +14,7 @@ const Comment = ({ post, userInfo }) => {
 				await dispatch(getReplies(post.id));
 			})();
 		}
-	}, [post.id]);
+	}, [post, dispatch]);
 
 	const handleDeleteComment = async (replyId) => {
 		await dispatch(deleteReply(replyId));

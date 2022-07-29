@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { isEmpty } from 'lodash';
 import { logoutUser } from '../../../../_actions/userAction';
 import { Menu } from 'antd';
 import {
@@ -20,13 +19,13 @@ function RightMenu() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const [currentPageKey, setCurrentPageKey] = useState('');
+	// const [, setCurrentPageKey] = useState('');
 	const user = useSelector(({ user }) => user.userInfo);
 	const [, , removeCookie] = useCookies(['TID']); // const [cookie, setCookie, removeCookie] = useCookies(['TID']);
 
-	const handleClick = (e) => {
-		setCurrentPageKey(e.key);
-	};
+	// const handleClick = (e) => {
+	// 	setCurrentPageKey(e.key);
+	// };
 
 	const handleLogout = () => {
 		dispatch(logoutUser(removeCookie));

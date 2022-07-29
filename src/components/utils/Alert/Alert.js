@@ -14,7 +14,7 @@ const handleConfirm = (props) => {
 		confirmButtonColor = '#3085d6', // #7066e0
 		cancelButtonColor = '#d33', // #6e7881
 		confirmFunction = () => {},
-		cancelFunction = () => {},
+		// cancelFunction = () => {},
 		className = '',
 	} = props;
 
